@@ -8,14 +8,17 @@ class LargeSailDecoratorTest {
 
     @Test
     void getSpeedRotation() {
+
+        LargeSailDecorator largeSail = new LargeSailDecorator(new NormalSail());
+        assertEquals(0.8, largeSail.getSpeedRotation());
     }
 
     @Test
     void getShipSpeed() {
-        LargeSailDecorator normalSail = new LargeSailDecorator(new NormalSail());
-        assertEquals(1, normalSail.getShipSpeed(60));
-        assertEquals(4, normalSail.getShipSpeed(0));
-        assertEquals(2.5, normalSail.getShipSpeed(30));
-        assertEquals(1, normalSail.getShipSpeed(-80));
+        LargeSailDecorator largeSail = new LargeSailDecorator(new NormalSail());
+        assertEquals(1, largeSail.getShipSpeed(60));
+        assertEquals(1.2, largeSail.getShipSpeed(0));
+        assertEquals(1.1, largeSail.getShipSpeed(30));
+        assertEquals(1, largeSail.getShipSpeed(-80));
     }
 }

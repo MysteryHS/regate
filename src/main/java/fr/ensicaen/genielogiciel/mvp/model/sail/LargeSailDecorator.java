@@ -7,11 +7,11 @@ public class LargeSailDecorator extends SailDecorator{
 
     @Override
     public double getSpeedRotation() {
-        return super.getSpeedRotation();
+        return 0.8;
     }
 
     @Override
     public double getShipSpeed(double angle) {
-        return super.getShipSpeed(angle)+(angle >= -60 && angle <= 60?((60-Math.abs(angle))/20.0):0);
+        return super.getShipSpeed(angle)+(angle >= -60 && angle <= 60?((60-Math.abs(angle))/300.0):0);
     }
 }
