@@ -1,8 +1,8 @@
 package fr.ensicaen.genielogiciel.mvp.model;
 
 public class BoatModel {
-    private double _x = 580;
-    private double _y = 480;
+    private double _x = 100;
+    private double _y = 100;
     private double _dx = 0;
     private double _dy = 0;
     private int _anglePositive = 0;

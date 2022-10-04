@@ -23,32 +23,58 @@ import java.io.IOException;
 public class GameView implements IGameView {
     private static Stage _stage;
     private GamePresenter _gamePresenter;
-    private Ellipse _boat;
+
+    private BoatUI _boat;
 
     @FXML
     private AnchorPane _base;
 
-    public void setGamePresenter( GamePresenter gamePresenter ) {
+    @FXML
+    private AnchorPane _map;
+    private static int mapHeight = 500;
+    private static int mapWidth = 500;
+
+    public void setGamePresenter(GamePresenter gamePresenter) {
         _gamePresenter = gamePresenter;
     }
 
-    public void rotate( Ellipse boat, double val ) {
+
+
+
+    public void rotate(BoatUI boat, double val) {
         boat.setRotate(val);
     }
 
-    public Ellipse drawBoat( double x, double y, double rx, double ry ) {
-        Ellipse boat = new Ellipse(x, y, rx, ry);
-        boat.setFill(Color.BLACK);
-        _base.getChildren().add(boat);
+    public void drawMap() {
+        int nbCol = 20;
+        int nbRow = 20;
+        double sizeWidth = (mapWidth / nbCol);
+        double sizeHeight = (mapHeight / nbRow);
+
+        for (int col = 0; col < nbCol; col++) {
+            for (int row = 0; row < nbRow; row++) {
+                TileUI tile = new TileUI();
+                tile.setFitWidth(sizeWidth);
+                tile.setFitHeight(sizeHeight);
+                tile.setLayoutX(sizeWidth * col);
+                tile.setLayoutY(sizeHeight * row);
+                _map.getChildren().add(tile);
+            }
+        }
+    }
+
+    public BoatUI drawBoat(double x, double y, double rx, double ry) {
+
+        BoatUI boat = new BoatUI(this,x,y,rx,ry);
+        _map.getChildren().add(boat);
         return boat;
     }
 
-    public void move( Ellipse boat, double dx, double dy ) {
-        boat.setLayoutX(boat.getLayoutX() + dx);
-        boat.setLayoutY(boat.getLayoutY() + dy);
+    public void move(BoatUI boat, double dx, double dy) {
+        boat.move(dx,dy);
     }
 
-    public void update( double dx, double dy, double angle ) {
+    public void update(double dx, double dy, double angle) {
         rotate(_boat, angle);
         move(_boat, dx, dy);
     }
@@ -57,11 +83,11 @@ public class GameView implements IGameView {
         _stage.show();
     }
 
-    public void addBoat( double x, double y ) {
-        _boat = drawBoat(x, y, 6, 16);
+    public void addBoat(double x, double y) {
+        _boat = drawBoat(x, y, 34, 44);
     }
 
-    private void handleKeyPressed( KeyCode code ) {
+    private void handleKeyPressed(KeyCode code) {
         if (code == KeyCode.SPACE) {
             _gamePresenter.handleUserAction(UserAction.START);
         } else if (code == KeyCode.LEFT) {
@@ -71,22 +97,8 @@ public class GameView implements IGameView {
         }
     }
 
-    /* stage / scene
-            superposer
-                gridview
-                    map
-                anchorpane
-                    boat
 
-
-     */
     public static class GameViewFactory {
-
-        private static int mapHeight = 500;
-        private static int mapWidth = 500;
-
-        @FXML
-        private AnchorPane map;
 
 
 
@@ -97,33 +109,15 @@ public class GameView implements IGameView {
 
 
 
-        private static void fillMap(AnchorPane pane) {
-
-            int nbCol = 20;
-            int nbRow = 20;
-            TileUI tile;
-
-            for(int col=0 ; col<nbCol ; col++) {
-                for(int row=0 ; row<nbRow ; row++) {
-                    tile = new TileUI();
-                    tile.setFitWidth((mapWidth/nbCol));
-                    tile.setFitHeight((mapHeight/nbRow));
-                    tile.setLayoutX((mapWidth/nbCol)*col);
-                    tile.setLayoutY((mapHeight/nbRow)*row);
-                    pane.getChildren().add(tile);
-                }
-            }
-        }
-
 
         public static GameView createView() throws IOException {
             FXMLLoader loader = new FXMLLoader(LoginView.class.getResource("SpotMap.fxml"), Main.getMessageBundle());
             Parent root = loader.load();
-            root.resize(mapWidth,mapHeight);
+            root.resize(mapWidth, mapHeight);
 
-            fillMap((AnchorPane) root.lookup("#map"));
 
             GameView view = loader.getController();
+
             Scene scene = new Scene(root, 800, 600);
             Stage stage = new Stage();
             stage.setTitle(Main.getMessageBundle().getString("project.title"));
