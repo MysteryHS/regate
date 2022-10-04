@@ -1,8 +1,8 @@
 package fr.ensicaen.genielogiciel.mvp.model.map.wind;
 
 public class WindData {
-    private WindDirection _direction;
-    private int _knot;
+    private final WindDirection _direction;
+    private final int _knot;
 
     public WindData(WindDirection direction, int knot) {
         this._direction = direction;

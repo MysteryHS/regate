@@ -15,5 +15,4 @@ class WindProxyTest {
     void windDirectionShouldEqualSouth() {
         assertEquals(WindDirection.SOUTH, windProxy.getWindDirection());
     }
-
 }
