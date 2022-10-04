@@ -8,12 +8,12 @@ class WindProxyTest {
     Wind windProxy = new WindProxy(49.183, -0.371);
     @Test
     void windSpeedShouldEqualThree() {
-        assertEquals(3, windProxy.queryWindData().getKnot());
+        assertEquals(3, windProxy.getWindKnot());
     }
 
     @Test
     void windDirectionShouldEqualSouth() {
-        assertEquals(WindDirection.SOUTH, windProxy.queryWindData().getDirection());
+        assertEquals(WindDirection.SOUTH, windProxy.getWindDirection());
     }
 
 }
