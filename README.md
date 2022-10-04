@@ -7,7 +7,7 @@ Projet de régate
 
 Ce projet contient un exemple d'une application graphique écrite en Java avec
 la bibliothèque graphique JavaFX. Elle est basée sur le patron d'architecture
-Modèle-Vue-Présentation. hhhhhhhhhhhhhhhhhhh
+Modèle-Vue-Présentation.
 
 Le projet est géré par le moteur de production 'gradle'.
 
