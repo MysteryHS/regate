@@ -10,12 +10,12 @@ public class Score {
         return _score;
     }
 
-    public void addScore(int time_in_seconds) {
-        int h = time_in_seconds % 3600;
-        int m = (time_in_seconds - h) % 60;
-        int s = time_in_seconds - m;
-
-        _score.add(h+":"+m+":"+s);
+    public void addScore(int time_in_milliseconds) {
+        int h = time_in_milliseconds % 3600000;
+        int m = (time_in_milliseconds - h) % 60000;
+        int s = (time_in_milliseconds - m) % 1000;
+        int ms =  time_in_milliseconds - s;
+        _score.add(h+":"+m+":"+s+":"+ms);
     }
 
 }
