@@ -1,7 +1,6 @@
 package fr.ensicaen.genielogiciel.mvp.model.map;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,14 +11,14 @@ public class Map {
     private int _height;
     private int _nbBuoy;
     private List<Buoy> _buoys = new ArrayList<Buoy>();
-
-    public static void main(String[] args) throws IOException {
-        Map m = new Map("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
-        m.displayInformationMap();
-    }
+    private List<Tile> _tiles = new ArrayList<Tile>();
 
     public Map(String filename) throws IOException {
         readFirstLineInFile(filename);
+    }
+
+    public Map() throws IOException {
+        readFirstLineInFile("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
     }
 
     private void readFirstLineInFile(String filename) throws IOException {
@@ -40,11 +39,22 @@ public class Map {
             Buoy b = new Buoy(XCoordinate, YCoordinate);
             _buoys.add(b);
         }
+        readMap(myReader);
     }
 
-    private void displayInformationMap(){
-        System.out.println("Width = " + _width);
-        System.out.println("Height = " + _height);
-        System.out.println("nbBuoy = " + _nbBuoy);
+    private void readMap(Scanner reader) throws IOException {
+        int y = 0;
+        while (reader.hasNextLine()) {
+            String s = reader.nextLine();
+            for (int i = 0 ; i < s.length() ; i++) {
+                char c = s.charAt(i);
+                if (c == '~') {
+                    _tiles.add(new Water(i, y));
+                } else if (c == '.') {
+                    _tiles.add(new Sand(i, y));
+                }
+            }
+            y++;
+        }
     }
 }

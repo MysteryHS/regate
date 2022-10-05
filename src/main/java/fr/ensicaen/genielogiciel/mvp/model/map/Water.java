@@ -1,13 +1,12 @@
 package fr.ensicaen.genielogiciel.mvp.model.map;
 
-public class Water {
-    private final char _symbol;
-    private int _XCoordinate;
-    private int _YCoordinate;
+public class Water extends Tile {
+    public Water(int X, int Y) {
+        super(X, Y);
+    }
 
-    public Water(int XCoordinate, int YCoordinate) {
-        _symbol = '~';
-        _XCoordinate = XCoordinate;
-        _YCoordinate = YCoordinate;
+    @Override
+    public void displayTile() {
+        System.out.print('~');
     }
 }

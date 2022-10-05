@@ -10,4 +10,9 @@ public class Buoy {
         _XCoordinate = XCoordinate;
         _YCoordinate = YCoordinate;
     }
+
+    public void displayBuoy(){
+        System.out.println(_XCoordinate);
+        System.out.println(_YCoordinate);
+    }
 }
