@@ -4,28 +4,80 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<GridPane styleClass="dialog" stylesheets="@LoginDialog.css" xmlns="http://javafx.com/javafx/8.0.111"
-          xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ensicaen.genielogiciel.mvp.view.LoginView">
-    <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints minHeight="50.0" vgrow="NEVER"/>
-        <RowConstraints minHeight="50.0" prefHeight="30.0" vgrow="NEVER"/>
-        <RowConstraints minHeight="50.0" prefHeight="30.0" vgrow="NEVER"/>
-    </rowConstraints>
-    <children>
-        <Label alignment="CENTER" prefHeight="16.0" prefWidth="160.0" styleClass="text" text="%login.message.text" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-        <TextField fx:id="_nickName" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-        <Button defaultButton="true" onAction="#onClickOnStartGame" prefWidth="200.0" text="%launch.button.text" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1"/>
-        <Label fx:id="_errorMessage" textFill="#ef0000" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2"/>
-    </children>
-    <padding>
-        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-    </padding>
-</GridPane>
+<Pane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ensicaen.genielogiciel.mvp.view.LoginView">
+   <children>
+      <ImageView fitHeight="442.0" fitWidth="370.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/fond_boat.jpg" />
+         </image></ImageView>
+      <GridPane alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="295.0" prefWidth="370.0" styleClass="dialog" stylesheets="@LoginDialog.css">
+          <columnConstraints>
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="181.0" minWidth="0.0" prefWidth="0.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="366.0" minWidth="10.0" prefWidth="366.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints maxHeight="171.0" minHeight="24.0" prefHeight="29.0" vgrow="NEVER" />
+              <RowConstraints maxHeight="200.0" minHeight="48.0" prefHeight="48.0" vgrow="NEVER" />
+              <RowConstraints maxHeight="203.0" minHeight="30.0" prefHeight="75.0" vgrow="NEVER" />
+              <RowConstraints maxHeight="172.0" minHeight="14.0" prefHeight="41.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="153.0" minHeight="21.0" prefHeight="26.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="137.0" minHeight="45.0" prefHeight="45.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="115.0" minHeight="15.0" prefHeight="31.0" vgrow="NEVER" />
+          </rowConstraints>
+          <children>
+              <Label alignment="CENTER" prefHeight="16.0" prefWidth="336.0" styleClass="text" text="%login.message.text" textAlignment="CENTER" GridPane.columnIndex="1" />
+              <TextField fx:id="_nickName" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <Button accessibleRole="CHECK_BOX" alignment="CENTER" mnemonicParsing="false" prefHeight="6.0" prefWidth="29.0" styleClass="selector" text="&lt;" textAlignment="CENTER" />
+                  <BorderPane prefHeight="50.0" prefWidth="62.0">
+                     <center>
+                        <ImageView fitHeight="50.0" fitWidth="63.0" BorderPane.alignment="CENTER">
+                           <image>
+                              <Image url="@../images/boat.jpg" />
+                           </image>
+                        </ImageView>
+                     </center>
+                  </BorderPane>
+                  <Button blendMode="MULTIPLY" cache="true" mnemonicParsing="false" prefHeight="24.0" prefWidth="6.0" styleClass="selector" text="&gt;" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <Button mnemonicParsing="false" styleClass="selector" text="&lt;" />
+                  <Label text="%type.voile">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Button mnemonicParsing="false" styleClass="selector" text="&gt;" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <children>
+                  <Button mnemonicParsing="false" styleClass="selector" text="&lt;" />
+                  <Label text="%nbr.crewmates">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Label>
+                  <Button mnemonicParsing="false" styleClass="selector" text="&gt;" />
+               </children>
+            </HBox>
+              <Button defaultButton="true" onAction="#onClickOnStartGame" prefWidth="200.0" text="%launch.button.text" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+              <Label fx:id="_errorMessage" textFill="#ef0000" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" />
+          </children>
+          <padding>
+              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+          </padding>
+      </GridPane>
+   </children>
+</Pane>
