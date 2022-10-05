@@ -8,32 +8,49 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DataPolarTest {
     @Test
-    void test() throws FileNotFoundException {
-        DataPolar polar = new DataPolar("polaire-figaro.pol");
-        System.out.println(polar.getPolarValues(60, 20));
-    }
-
-    @Test
-    void polarValueShouldBeEqualsTo12_50() throws FileNotFoundException {
+    void polarFigaroValueShouldBeEqualsTo12_50() throws FileNotFoundException {
         DataPolar polar = new DataPolar("polaire-figaro.pol");
         assertEquals(12.50, polar.getPolarValues(160, 28));
     }
+    @Test
+    void polarOceanisValueShouldBeEqualsTo10_89() throws FileNotFoundException {
+        DataPolar polar = new DataPolar("polaire-oceanis-37.pol");
+        assertEquals(10.89, polar.getPolarValues(160, 28));
+    }
 
     @Test
-    void polarValueShouldBeEqualsTo9925() throws FileNotFoundException {
+    void polarFigaroValueShouldBeEqualsTo9925() throws FileNotFoundException {
         DataPolar polar = new DataPolar("polaire-figaro.pol");
         assertEquals(9.925, polar.getPolarValues(120, 17));
     }
 
     @Test
-    void polarValueShouldBeEqualsTo10665() throws FileNotFoundException {
+    void polarOceanisValueShouldBeEqualsTo8615() throws FileNotFoundException {
+        DataPolar polar = new DataPolar("polaire-oceanis-37.pol");
+        assertEquals(8.615, polar.getPolarValues(120, 17));
+    }
+
+    @Test
+    void polarFigaroValueShouldBeEqualsTo10665() throws FileNotFoundException {
         DataPolar polar = new DataPolar("polaire-figaro.pol");
         assertEquals(10.665, polar.getPolarValues(95, 26));
     }
 
     @Test
-    void polarValueShouldBeEqualsTo450() throws FileNotFoundException {
+    void polarOceanisValueShouldBeEqualsTo9235() throws FileNotFoundException {
+        DataPolar polar = new DataPolar("polaire-oceanis-37.pol");
+        assertEquals(9.235, polar.getPolarValues(95, 26));
+    }
+
+    @Test
+    void polarFigaroValueShouldBeEqualsTo450() throws FileNotFoundException {
         DataPolar polar = new DataPolar("polaire-figaro.pol");
         assertEquals(4.50, polar.getPolarValues(35, 7));
+    }
+
+    @Test
+    void polarOceanisValueShouldBeEqualsTo4125() throws FileNotFoundException {
+        DataPolar polar = new DataPolar("polaire-oceanis-37.pol");
+        assertEquals(4.125, polar.getPolarValues(35, 7));
     }
 }

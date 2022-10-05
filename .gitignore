@@ -146,6 +146,8 @@ replay_pid*
 .gradle/**
 **/build/
 !src/**/build/
+.gradle/buildOutputCleanup/buildOutputCleanup.lock
+.gradle/buildOutputCleanup/outputFiles.bin
 
 # Ignore Gradle GUI config
 gradle-app.setting
