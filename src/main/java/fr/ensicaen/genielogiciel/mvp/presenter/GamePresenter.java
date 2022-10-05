@@ -5,6 +5,7 @@ import fr.ensicaen.genielogiciel.mvp.model.BoatModel;
 // Remarque : l'animation n'est pas considérée comme étant du graphisme à proprement parlé.
 //            On peut la considérer comme une bibliothèque tiers de gestion de threading.
 //            On peut donc l'utiliser dans le presenter.
+import fr.ensicaen.genielogiciel.mvp.model.DataPolar;
 import fr.ensicaen.genielogiciel.mvp.model.PlayerModel;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
 import fr.ensicaen.genielogiciel.mvp.model.sail.LargeSailDecorator;
@@ -13,6 +14,8 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
+
+import java.io.FileNotFoundException;
 
 public class GamePresenter {
     private final PlayerModel _playerModel;
@@ -56,7 +59,13 @@ public class GamePresenter {
     }
 
     private void initGame() {
-        _boatModel = new BoatModel(new LargeSailDecorator(new NormalSail()), new WindProxy(0,0));
+        DataPolar polar = null;
+        try {
+            polar = new DataPolar("polaire-figaro.pol");
+        } catch (FileNotFoundException exception){
+            System.err.println(exception.getMessage());
+        }
+        _boatModel = new BoatModel(new LargeSailDecorator(new NormalSail()), new WindProxy(0,0), polar);
     }
 
     private void runGameLoop() {

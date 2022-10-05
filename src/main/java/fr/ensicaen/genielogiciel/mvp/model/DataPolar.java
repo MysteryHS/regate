@@ -24,6 +24,7 @@ public class DataPolar {
     public double getPolarValues(double angle, double knot) {
         double approximateAngleIndex = getApproximateAngleIndex(angle);
         double approximateKnotIndex = getApproximateKnotIndex(knot);
+        System.out.println(approximateAngleIndex + "   " + approximateKnotIndex);
         double polarValuesInf =
                 _polarValues[(int)Math.floor(approximateKnotIndex)][(int)Math.floor(approximateAngleIndex)];
         double polarValuesSupp =

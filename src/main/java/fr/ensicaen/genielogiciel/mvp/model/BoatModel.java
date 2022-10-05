@@ -25,9 +25,12 @@ public class BoatModel {
     private final Sail _sail;
     private final Wind _wind;
 
-    public BoatModel(Sail sail, Wind wind){
+    private final DataPolar _polar;
+
+    public BoatModel(Sail sail, Wind wind, DataPolar polar){
         _sail = sail;
         _wind = wind;
+        _polar = polar;
     }
     public double getX() {
         return _x;
@@ -54,8 +57,9 @@ public class BoatModel {
     }
 
     private double getSpeed(){
-        int angleToWind = (((int)(Math.abs(_wind.getWindDirection().getAngle()-_anglePositive))/10)*10);
-        return polar.get(angleToWind<180?angleToWind:Math.abs(360-angleToWind)).get(_wind.getWindKnot());
+        int angleToWind360 = (((int)(Math.abs(_wind.getWindDirection().getAngle()-_anglePositive))/10)*10);
+        double angle = angleToWind360<180?angleToWind360:Math.abs(360-angleToWind360);
+        return _polar.getPolarValues(angle, _wind.getWindKnot());
     }
 
     public void move() {

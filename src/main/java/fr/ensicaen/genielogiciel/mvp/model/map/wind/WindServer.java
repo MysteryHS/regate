@@ -12,7 +12,7 @@ public class WindServer implements Wind {
     }
 
     private WindData queryWindDataFromJSON() {
-        return new WindData(WindDirection.SOUTH, 3.);
+        return new WindData(WindDirection.SOUTH, 4.);
     }
 
     @Override
