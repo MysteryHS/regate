@@ -15,7 +15,7 @@ public enum WindDirection {
         _angle = angle;
     }
 
-    double getAngle() {
+    public double getAngle() {
         return _angle;
     }
 }
