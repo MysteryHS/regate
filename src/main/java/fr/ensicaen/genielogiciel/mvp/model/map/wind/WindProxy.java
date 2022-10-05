@@ -6,9 +6,12 @@ public class WindProxy implements Wind {
     public WindProxy(double longitude, double latitude) {
         _windServer = new WindServer(longitude, latitude);
     }
-
     @Override
-    public WindData queryWindData() {
-        return _windServer.queryWindData();
+    public int getWindKnot() {
+        return _windServer.getWindKnot();
+    }
+    @Override
+    public WindDirection getWindDirection() {
+        return _windServer.getWindDirection();
     }
 }
