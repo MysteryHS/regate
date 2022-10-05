@@ -1,5 +1,6 @@
 package fr.ensicaen.genielogiciel.mvp.model;
 
+import fr.ensicaen.genielogiciel.mvp.model.crew.Crew;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.Wind;
 import fr.ensicaen.genielogiciel.mvp.model.sail.Sail;
 

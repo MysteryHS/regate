@@ -1,6 +1,6 @@
 package fr.ensicaen.genielogiciel.mvp.model.crew;
 
-public class NormalSail implements Sail {
+public class NormalCrew implements Crew {
 
     @Override
     public double getSpeedRotation() {

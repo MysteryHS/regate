@@ -1,6 +1,6 @@
 package fr.ensicaen.genielogiciel.mvp.model.crew;
 
-public interface Sail {
+public interface Crew {
     double getSpeedRotation();
     double getShipSpeed(double angle);
 }

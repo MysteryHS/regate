@@ -17,5 +17,6 @@ class NormalSailTest {
         NormalSail normalSail = new NormalSail();
         assertEquals(1, normalSail.getShipSpeed(0));
         assertEquals(1, normalSail.getShipSpeed(60));
+        assertEquals(1, normalSail.getShipSpeed(70));
     }
 }
