@@ -6,6 +6,9 @@ import fr.ensicaen.genielogiciel.mvp.model.BoatModel;
 //            On peut la considérer comme une bibliothèque tiers de gestion de threading.
 //            On peut donc l'utiliser dans le presenter.
 import fr.ensicaen.genielogiciel.mvp.model.PlayerModel;
+import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
+import fr.ensicaen.genielogiciel.mvp.model.sail.LargeSailDecorator;
+import fr.ensicaen.genielogiciel.mvp.model.sail.NormalSail;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -53,7 +56,7 @@ public class GamePresenter {
     }
 
     private void initGame() {
-        _boatModel = new BoatModel();
+        _boatModel = new BoatModel(new LargeSailDecorator(new NormalSail()), new WindProxy(0,0));
     }
 
     private void runGameLoop() {
