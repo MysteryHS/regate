@@ -1,11 +1,8 @@
-package fr.ensicaen.genielogiciel.mvp.view;
+package fr.ensicaen.genielogiciel.mvp.view.game;
 
-import fr.ensicaen.genielogiciel.mvp.model.BoatModel;
-import fr.ensicaen.genielogiciel.mvp.presenter.GamePresenter;
+import fr.ensicaen.genielogiciel.mvp.view.game.GameView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Ellipse;
 
 public class BoatUI extends ImageView {
     GameView view;

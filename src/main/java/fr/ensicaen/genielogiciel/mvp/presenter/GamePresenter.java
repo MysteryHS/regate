@@ -14,6 +14,8 @@ import javafx.util.Duration;
 public class GamePresenter {
     private final PlayerModel _playerModel;
     private BoatModel _boatModel;
+
+
     private IGameView _gameView;
     private boolean _started = false;
     private Timeline _timeline;
@@ -26,8 +28,9 @@ public class GamePresenter {
 
     public void setGameView( IGameView gameView ) {
         _gameView = gameView;
-        _gameView.addBoat(_boatModel.getX(), _boatModel.getY());
+
         _gameView.drawMap();
+        _gameView.addBoat(_boatModel.getX(), _boatModel.getY());
     }
 
     public void handleUserAction( UserAction code ) {

@@ -1,7 +1,7 @@
 package fr.ensicaen.genielogiciel.mvp.presenter;
 
 import fr.ensicaen.genielogiciel.mvp.Main;
-import fr.ensicaen.genielogiciel.mvp.view.GameView;
+import fr.ensicaen.genielogiciel.mvp.view.game.GameView;
 import fr.ensicaen.genielogiciel.mvp.view.LoginView;
 
 import java.io.IOException;

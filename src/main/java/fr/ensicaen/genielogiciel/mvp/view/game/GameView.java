@@ -1,21 +1,18 @@
-package fr.ensicaen.genielogiciel.mvp.view;
+package fr.ensicaen.genielogiciel.mvp.view.game;
 
 import fr.ensicaen.genielogiciel.mvp.Main;
 import fr.ensicaen.genielogiciel.mvp.presenter.GamePresenter;
 import fr.ensicaen.genielogiciel.mvp.presenter.IGameView;
 import fr.ensicaen.genielogiciel.mvp.presenter.UserAction;
+import fr.ensicaen.genielogiciel.mvp.view.LoginView;
+import fr.ensicaen.genielogiciel.mvp.view.TileUI;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Ellipse;
 import javafx.stage.Stage;
 
 import java.io.IOException;
