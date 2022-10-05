@@ -14,32 +14,68 @@ public class Map {
     private List<Tile> _tiles = new ArrayList<Tile>();
 
     public Map(String filename) throws IOException {
-        readFirstLineInFile(filename);
+        readFile(filename);
     }
 
     public Map() throws IOException {
-        readFirstLineInFile("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
+        _width = 0;
+        _height = 0;
+        _nbBuoy = 0;
+        //readFirstLineInFile("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
     }
 
-    private void readFirstLineInFile(String filename) throws IOException {
-        int XCoordinate;
-        int YCoordinate;
+    public Map(int width, int height, int nbBuoy){
+        _width = width;
+        _height = height;
+        _nbBuoy = nbBuoy;
+    }
+
+    public int getWidth() {
+        return _width;
+    }
+
+    public int getHeight() {
+        return _height;
+    }
+
+    public int getNbBuoy() {
+        return _nbBuoy;
+    }
+
+    public List<Buoy> getBuoys() {
+        return _buoys;
+    }
+
+    public void readFile(String filename) throws IOException {
         File inputFile = new File(filename);
         Scanner myReader = new Scanner(inputFile);
+        heightWidthAndNumberBuoyRecovery(readFirstLineInFile(myReader));
+    }
+    public String readFirstLineInFile(Scanner myReader) throws IOException {
         String firstLine = myReader.nextLine();
-        String[] delims = firstLine.split(" ");
-        _width = Integer.parseInt(delims[0]);
-        _height = Integer.parseInt(delims[1]);
-        _nbBuoy = Integer.parseInt(delims[2]);
+        myReader.close();
+        return firstLine;
+    }
+
+    public void  heightWidthAndNumberBuoyRecovery(String information) {
+        String[] delimitation = information.split(" ");
+        _width = Integer.parseInt(delimitation[0]);
+        _height = Integer.parseInt(delimitation[1]);
+        _nbBuoy = Integer.parseInt(delimitation[2]);
+    }
+
+    public void collectBuoys(Scanner myReader) throws IOException {
+        String[] delimitation;
+        int XCoordinate;
+        int YCoordinate;
         for (int i = 0 ; i < _nbBuoy ; i++) {
             String dataBuoy = myReader.nextLine();
-            delims = dataBuoy.split(" ");
-            XCoordinate = Integer.parseInt(delims[0]);
-            YCoordinate = Integer.parseInt(delims[1]);
+            delimitation = dataBuoy.split(" ");
+            XCoordinate = Integer.parseInt(delimitation[0]);
+            YCoordinate = Integer.parseInt(delimitation[1]);
             Buoy b = new Buoy(XCoordinate, YCoordinate);
             _buoys.add(b);
         }
-        readMap(myReader);
     }
 
     private void readMap(Scanner reader) throws IOException {
