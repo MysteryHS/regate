@@ -19,6 +19,7 @@ class ShipModelTest {
     private ShipModel _ship;
     private double _angle;
     private double _knot;
+    private double _acc;
     @Mock
     private Wind _mockedWind;
     @Mock
@@ -32,6 +33,7 @@ class ShipModelTest {
         doReturn(4.).when(_mockedWind).getWindKnot();
         _knot = _mockedWind.getWindKnot();
         _angle = 60.;
+        _acc = 0.02;
     }
     @AfterEach
     void tearDown() {
@@ -45,13 +47,15 @@ class ShipModelTest {
         System.out.println(_ship.getDx());
         System.out.println(_ship.getAngle());
         doReturn(new TestDataPolar().getPolarValues(_angle, _knot)).when(_mockedPolar).getPolarValues(_angle, _knot);
-        double dx = 0;
+        double dx = 0.;
         _ship.rotate(_angle);
         for ( int i = 0; i < 100; i++ ) {
             _ship.move();
+            dx += _acc;
         }
         System.out.println( (double) Math.round(_ship.getX() * 100.) / 100. );
         System.out.println(_ship.getDx());
+        System.out.println(dx);
         System.out.println(_ship.getAngle());
         assertEquals(_angle, _ship.getAngle());
     }

@@ -10,7 +10,7 @@ public class ShipModel {
     private double _dx = 0;
     private double _dy = 0;
     private double _anglePositive = 0;
-
+    private final double _inertia = 0.05;
     private final Sail _sail;
     private final Crew _crew;
     private final Wind _wind;
@@ -30,6 +30,10 @@ public class ShipModel {
         return _y;
     }
 
+    public double getInertia() {
+        return _inertia;
+    }
+
     public void rotate( double angle ) {
         _anglePositive = (360 + _anglePositive + (_sail.getSpeedRotation()* _crew.getSpeedRotation()*angle)) % 360;
     }
@@ -47,7 +51,7 @@ public class ShipModel {
     }
 
     private double getSpeed(){
-        double ratio = 0.3;
+        double ratio = 1;
         int angleToWind360 = (((int)(Math.abs(_wind.getWindDirection().getAngle()-_anglePositive))/10)*10);
         double angle = angleToWind360<180?angleToWind360:Math.abs(360-angleToWind360);
         return _polar.getPolarValues(angle, _wind.getWindKnot()) * _sail.getShipSpeed(_anglePositive-180) * _crew.getShipSpeed(_anglePositive-180)*ratio ;
@@ -62,11 +66,10 @@ public class ShipModel {
     }
 
     private double getInertiaSpeed(double newSpeed, double currentSpeed){
-        final double inertia = 0.02;
-        if(newSpeed<currentSpeed-inertia){
-            return currentSpeed-inertia;
+        if(newSpeed<currentSpeed-_inertia){
+            return currentSpeed-_inertia;
         }
-        return Math.min(newSpeed, currentSpeed + inertia);
+        return Math.min(newSpeed, currentSpeed + _inertia);
     }
 
     public void move() {
