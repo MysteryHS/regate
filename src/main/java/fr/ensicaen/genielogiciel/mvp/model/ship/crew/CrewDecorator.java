@@ -1,4 +1,4 @@
-package fr.ensicaen.genielogiciel.mvp.model.crew;
+package fr.ensicaen.genielogiciel.mvp.model.ship.crew;
 
 public abstract  class CrewDecorator implements Crew {
     private final Crew _decoratedCrew;

@@ -1,10 +1,10 @@
-package fr.ensicaen.genielogiciel.mvp.model;
+package fr.ensicaen.genielogiciel.mvp.model.ship;
 
-import fr.ensicaen.genielogiciel.mvp.model.crew.Crew;
+import fr.ensicaen.genielogiciel.mvp.model.ship.crew.Crew;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.Wind;
-import fr.ensicaen.genielogiciel.mvp.model.sail.Sail;
+import fr.ensicaen.genielogiciel.mvp.model.ship.sail.Sail;
 
-public class BoatModel {
+public class ShipModel {
     private double _x = 580;
     private double _y = 480;
     private double _dx = 0;
@@ -16,7 +16,7 @@ public class BoatModel {
     private final Wind _wind;
     private final DataPolar _polar;
 
-    public BoatModel(Sail sail, Crew crew, Wind wind, DataPolar polar){
+    public ShipModel(Sail sail, Crew crew, Wind wind, DataPolar polar){
         _sail = sail;
         _crew = crew;
         _wind = wind;

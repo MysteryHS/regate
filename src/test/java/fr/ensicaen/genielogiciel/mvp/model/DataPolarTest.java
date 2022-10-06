@@ -1,5 +1,6 @@
 package fr.ensicaen.genielogiciel.mvp.model;
 
+import fr.ensicaen.genielogiciel.mvp.model.ship.DataPolar;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;

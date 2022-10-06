@@ -1,5 +1,7 @@
 package fr.ensicaen.genielogiciel.mvp.model.sail;
 
+import fr.ensicaen.genielogiciel.mvp.model.ship.sail.LargeSailDecorator;
+import fr.ensicaen.genielogiciel.mvp.model.ship.sail.NormalSail;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
