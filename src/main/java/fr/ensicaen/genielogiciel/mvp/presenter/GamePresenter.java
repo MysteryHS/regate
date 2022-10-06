@@ -34,7 +34,7 @@ public class GamePresenter {
 
     public void setGameView( IGameView gameView ) {
         _gameView = gameView;
-        _gameView.addBoat(_shipModel.getX(), _shipModel.getY());
+        _gameView.addShip(_shipModel.getX(), _shipModel.getY());
     }
 
     public void handleUserAction( UserAction code ) {
