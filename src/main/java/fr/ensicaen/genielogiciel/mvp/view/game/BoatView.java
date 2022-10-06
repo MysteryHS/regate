@@ -3,6 +3,7 @@ package fr.ensicaen.genielogiciel.mvp.view.game;
 import fr.ensicaen.genielogiciel.mvp.model.BoatModel;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 
 public class BoatView extends ImageView {
     GameView view;
@@ -14,11 +15,18 @@ public class BoatView extends ImageView {
         this._boatModel = boatModel;
 
         this.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/boat.png"));
-        this.setLayoutX(boatModel.getX());
-        this.setLayoutY(boatModel.getY());
 
-        this.setFitWidth(34);
-        this.setFitHeight(44);
+    }
+
+    public void draw(AnchorPane pane) {
+        this.setLayoutX(_boatModel.getX());
+        this.setLayoutY(_boatModel.getY());
+
+        this.setFitWidth(17);
+        this.setFitHeight(22);
+
+
+        pane.getChildren().add(this);
     }
 
 

@@ -21,6 +21,10 @@ public class Map {
         return _tiles.get(y*_width+x);
     }
 
+    public List<Buoy> getBuoys() {
+        return _buoys;
+    }
+
     public int getHeight() {
         return _height;
     }

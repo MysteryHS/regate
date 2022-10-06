@@ -83,6 +83,6 @@ public class GamePresenter {
     }
 
     private void render() {
-        _gameView.update(_boatModel.getDx(), _boatModel.getDy(), _boatModel.getAngle());
+        _gameView.update(_boatModel,_playerModel);
     }
 }

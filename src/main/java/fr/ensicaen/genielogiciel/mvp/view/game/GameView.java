@@ -2,6 +2,7 @@ package fr.ensicaen.genielogiciel.mvp.view.game;
 
 import fr.ensicaen.genielogiciel.mvp.Main;
 import fr.ensicaen.genielogiciel.mvp.model.BoatModel;
+import fr.ensicaen.genielogiciel.mvp.model.PlayerModel;
 import fr.ensicaen.genielogiciel.mvp.model.map.Map;
 import fr.ensicaen.genielogiciel.mvp.presenter.GamePresenter;
 import fr.ensicaen.genielogiciel.mvp.presenter.IGameView;
@@ -24,6 +25,7 @@ public class GameView implements IGameView {
     private GamePresenter _gamePresenter;
 
     private BoatView _boat;
+
     private MapView _map;
 
     @FXML
@@ -45,8 +47,11 @@ public class GameView implements IGameView {
     public void draw(Map mapModel, BoatModel boatModel) {
         _map = new MapView(this,mapModel);
         _boat = new BoatView(this,boatModel);
-        _mapPane.getChildren().add(_boat);
-
+        if(_mapPane==null) {
+            System.out.println("mapPane est null");
+        }
+        _map.draw(_mapPane);
+        _boat.draw(_mapPane);
     }
 
 
@@ -54,10 +59,11 @@ public class GameView implements IGameView {
 
 
 
+    @Override
+    public void update(BoatModel boatModel, PlayerModel playerModel) {
 
-    public void update(double dx, double dy, double angle) {
-        _boat.rotate(angle);
-        _boat.move(dx, dy);
+        _boat.rotate(boatModel.getAngle());
+        _boat.move(boatModel.getDx(), boatModel.getDy());
     }
 
     public void show() {
@@ -78,9 +84,10 @@ public class GameView implements IGameView {
         }
     }
 
+    /*
     public AnchorPane getMapPane() {
         return _mapPane;
-    }
+    }*/
 
 
     public static class GameViewFactory {

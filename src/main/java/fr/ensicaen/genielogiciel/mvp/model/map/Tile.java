@@ -9,5 +9,9 @@ public abstract class Tile {
         _Y = Y;
     }
 
+    public int getX() {return _X;}
+
+    public int getY() {return _Y;}
+
     public abstract void displayTile();
 }
