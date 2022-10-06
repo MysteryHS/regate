@@ -10,12 +10,12 @@ public enum WindDirection {
     SOUTH           (270),
     SOUTH_EAST      (315);
 
-    private final int _angle;
-    WindDirection(int angle) {
+    private final double _angle;
+    WindDirection(double angle) {
         _angle = angle;
     }
 
-    int getAngle() {
+    double getAngle() {
         return _angle;
     }
 }

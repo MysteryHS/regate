@@ -2,9 +2,9 @@ package fr.ensicaen.genielogiciel.mvp.model.map.wind;
 
 public class WindData {
     private final WindDirection _direction;
-    private final int _knot;
+    private final double _knot;
 
-    public WindData(WindDirection direction, int knot) {
+    public WindData(WindDirection direction, double knot) {
         this._direction = direction;
         this._knot = knot;
     }
@@ -13,7 +13,7 @@ public class WindData {
         return _direction;
     }
 
-    public int getKnot() {
+    public double getKnot() {
         return _knot;
     }
 }
