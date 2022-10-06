@@ -1,6 +1,5 @@
 package fr.ensicaen.genielogiciel.mvp.view.game;
 
-import fr.ensicaen.genielogiciel.mvp.model.BoatModel;
 import fr.ensicaen.genielogiciel.mvp.model.map.Buoy;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

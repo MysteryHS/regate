@@ -9,9 +9,15 @@ public abstract class Tile {
         _Y = Y;
     }
 
-    public int getX() {return _X;}
+    public int getCoordinateX() {
+        return _X;
+    }
 
-    public int getY() {return _Y;}
+    public int getCoordinateY() {
+        return _Y;
+    }
 
     public abstract void displayTile();
+
+    public abstract char getSymbol();
 }

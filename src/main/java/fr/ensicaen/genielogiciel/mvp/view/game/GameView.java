@@ -1,9 +1,9 @@
 package fr.ensicaen.genielogiciel.mvp.view.game;
 
 import fr.ensicaen.genielogiciel.mvp.Main;
-import fr.ensicaen.genielogiciel.mvp.model.BoatModel;
 import fr.ensicaen.genielogiciel.mvp.model.PlayerModel;
 import fr.ensicaen.genielogiciel.mvp.model.map.Map;
+import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 import fr.ensicaen.genielogiciel.mvp.presenter.GamePresenter;
 import fr.ensicaen.genielogiciel.mvp.presenter.IGameView;
 import fr.ensicaen.genielogiciel.mvp.presenter.UserAction;
@@ -18,7 +18,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.security.cert.PolicyNode;
 
 public class GameView implements IGameView {
     private static Stage _stage;
@@ -44,9 +43,9 @@ public class GameView implements IGameView {
 
 
     @Override
-    public void draw(Map mapModel, BoatModel boatModel) {
+    public void draw(Map mapModel, ShipModel shipModel) {
         _map = new MapView(this,mapModel);
-        _boat = new BoatView(this,boatModel);
+        _boat = new BoatView(this,shipModel);
         if(_mapPane==null) {
             System.out.println("mapPane est null");
         }
@@ -60,16 +59,15 @@ public class GameView implements IGameView {
 
 
     @Override
-    public void update(BoatModel boatModel, PlayerModel playerModel) {
+    public void update(ShipModel shipModel, PlayerModel playerModel) {
 
-        _boat.rotate(boatModel.getAngle());
-        _boat.move(boatModel.getDx(), boatModel.getDy());
+        _boat.rotate(shipModel.getAngle());
+        _boat.move(shipModel.getDx(), shipModel.getDy());
     }
 
     public void show() {
         _stage.show();
     }
-
 
 
 
@@ -83,11 +81,6 @@ public class GameView implements IGameView {
             _gamePresenter.handleUserAction(UserAction.RIGHT);
         }
     }
-
-    /*
-    public AnchorPane getMapPane() {
-        return _mapPane;
-    }*/
 
 
     public static class GameViewFactory {

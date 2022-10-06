@@ -1,4 +1,4 @@
-package fr.ensicaen.genielogiciel.mvp.model.sail;
+package fr.ensicaen.genielogiciel.mvp.model.ship.sail;
 
 public class LargeSailDecorator extends SailDecorator{
     public LargeSailDecorator(Sail decoratedSail) {

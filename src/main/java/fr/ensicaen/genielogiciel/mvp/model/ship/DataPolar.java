@@ -1,4 +1,4 @@
-package fr.ensicaen.genielogiciel.mvp.model;
+package fr.ensicaen.genielogiciel.mvp.model.ship;
 
 
 import java.io.File;
