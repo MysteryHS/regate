@@ -9,4 +9,9 @@ public class Water extends Tile {
     public void displayTile() {
         System.out.print('~');
     }
+
+    @Override
+    public char getSymbol(){
+        return '~';
+    }
 }
