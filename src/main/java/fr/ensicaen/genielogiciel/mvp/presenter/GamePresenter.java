@@ -67,7 +67,7 @@ public class GamePresenter {
         } catch (FileNotFoundException exception){
             System.err.println(exception.getMessage());
         }
-        _boatModel = new BoatModel(new LargeSailDecorator(new NormalSail()), new WindProxy(0,0), polar);
+        _boatModel = new BoatModel(new LargeSailDecorator(new NormalSail()), new MaxCrewDecorator(new NormalCrew()), new WindProxy(0,0), polar);
     }
 
     private void runGameLoop() {
