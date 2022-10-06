@@ -5,6 +5,14 @@ public class Buoy {
     private int _XCoordinate;
     private int _YCoordinate;
 
+    public int getXCoordinate() {
+        return _XCoordinate;
+    }
+
+    public int getYCoordinate() {
+        return _YCoordinate;
+    }
+
     public Buoy(int XCoordinate, int YCoordinate) {
         _symbol = '#';
         _XCoordinate = XCoordinate;

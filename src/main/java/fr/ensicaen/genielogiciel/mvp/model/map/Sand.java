@@ -9,4 +9,9 @@ public class Sand extends Tile{
     public void displayTile() {
         System.out.print('.');
     }
+
+    @Override
+    public char getSymbol(){
+        return '.';
+    }
 }
