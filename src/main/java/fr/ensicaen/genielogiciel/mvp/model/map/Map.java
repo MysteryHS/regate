@@ -10,6 +10,8 @@ public class Map {
     private int _width;
     private int _height;
     private int _nbBuoy;
+    private int _nbSand;
+    private int _nbWater;
     private List<Buoy> _buoys = new ArrayList<Buoy>();
     private List<Tile> _tiles = new ArrayList<Tile>();
 
@@ -21,6 +23,8 @@ public class Map {
         _width = 0;
         _height = 0;
         _nbBuoy = 0;
+        _nbSand = 0;
+        _nbWater = 0;
         //readFirstLineInFile("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
     }
 
@@ -42,18 +46,45 @@ public class Map {
         return _nbBuoy;
     }
 
+    public int getNbSand() {
+        return _nbSand;
+    }
+
+    public int getNbWater() {
+        return _nbWater;
+    }
+
     public List<Buoy> getBuoys() {
         return _buoys;
+    }
+
+    public List<Tile> getTiles() {
+        return _tiles;
+    }
+
+    public char getType(int X, int Y){
+        for (Buoy elem : _buoys) {
+            if ((elem.getXCoordinate() == X) && (elem.getYCoordinate() == Y)) {
+                return '~';
+            }
+        }
+        for (Tile t : _tiles) {
+            if ((t.getCoordinateX() == X) && (t.getCoordinateY() == Y)) {
+                return t.getSymbol();
+            }
+        }
+        return 0;
     }
 
     public void readFile(String filename) throws IOException {
         File inputFile = new File(filename);
         Scanner myReader = new Scanner(inputFile);
         heightWidthAndNumberBuoyRecovery(readFirstLineInFile(myReader));
+        readMap(myReader);
     }
+
     public String readFirstLineInFile(Scanner myReader) throws IOException {
         String firstLine = myReader.nextLine();
-        myReader.close();
         return firstLine;
     }
 
@@ -78,7 +109,7 @@ public class Map {
         }
     }
 
-    private void readMap(Scanner reader) throws IOException {
+    public void readMap(Scanner reader) throws IOException {
         int y = 0;
         while (reader.hasNextLine()) {
             String s = reader.nextLine();
@@ -86,11 +117,32 @@ public class Map {
                 char c = s.charAt(i);
                 if (c == '~') {
                     _tiles.add(new Water(i, y));
+                    _nbWater++;
                 } else if (c == '.') {
                     _tiles.add(new Sand(i, y));
+                    _nbSand++;
                 }
             }
             y++;
+        }
+    }
+
+    public void displayInformationMap(){
+        System.out.println("Width = " + _width);
+        System.out.println("Height = " + _height);
+        System.out.println("nbBuoy = " + _nbBuoy);
+        for (Buoy elem : _buoys) {
+            elem.displayBuoy();
+        }
+        int index = 0;
+        for (Tile t : _tiles) {
+            t.displayTile();
+            if (index == _width -1) {
+                index = 0;
+                System.out.println();
+            } else {
+                index++;
+            }
         }
     }
 }

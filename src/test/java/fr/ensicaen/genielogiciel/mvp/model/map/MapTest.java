@@ -34,4 +34,48 @@ class MapTest {
         assertEquals(5, m.getBuoys().get(0).getXCoordinate());
         assertEquals(5, m.getBuoys().get(0).getYCoordinate());
     }
+
+    @Test
+    public void testReadMap() throws IOException {
+        Map m = new Map(50,50,1);
+        File inputFile = new File("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
+        Scanner myReader = new Scanner(inputFile);
+        myReader.nextLine();
+        m.collectBuoys(myReader);
+        m.readMap(myReader);
+        int i = 0;
+        int j = 0;
+        for (Tile elem : m.getTiles()) {
+            Tile tile = new Water(i, j);
+            assertEquals(tile.getCoordinateX(), elem.getCoordinateX());
+            assertEquals(tile.getCoordinateY(), elem.getCoordinateY());
+            assertEquals(tile.getSymbol(), elem.getSymbol());
+            if (i == m.getWidth()-1) {
+                i = 0;
+                j++;
+            } else {
+                i++;
+            }
+        }
+    }
+
+    @Test
+    public void testGetType() throws IOException {
+        Map m = new Map(50,50,1);
+        File inputFile = new File("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
+        Scanner myReader = new Scanner(inputFile);
+        myReader.nextLine();
+        m.collectBuoys(myReader);
+        m.readMap(myReader);
+        char c = m.getType(0,0);
+        assertEquals('~', c);
+        c = m.getType(-1, 0);
+        assertEquals(0, c);
+    }
+
+    @Test
+    public void testReadFile() throws IOException {
+        Map m = new Map("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
+        m.displayInformationMap();
+    }
 }
