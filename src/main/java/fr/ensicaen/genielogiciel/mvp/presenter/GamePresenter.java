@@ -7,6 +7,8 @@ import fr.ensicaen.genielogiciel.mvp.model.BoatModel;
 //            On peut donc l'utiliser dans le presenter.
 import fr.ensicaen.genielogiciel.mvp.model.DataPolar;
 import fr.ensicaen.genielogiciel.mvp.model.PlayerModel;
+import fr.ensicaen.genielogiciel.mvp.model.crew.MaxCrewDecorator;
+import fr.ensicaen.genielogiciel.mvp.model.crew.NormalCrew;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
 import fr.ensicaen.genielogiciel.mvp.model.sail.LargeSailDecorator;
 import fr.ensicaen.genielogiciel.mvp.model.sail.NormalSail;
