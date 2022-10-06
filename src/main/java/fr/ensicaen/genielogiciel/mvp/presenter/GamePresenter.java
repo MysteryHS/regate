@@ -7,6 +7,7 @@ import fr.ensicaen.genielogiciel.mvp.model.BoatModel;
 //            On peut donc l'utiliser dans le presenter.
 import fr.ensicaen.genielogiciel.mvp.model.PlayerModel;
 import fr.ensicaen.genielogiciel.mvp.model.map.Map;
+import fr.ensicaen.genielogiciel.mvp.model.map.wind.Wind;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -17,17 +18,20 @@ public class GamePresenter {
     private BoatModel _boatModel;
     private Map _mapModel;
 
+    private Wind _windModel;
+
 
     private IGameView _gameView;
     private boolean _started = false;
     private Timeline _timeline;
 
-    public GamePresenter(String nickName, Map map, BoatModel boat) {
+    public GamePresenter(String nickName, Map map, BoatModel boat, Wind windModel) {
         _playerModel = new PlayerModel();
         _playerModel.setNickname(nickName);
 
         _mapModel = map;
         _boatModel = boat;
+        _windModel = windModel;
     }
 
     private void initView() {

@@ -3,6 +3,8 @@ package fr.ensicaen.genielogiciel.mvp.presenter;
 import fr.ensicaen.genielogiciel.mvp.Main;
 import fr.ensicaen.genielogiciel.mvp.model.BoatModel;
 import fr.ensicaen.genielogiciel.mvp.model.map.Map;
+import fr.ensicaen.genielogiciel.mvp.model.map.wind.Wind;
+import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
 import fr.ensicaen.genielogiciel.mvp.view.game.GameView;
 import fr.ensicaen.genielogiciel.mvp.view.LoginView;
 
@@ -23,7 +25,8 @@ public final class LoginPresenter {
                 GameView view = GameView.GameViewFactory.createView();
                 Map map = new Map();
                 BoatModel boat = new BoatModel();
-                GamePresenter gamePresenter = new GamePresenter(nickName,map,boat);
+                Wind wind = new WindProxy(50,50);
+                GamePresenter gamePresenter = new GamePresenter(nickName,map,boat,wind);
                 view.setGamePresenter(gamePresenter);
                 gamePresenter.setGameView(view);
                 view.show();
