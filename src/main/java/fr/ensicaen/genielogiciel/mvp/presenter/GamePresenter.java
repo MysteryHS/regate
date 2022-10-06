@@ -6,6 +6,7 @@ import fr.ensicaen.genielogiciel.mvp.model.BoatModel;
 //            On peut la considérer comme une bibliothèque tiers de gestion de threading.
 //            On peut donc l'utiliser dans le presenter.
 import fr.ensicaen.genielogiciel.mvp.model.PlayerModel;
+import fr.ensicaen.genielogiciel.mvp.model.map.Map;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -14,24 +15,34 @@ import javafx.util.Duration;
 public class GamePresenter {
     private final PlayerModel _playerModel;
     private BoatModel _boatModel;
+    private Map _mapModel;
 
 
     private IGameView _gameView;
     private boolean _started = false;
     private Timeline _timeline;
 
-    public GamePresenter( String nickName ) {
+    public GamePresenter(String nickName, Map map, BoatModel boat) {
         _playerModel = new PlayerModel();
         _playerModel.setNickname(nickName);
-        initGame();
+
+        _mapModel = map;
+        _boatModel = boat;
     }
+
+    private void initView() {
+        _gameView.draw(_mapModel,_boatModel);
+    }
+
 
     public void setGameView( IGameView gameView ) {
         _gameView = gameView;
-
-        _gameView.drawMap();
-        _gameView.addBoat(_boatModel.getX(), _boatModel.getY());
+        initView();
     }
+
+
+
+
 
     public void handleUserAction( UserAction code ) {
         if (code == UserAction.START) {
@@ -56,9 +67,7 @@ public class GamePresenter {
         }
     }
 
-    private void initGame() {
-        _boatModel = new BoatModel();
-    }
+
 
     private void runGameLoop() {
         _timeline = new Timeline(new KeyFrame(Duration.millis(50), onFinished -> {

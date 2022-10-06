@@ -17,6 +17,18 @@ public class Map {
         readFirstLineInFile(filename);
     }
 
+    public Tile getTile(int x,int y) {
+        return _tiles.get(y*_width+x);
+    }
+
+    public int getHeight() {
+        return _height;
+    }
+
+    public int getWidth() {
+        return _width;
+    }
+
     public Map() throws IOException {
         readFirstLineInFile("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
     }

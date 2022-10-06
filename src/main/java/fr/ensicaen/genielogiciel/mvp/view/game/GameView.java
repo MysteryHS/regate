@@ -1,11 +1,12 @@
 package fr.ensicaen.genielogiciel.mvp.view.game;
 
 import fr.ensicaen.genielogiciel.mvp.Main;
+import fr.ensicaen.genielogiciel.mvp.model.BoatModel;
+import fr.ensicaen.genielogiciel.mvp.model.map.Map;
 import fr.ensicaen.genielogiciel.mvp.presenter.GamePresenter;
 import fr.ensicaen.genielogiciel.mvp.presenter.IGameView;
 import fr.ensicaen.genielogiciel.mvp.presenter.UserAction;
 import fr.ensicaen.genielogiciel.mvp.view.LoginView;
-import fr.ensicaen.genielogiciel.mvp.view.TileUI;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,20 +17,20 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.security.cert.PolicyNode;
 
 public class GameView implements IGameView {
     private static Stage _stage;
     private GamePresenter _gamePresenter;
 
-    private BoatUI _boat;
+    private BoatView _boat;
+    private MapView _map;
 
     @FXML
     private AnchorPane _base;
 
     @FXML
-    private AnchorPane _map;
-    private static int mapHeight = 500;
-    private static int mapWidth = 500;
+    private AnchorPane _mapPane;
 
     public void setGamePresenter(GamePresenter gamePresenter) {
         _gamePresenter = gamePresenter;
@@ -38,51 +39,34 @@ public class GameView implements IGameView {
 
 
 
-    public void rotate(BoatUI boat, double val) {
-        boat.setRotate(val);
+
+
+    @Override
+    public void draw(Map mapModel, BoatModel boatModel) {
+        _map = new MapView(this,mapModel);
+        _boat = new BoatView(this,boatModel);
+        _mapPane.getChildren().add(_boat);
+
     }
 
-    public void drawMap() {
-        int nbCol = 20;
-        int nbRow = 20;
-        double sizeWidth = (mapWidth / nbCol);
-        double sizeHeight = (mapHeight / nbRow);
 
-        for (int col = 0; col < nbCol; col++) {
-            for (int row = 0; row < nbRow; row++) {
-                TileUI tile = new TileUI();
-                tile.setFitWidth(sizeWidth);
-                tile.setFitHeight(sizeHeight);
-                tile.setLayoutX(sizeWidth * col);
-                tile.setLayoutY(sizeHeight * row);
-                _map.getChildren().add(tile);
-            }
-        }
-    }
 
-    public BoatUI drawBoat(double x, double y, double rx, double ry) {
 
-        BoatUI boat = new BoatUI(this,x,y,rx,ry);
-        _map.getChildren().add(boat);
-        return boat;
-    }
 
-    public void move(BoatUI boat, double dx, double dy) {
-        boat.move(dx,dy);
-    }
+
 
     public void update(double dx, double dy, double angle) {
-        rotate(_boat, angle);
-        move(_boat, dx, dy);
+        _boat.rotate(angle);
+        _boat.move(dx, dy);
     }
 
     public void show() {
         _stage.show();
     }
 
-    public void addBoat(double x, double y) {
-        _boat = drawBoat(x, y, 34, 44);
-    }
+
+
+
 
     private void handleKeyPressed(KeyCode code) {
         if (code == KeyCode.SPACE) {
@@ -92,6 +76,10 @@ public class GameView implements IGameView {
         } else if (code == KeyCode.RIGHT) {
             _gamePresenter.handleUserAction(UserAction.RIGHT);
         }
+    }
+
+    public AnchorPane getMapPane() {
+        return _mapPane;
     }
 
 
@@ -110,7 +98,7 @@ public class GameView implements IGameView {
         public static GameView createView() throws IOException {
             FXMLLoader loader = new FXMLLoader(LoginView.class.getResource("SpotMap.fxml"), Main.getMessageBundle());
             Parent root = loader.load();
-            root.resize(mapWidth, mapHeight);
+            root.resize(MapView.mapWidth, MapView.mapHeight);
 
 
             GameView view = loader.getController();
