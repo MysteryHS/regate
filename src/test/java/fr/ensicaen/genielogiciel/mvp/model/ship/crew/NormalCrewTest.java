@@ -1,6 +1,5 @@
-package fr.ensicaen.genielogiciel.mvp.model.crew;
+package fr.ensicaen.genielogiciel.mvp.model.ship.crew;
 
-import fr.ensicaen.genielogiciel.mvp.model.ship.crew.NormalCrew;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
