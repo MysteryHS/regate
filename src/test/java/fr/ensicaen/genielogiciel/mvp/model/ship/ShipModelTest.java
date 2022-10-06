@@ -43,8 +43,8 @@ class ShipModelTest {
     void shipSpeedShouldBeEqualsToMaxSpeed() {
         _ship = new ShipModel(new NormalSail(), new NormalCrew(), _mockedWind, _mockedPolar );
         _speedRatio = _ship.getSpeedRatio();
-        _maxSpeed = new TestDataPolar().getPolarValues(_angle, _knot) * _speedRatio;
-        doReturn(new TestDataPolar().getPolarValues(_angle, _knot)).when(_mockedPolar).getPolarValues(_angle, _knot);
+        _maxSpeed = new MocktDataPolar().getPolarValues(_angle, _knot) * _speedRatio;
+        doReturn(new MocktDataPolar().getPolarValues(_angle, _knot)).when(_mockedPolar).getPolarValues(_angle, _knot);
         _ship.rotate(_angle);
         for ( int i = 0; i < 100; i++ ) {
             _ship.move();

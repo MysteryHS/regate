@@ -1,7 +1,7 @@
 package fr.ensicaen.genielogiciel.mvp.model.ship;
 
-public class TestDataPolar {
-    public TestDataPolar() {
+public class MocktDataPolar {
+    public MocktDataPolar() {
     }
 
     public double getPolarValues(double angle, double knot) {
