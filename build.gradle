@@ -10,8 +10,7 @@ version '0.1'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 application {
-    //mainClass = 'fr.ensicaen.genielogiciel.mvp.Main'
-    mainClass = 'fr.ensicaen.genielogiciel.mvp.model.player.Score'
+    mainClass = 'fr.ensicaen.genielogiciel.mvp.Main'
 }
 
 repositories {
