@@ -6,7 +6,7 @@ public abstract  class CrewDecorator implements Crew {
         _decoratedCrew = decoratedCrew;
     }
     @Override
-    public double getSpeedRotation(){
+    public double getSpeedRotation() {
         return _decoratedCrew.getSpeedRotation();
     }
 
