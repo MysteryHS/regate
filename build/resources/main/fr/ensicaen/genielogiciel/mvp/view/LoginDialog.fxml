@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 <Pane prefHeight="420.0" prefWidth="818.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ensicaen.genielogiciel.mvp.view.LoginView">
     <ImageView fitHeight="538.0" fitWidth="817.0" pickOnBounds="true" preserveRatio="true">
@@ -47,6 +55,9 @@
                         <Image url="@../images/boat-removebg-preview.png" />
                     </ImageView>
                 </center>
+            <bottom>
+               <Label text="Figaro" BorderPane.alignment="CENTER" />
+            </bottom>
             </BorderPane>
             <Button blendMode="MULTIPLY" cache="true" mnemonicParsing="false" prefHeight="24.0" prefWidth="6.0" styleClass="selector" text="&gt;" visible="false">
                 <font>
