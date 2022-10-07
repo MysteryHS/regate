@@ -9,12 +9,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MapTest {
     @Test
-    public void testReadFirstLine() throws IOException {
+    public void testReadWidthHeightAndNumberBuoysInFirstLine() throws IOException {
         Map m1 = new Map();
-        assertEquals("50 50 1", m1.readFirstLineInFile(new Scanner(new File("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt"))));
+        assertEquals("50 50 1", m1.readWidthHeightAndNumberBuoysInFirstLine(new Scanner(new File("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt"))));
 
         Map m2 = new Map();
-        assertEquals("100 50", m2.readFirstLineInFile(new Scanner(new File("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte2.txt"))));
+        assertEquals("100 50", m2.readWidthHeightAndNumberBuoysInFirstLine(new Scanner(new File("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte2.txt"))));
 
     }
 
@@ -37,6 +37,23 @@ class MapTest {
         assertEquals(0, m1.getWidth());
         assertEquals(0, m1.getNbBuoy());
     }
+
+    @Test
+    public void testReadLongitudeAndLatitudeSecondLine() throws IOException {
+        Map m1 = new Map();
+        Scanner myReader = new Scanner(new File("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt"));
+        myReader.nextLine();
+        assertEquals("49.283 -0.25", m1.readLongitudeAndLatitudeSecondLine(myReader));
+    }
+
+    @Test
+    public void testLongitudeAndLatitudeRecovery() {
+        Map m = new Map();
+        m.longitudeAndLatitudeRecovery("49.283 -0.25");
+        assertEquals(49.283, m.getLongitude());
+        assertEquals(-0.25, m.getLatitude());
+    }
+
 
     @Test
     public void testCollectBuoys() throws IOException {

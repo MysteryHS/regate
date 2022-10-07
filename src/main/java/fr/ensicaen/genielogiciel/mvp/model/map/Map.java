@@ -12,6 +12,8 @@ public class Map {
     private int _nbBuoy;
     private int _nbSand;
     private int _nbWater;
+    private double _longitude;
+    private double _latitude;
     private final List<Buoy> _buoys = new ArrayList<>();
     private final List<Tile> _tiles = new ArrayList<>();
 
@@ -68,6 +70,14 @@ public class Map {
         return _tiles;
     }
 
+    public double getLatitude() {
+        return _latitude;
+    }
+
+    public double getLongitude() {
+        return _longitude;
+    }
+
     public char getType(int X, int Y){
         for (Tile t : _tiles) {
             if ((t.getCoordinateX() == X) && (t.getCoordinateY() == Y)) {
@@ -89,11 +99,12 @@ public class Map {
     public void readFile(String filename) throws IOException {
         File inputFile = new File(filename);
         Scanner myReader = new Scanner(inputFile);
-        heightWidthAndNumberBuoyRecovery(readFirstLineInFile(myReader));
+        heightWidthAndNumberBuoyRecovery(readWidthHeightAndNumberBuoysInFirstLine(myReader));
+        longitudeAndLatitudeRecovery(readLongitudeAndLatitudeSecondLine(myReader));
         readMap(myReader);
     }
 
-    public String readFirstLineInFile(Scanner myReader) {
+    public String readWidthHeightAndNumberBuoysInFirstLine(Scanner myReader) {
         return myReader.nextLine();
     }
 
@@ -110,6 +121,16 @@ public class Map {
                 _nbBuoy = 0;
             }
         }
+    }
+
+    public String readLongitudeAndLatitudeSecondLine(Scanner myReader) {
+        return myReader.nextLine();
+    }
+
+    public void longitudeAndLatitudeRecovery(String information){
+        String[] delimitation = information.split(" ");
+        _longitude = Double.parseDouble(delimitation[0]);
+        _latitude = Double.parseDouble(delimitation[1]);
     }
 
     public void collectBuoys(Scanner myReader) {
