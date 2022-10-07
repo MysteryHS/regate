@@ -1,21 +1,21 @@
 package fr.ensicaen.genielogiciel.mvp.model.map.wind;
 
 public enum WindDirection {
-    EAST            (0),
-    NORTH_EAST      (45),
-    NORTH           (90),
-    NORTH_WEST      (135),
-    WEST            (180),
-    SOUTH_WEST      (225),
-    SOUTH           (270),
-    SOUTH_EAST      (315);
+    SOUTH           (0),
+    SOUTH_EAST      (45),
+    EAST            (90),
+    NORTH_EAST      (135),
+    NORTH           (180),
+    NORTH_WEST      (225),
+    WEST            (270),
+    SOUTH_WEST      (315);
 
-    private final int _angle;
-    WindDirection(int angle) {
+    private final double _angle;
+    WindDirection(double angle) {
         _angle = angle;
     }
 
-    int getAngle() {
+    public double getAngle() {
         return _angle;
     }
 }
