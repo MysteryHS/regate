@@ -12,20 +12,25 @@ public class Map {
     private int _nbBuoy;
     private int _nbSand;
     private int _nbWater;
-    private List<Buoy> _buoys = new ArrayList<Buoy>();
-    private List<Tile> _tiles = new ArrayList<Tile>();
+    private final List<Buoy> _buoys = new ArrayList<>();
+    private final List<Tile> _tiles = new ArrayList<>();
+
+    private static final int NumberDatasWithBuoys = 3;
+    private static final int NumberDatasWithNotBuoys = 2;
 
     public Map(String filename) throws IOException {
-        readFile(filename);
+        _width = 0;
+        _height = 0;
+        _nbBuoy = 0;
+        readFile("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/" + filename);
     }
 
-    public Map() throws IOException {
+    public Map(){
         _width = 0;
         _height = 0;
         _nbBuoy = 0;
         _nbSand = 0;
         _nbWater = 0;
-        //readFirstLineInFile("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
     }
 
     public Map(int width, int height, int nbBuoy){
@@ -63,17 +68,21 @@ public class Map {
     }
 
     public char getType(int X, int Y){
-        for (Buoy elem : _buoys) {
-            if ((elem.getXCoordinate() == X) && (elem.getYCoordinate() == Y)) {
-                return '~';
-            }
-        }
         for (Tile t : _tiles) {
             if ((t.getCoordinateX() == X) && (t.getCoordinateY() == Y)) {
                 return t.getSymbol();
             }
         }
         return 0;
+    }
+
+    public Buoy getBuoy(int X, int Y) {
+        for (Buoy b : _buoys){
+            if ((b.getXCoordinate() == X) && (b.getYCoordinate() == Y)) {
+                return b;
+            }
+        }
+        return null;
     }
 
     public void readFile(String filename) throws IOException {
@@ -83,19 +92,26 @@ public class Map {
         readMap(myReader);
     }
 
-    public String readFirstLineInFile(Scanner myReader) throws IOException {
-        String firstLine = myReader.nextLine();
-        return firstLine;
+    public String readFirstLineInFile(Scanner myReader) {
+        return myReader.nextLine();
     }
 
     public void  heightWidthAndNumberBuoyRecovery(String information) {
         String[] delimitation = information.split(" ");
-        _width = Integer.parseInt(delimitation[0]);
-        _height = Integer.parseInt(delimitation[1]);
-        _nbBuoy = Integer.parseInt(delimitation[2]);
+        if (delimitation.length == NumberDatasWithBuoys) {
+            _width = Integer.parseInt(delimitation[0]);
+            _height = Integer.parseInt(delimitation[1]);
+            _nbBuoy = Integer.parseInt(delimitation[2]);
+        } else {
+            if (delimitation.length == NumberDatasWithNotBuoys) {
+                _width = Integer.parseInt(delimitation[0]);
+                _height = Integer.parseInt(delimitation[1]);
+                _nbBuoy = 0;
+            }
+        }
     }
 
-    public void collectBuoys(Scanner myReader) throws IOException {
+    public void collectBuoys(Scanner myReader) {
         String[] delimitation;
         int XCoordinate;
         int YCoordinate;
@@ -109,7 +125,7 @@ public class Map {
         }
     }
 
-    public void readMap(Scanner reader) throws IOException {
+    public void readMap(Scanner reader) {
         int y = 0;
         while (reader.hasNextLine()) {
             String s = reader.nextLine();
@@ -124,25 +140,6 @@ public class Map {
                 }
             }
             y++;
-        }
-    }
-
-    public void displayInformationMap(){
-        System.out.println("Width = " + _width);
-        System.out.println("Height = " + _height);
-        System.out.println("nbBuoy = " + _nbBuoy);
-        for (Buoy elem : _buoys) {
-            elem.displayBuoy();
-        }
-        int index = 0;
-        for (Tile t : _tiles) {
-            t.displayTile();
-            if (index == _width -1) {
-                index = 0;
-                System.out.println();
-            } else {
-                index++;
-            }
         }
     }
 }
