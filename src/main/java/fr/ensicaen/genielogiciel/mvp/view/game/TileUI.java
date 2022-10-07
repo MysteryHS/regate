@@ -10,9 +10,6 @@ import javafx.scene.layout.AnchorPane;
 public class TileUI extends ImageView {
     private Tile _tile;
 
-    public static int mapHeight = 500;
-    public static int mapWidth = 500;
-
 
     public TileUI(Tile tile) {
         _tile = tile;
@@ -26,14 +23,12 @@ public class TileUI extends ImageView {
 
     }
 
-    public void draw(AnchorPane pane,int nbColumns, int nbRows) {
+    public void draw(AnchorPane pane,double caseWidthInPixel, double caseHeightInPixel) {
 
-        double sizeWidth = (mapWidth / nbColumns);
-        double sizeHeight = (mapHeight / nbRows);
-        setFitWidth(sizeWidth);
-        setFitHeight(sizeHeight);
-        setLayoutX(sizeWidth * _tile.getX());
-        setLayoutY(sizeHeight * _tile.getY());
+        setFitWidth(caseWidthInPixel);
+        setFitHeight(caseHeightInPixel);
+        setLayoutX(caseWidthInPixel * _tile.getCoordinateX());
+        setLayoutY(caseHeightInPixel * _tile.getCoordinateY());
         pane.getChildren().add(this);
     }
 }

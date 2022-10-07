@@ -13,23 +13,30 @@ public class MapView {
 
     private ArrayList<BuoyView> _buoysView;
 
-    public static int mapHeight = 500;
-    public static int mapWidth = 500;
 
-    public MapView(GameView view, Map mapModel) {
-        this._mapModel = mapModel;
-        this._view = view;
+    private double _caseHeightInPixel;
+    private double _caseWidthInPixel;
+
+
+
+
+    public MapView(GameView view, Map mapModel, int caseWidthInPixel, int caseHeightInPixel) {
+        _mapModel = mapModel;
+        _view = view;
         _tilesUI = new ArrayList<TileUI>();
         _buoysView = new ArrayList<BuoyView>();
+
+        _caseHeightInPixel = caseHeightInPixel;
+        _caseWidthInPixel = caseWidthInPixel;
     }
 
 
     public void draw(AnchorPane pane) {
-
+        pane.resize(_mapModel.getWidth(),_mapModel.getHeight());
         for (int col = 0; col < _mapModel.getWidth(); col++) {
             for (int row = 0; row < _mapModel.getHeight(); row++) {
                 TileUI tile = new TileUI(_mapModel.getTile(col,row));
-                tile.draw(pane,_mapModel.getWidth(),_mapModel.getHeight());
+                tile.draw(pane,_caseWidthInPixel,_caseHeightInPixel);
                 _tilesUI.add(tile);
             }
         }

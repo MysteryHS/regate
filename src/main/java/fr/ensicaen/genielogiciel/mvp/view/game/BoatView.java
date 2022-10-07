@@ -6,21 +6,28 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 public class BoatView extends ImageView {
-    GameView view;
-    ShipModel _shipModel;
+    private GameView _view;
+    private ShipModel _shipModel;
+    private double _caseHeightInPixel;
+    private double _caseWidthInPixel;
 
 
-    public BoatView(GameView view, ShipModel shipModel) {
-        this.view = view;
-        this._shipModel = shipModel;
 
-        this.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/boat.png"));
 
+    public BoatView(GameView view, ShipModel shipModel, int caseWidthInPixel, int caseHeightInPixel) {
+        _view = view;
+        _shipModel = shipModel;
+
+        setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/boat.png"));
+
+        _caseHeightInPixel = caseHeightInPixel;
+        _caseWidthInPixel = caseWidthInPixel;
     }
 
     public void draw(AnchorPane pane) {
-        this.setLayoutX(_shipModel.getX());
-        this.setLayoutY(_shipModel.getY());
+
+        this.setLayoutX(_shipModel.getX()*_caseWidthInPixel);
+        this.setLayoutY(_shipModel.getY()*_caseHeightInPixel);
 
         this.setFitWidth(17);
         this.setFitHeight(22);

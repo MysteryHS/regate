@@ -50,13 +50,6 @@ public class Map {
         _nbBuoy = nbBuoy;
     }
 
-    public int getWidth() {
-        return _width;
-    }
-
-    public int getHeight() {
-        return _height;
-    }
 
     public int getNbBuoy() {
         return _nbBuoy;
@@ -70,9 +63,6 @@ public class Map {
         return _nbWater;
     }
 
-    public List<Buoy> getBuoys() {
-        return _buoys;
-    }
 
     public List<Tile> getTiles() {
         return _tiles;

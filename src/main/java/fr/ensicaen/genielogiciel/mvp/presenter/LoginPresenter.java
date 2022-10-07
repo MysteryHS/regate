@@ -26,7 +26,7 @@ public final class LoginPresenter {
         } else {
             try {
                 GameView view = GameView.GameViewFactory.createView();
-                Map map = new Map();
+                Map map = new Map("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
                 ShipModel boat = new ShipModel(
                         new NormalSail(),
                         new MaxCrewDecorator(new NormalCrew()),
