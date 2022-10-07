@@ -1,9 +1,12 @@
 package fr.ensicaen.genielogiciel.mvp.model.player;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 
 public abstract class Player {
-    private Score score;
+    private Score _score;
     private final String _name;
 
     private final ShipModel _ship;
@@ -11,6 +14,15 @@ public abstract class Player {
     Player(String name, ShipModel ship) {
         _ship = ship;
         _name = name;
+        _score = new Score();
+    }
+
+    public ArrayList<String> getScores() {
+        return _score.getScores();
+    }
+
+    public String getScore(int index) throws IOException {
+        return _score.getScore(index);
     }
 
     public ShipModel getShip(){
@@ -21,3 +33,4 @@ public abstract class Player {
         return _name;
     }
 }
+
