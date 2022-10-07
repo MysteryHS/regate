@@ -17,12 +17,13 @@ public class Map {
 
     private static final int NumberDatasWithBuoys = 3;
     private static final int NumberDatasWithNotBuoys = 2;
+    private static final String pathToMapFolder = "./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/";
 
     public Map(String filename) throws IOException {
         _width = 0;
         _height = 0;
         _nbBuoy = 0;
-        readFile("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/" + filename);
+        readFile( pathToMapFolder + filename);
     }
 
     public Map(){
