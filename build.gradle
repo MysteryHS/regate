@@ -10,8 +10,7 @@ version '0.1'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 application {
-    //mainClass = 'fr.ensicaen.genielogiciel.mvp.Main'
-    mainClass = 'fr.ensicaen.genielogiciel.mvp.model.player.Score'
+    mainClass = 'fr.ensicaen.genielogiciel.mvp.Main'
 }
 
 repositories {
@@ -31,10 +30,7 @@ dependencies {
     implementation(
             [files("lib")]
     )
-    implementation 'junit:junit:4.13.1'
-    implementation 'junit:junit:4.13.1'
-    implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
-    implementation 'junit:junit:4.13.1'
+
     testImplementation(
             ['org.junit.jupiter:junit-jupiter:5.+'],
             ['org.mockito:mockito-core:4.+'],
