@@ -18,10 +18,6 @@ public class Model {
         _map = map;
     }
 
-    public void addPlayer(Player player){
-        _players.add(player);
-    }
-
     public void createPlayer(String nickname, Sail sail, Crew crew, String polarName){
         ShipModel model = new ShipModel(sail, crew, _map.getWind(), polarName);
         Player player = new User(nickname, model);
@@ -30,6 +26,10 @@ public class Model {
 
     public Player getFirstPlayer(){
         return _players.get(0);
+    }
+
+    public Map getMap(){
+        return _map;
     }
 
 }

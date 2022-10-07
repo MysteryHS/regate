@@ -4,7 +4,6 @@ import fr.ensicaen.genielogiciel.mvp.model.ship.crew.Crew;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.Wind;
 import fr.ensicaen.genielogiciel.mvp.model.ship.sail.Sail;
 
-import javax.xml.crypto.Data;
 import java.io.FileNotFoundException;
 
 public class ShipModel {
@@ -20,6 +19,7 @@ public class ShipModel {
     private final Wind _wind;
     private final DataPolar _polar;
 
+    @Deprecated
     public ShipModel(Sail sail, Crew crew, Wind wind, DataPolar polarName){
         _sail = sail;
         _crew = crew;
@@ -27,7 +27,6 @@ public class ShipModel {
         _polar = polarName;
     }
 
-    @Deprecated
     public ShipModel(Sail sail, Crew crew, Wind wind, String polarName){
         _sail = sail;
         _crew = crew;
