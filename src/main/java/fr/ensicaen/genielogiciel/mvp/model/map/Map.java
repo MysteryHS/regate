@@ -1,5 +1,8 @@
 package fr.ensicaen.genielogiciel.mvp.model.map;
 
+import fr.ensicaen.genielogiciel.mvp.model.map.wind.Wind;
+import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,11 +15,14 @@ public class Map {
     private int _nbBuoy;
     private int _nbSand;
     private int _nbWater;
+
+    private Wind _wind;
     private List<Buoy> _buoys = new ArrayList<Buoy>();
     private List<Tile> _tiles = new ArrayList<Tile>();
 
     public Map(String filename) throws IOException {
         readFile(filename);
+        _wind = new WindProxy(0., 0.);
     }
 
     public Map() throws IOException {
@@ -61,6 +67,8 @@ public class Map {
     public List<Tile> getTiles() {
         return _tiles;
     }
+
+    public Wind getWind() { return _wind; }
 
     public char getType(int X, int Y){
         for (Buoy elem : _buoys) {
