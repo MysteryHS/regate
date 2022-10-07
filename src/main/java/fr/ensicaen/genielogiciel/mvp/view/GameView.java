@@ -53,7 +53,7 @@ public class GameView implements IGameView {
         _stage.show();
     }
 
-    public void addBoat( double x, double y ) {
+    public void addShip(double x, double y ) {
         _boat = drawBoat(x, y, 6, 16);
     }
 
