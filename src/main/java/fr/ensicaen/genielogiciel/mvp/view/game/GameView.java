@@ -1,7 +1,7 @@
 package fr.ensicaen.genielogiciel.mvp.view.game;
 
 import fr.ensicaen.genielogiciel.mvp.Main;
-import fr.ensicaen.genielogiciel.mvp.model.PlayerModel;
+import fr.ensicaen.genielogiciel.mvp.model.player.Player;
 import fr.ensicaen.genielogiciel.mvp.model.map.Map;
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 import fr.ensicaen.genielogiciel.mvp.presenter.GamePresenter;
@@ -59,7 +59,7 @@ public class GameView implements IGameView {
 
 
     @Override
-    public void draw(Map mapModel, ShipModel shipModel) {
+    public void draw(Map mapModel, Player playerModel) {
         System.out.println(mapWidthInPixel/mapModel.getWidth());
         System.out.println(mapHeightInPixel/mapModel.getHeight());
         _map = new MapView(
@@ -68,11 +68,11 @@ public class GameView implements IGameView {
                 mapHeightInPixel/mapModel.getHeight());
 
         _boat = new BoatView(
-                this,shipModel,
+                this,playerModel.getShip(),
                 mapWidthInPixel/mapModel.getWidth(),
                 mapHeightInPixel/mapModel.getHeight());
 
-        _wind = new WindView(shipModel.getWind(),_windText);
+        _wind = new WindView(playerModel.getShip().getWind(),_windText);
 
         ImageView bg = new ImageView();
         bg.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/bg.png"));
@@ -92,10 +92,10 @@ public class GameView implements IGameView {
 
 
     @Override
-    public void update(ShipModel shipModel, PlayerModel playerModel) {
+    public void update(Player playerModel) {
 
-        _boat.rotate(shipModel.getAngle());
-        _boat.move(shipModel.getDx(), shipModel.getDy());
+        _boat.rotate(playerModel.getShip().getAngle());
+        _boat.move(playerModel.getShip().getDx(), playerModel.getShip().getDy());
     }
 
     public void show() {

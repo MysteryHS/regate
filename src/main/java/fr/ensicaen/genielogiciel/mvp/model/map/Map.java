@@ -47,7 +47,7 @@ public class Map {
         _nbBuoy = 0;
         _nbSand = 0;
         _nbWater = 0;
-        //readFirstLineInFile("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
+        //readFirstLineInFile("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte2.txt");
     }
 
     public Map(int width, int height, int nbBuoy){

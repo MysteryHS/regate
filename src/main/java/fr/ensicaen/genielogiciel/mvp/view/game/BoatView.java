@@ -29,8 +29,8 @@ public class BoatView extends ImageView {
         this.setLayoutX(_shipModel.getX()*_caseWidthInPixel);
         this.setLayoutY(_shipModel.getY()*_caseHeightInPixel);
 
-        this.setFitWidth(17);
-        this.setFitHeight(22);
+        this.setFitWidth(24);
+        this.setFitHeight(33);
 
 
         pane.getChildren().add(this);

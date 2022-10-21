@@ -7,7 +7,9 @@ import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 //            On peut la considérer comme une bibliothèque tiers de gestion de threading.
 //            On peut donc l'utiliser dans le presenter.
 import fr.ensicaen.genielogiciel.mvp.model.ship.DataPolar;
-import fr.ensicaen.genielogiciel.mvp.model.PlayerModel;
+import fr.ensicaen.genielogiciel.mvp.model.player.User;
+
+import fr.ensicaen.genielogiciel.mvp.model.player.Player;
 import fr.ensicaen.genielogiciel.mvp.model.ship.crew.MaxCrewDecorator;
 import fr.ensicaen.genielogiciel.mvp.model.ship.crew.NormalCrew;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
@@ -21,10 +23,9 @@ import javafx.util.Duration;
 import java.io.FileNotFoundException;
 
 public class GamePresenter {
-    private final PlayerModel _playerModel;
+    private final Player _playerModel;
 
     private Map _mapModel;
-    private ShipModel _shipModel;
 
 
     private IGameView _gameView;
@@ -32,15 +33,13 @@ public class GamePresenter {
     private Timeline _timeline;
 
     public GamePresenter(String nickName, Map map, ShipModel ship) {
-        _playerModel = new PlayerModel();
-        _playerModel.setNickname(nickName);
+        _playerModel = new User(nickName,ship);
 
         _mapModel = map;
-        _shipModel = ship;
     }
 
     private void initView() {
-        _gameView.draw(_mapModel,_shipModel);
+        _gameView.draw(_mapModel,_playerModel);
     }
 
 
@@ -70,9 +69,9 @@ public class GamePresenter {
 
     private void changeDirection( UserAction action ) {
         if (action == UserAction.LEFT) {
-            _shipModel.rotate(-2);
+            _playerModel.getShip().rotate(-2);
         } else if (action == UserAction.RIGHT) {
-            _shipModel.rotate(+2);
+            _playerModel.getShip().rotate(+2);
         }
     }
 
@@ -83,7 +82,6 @@ public class GamePresenter {
         } catch (FileNotFoundException exception){
             System.err.println(exception.getMessage());
         }
-        _shipModel = new ShipModel(new LargeSailDecorator(new NormalSail()), new MaxCrewDecorator(new NormalCrew()), new WindProxy(0,0), polar);
     }
 
     private void runGameLoop() {
@@ -96,10 +94,10 @@ public class GamePresenter {
     }
 
     private void update() {
-        _shipModel.move();
+        _playerModel.getShip().move();
     }
 
     private void render() {
-        _gameView.update(_shipModel,_playerModel);
+        _gameView.update(_playerModel);
     }
 }
