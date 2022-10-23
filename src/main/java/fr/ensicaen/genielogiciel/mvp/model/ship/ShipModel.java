@@ -7,8 +7,8 @@ import fr.ensicaen.genielogiciel.mvp.model.ship.sail.Sail;
 import java.io.FileNotFoundException;
 
 public class ShipModel {
-    private double _x = 580;
-    private double _y = 480;
+    private double _x = 10;
+    private double _y = 10;
     private double _dx = 0;
     private double _dy = 0;
     private double _anglePositive = 0;
@@ -96,5 +96,9 @@ public class ShipModel {
         _dy = getInertiaSpeed(getNewSpeedY(), _dy);
         _x += _dx;
         _y += _dy;
+    }
+
+    public Wind getWind() {
+        return _wind;
     }
 }

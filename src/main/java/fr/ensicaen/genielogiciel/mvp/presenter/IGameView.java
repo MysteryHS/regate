@@ -1,7 +1,11 @@
 package fr.ensicaen.genielogiciel.mvp.presenter;
 
-public interface IGameView {
-    void addShip(double x, double y );
+import fr.ensicaen.genielogiciel.mvp.model.player.Player;
+import fr.ensicaen.genielogiciel.mvp.model.map.Map;
+import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 
-    void update( double dx, double dy, double angle );
+public interface IGameView {
+    public void draw(Map mapModel, Player playerModel);
+
+    public void update(Player playerModel);
 }

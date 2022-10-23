@@ -25,13 +25,29 @@ public class Map {
         _wind = new WindProxy(0., 0.);
     }
 
+    public Tile getTile(int x,int y) {
+        return _tiles.get(y*_width+x);
+    }
+
+    public List<Buoy> getBuoys() {
+        return _buoys;
+    }
+
+    public int getHeight() {
+        return _height;
+    }
+
+    public int getWidth() {
+        return _width;
+    }
+
     public Map() throws IOException {
         _width = 0;
         _height = 0;
         _nbBuoy = 0;
         _nbSand = 0;
         _nbWater = 0;
-        //readFirstLineInFile("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
+        //readFirstLineInFile("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte2.txt");
     }
 
     public Map(int width, int height, int nbBuoy){
@@ -40,13 +56,6 @@ public class Map {
         _nbBuoy = nbBuoy;
     }
 
-    public int getWidth() {
-        return _width;
-    }
-
-    public int getHeight() {
-        return _height;
-    }
 
     public int getNbBuoy() {
         return _nbBuoy;
@@ -60,9 +69,6 @@ public class Map {
         return _nbWater;
     }
 
-    public List<Buoy> getBuoys() {
-        return _buoys;
-    }
 
     public List<Tile> getTiles() {
         return _tiles;
