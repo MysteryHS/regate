@@ -60,8 +60,6 @@ public class GameView implements IGameView {
 
     @Override
     public void draw(Map mapModel, Player playerModel) {
-        System.out.println(mapWidthInPixel/mapModel.getWidth());
-        System.out.println(mapHeightInPixel/mapModel.getHeight());
         _map = new MapView(
                 this,mapModel,
                 mapWidthInPixel/mapModel.getWidth(),
