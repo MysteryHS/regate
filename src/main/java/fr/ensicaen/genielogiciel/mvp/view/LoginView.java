@@ -16,6 +16,7 @@ import java.io.IOException;
 public class LoginView implements ILoginView {
     private LoginPresenter _loginPresenter;
     private Stage _stage;
+
     @FXML
     private TextField _nickName;
     @FXML

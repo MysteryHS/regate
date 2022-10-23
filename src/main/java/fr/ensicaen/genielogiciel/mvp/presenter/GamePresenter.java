@@ -1,47 +1,56 @@
 package fr.ensicaen.genielogiciel.mvp.presenter;
 
-import fr.ensicaen.genielogiciel.mvp.model.Model;
 import fr.ensicaen.genielogiciel.mvp.model.map.Map;
-import fr.ensicaen.genielogiciel.mvp.model.player.Player;
+import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 
 // Remarque : l'animation n'est pas considérée comme étant du graphisme à proprement parlé.
 //            On peut la considérer comme une bibliothèque tiers de gestion de threading.
 //            On peut donc l'utiliser dans le presenter.
+import fr.ensicaen.genielogiciel.mvp.model.ship.DataPolar;
+import fr.ensicaen.genielogiciel.mvp.model.player.User;
+
+import fr.ensicaen.genielogiciel.mvp.model.player.Player;
+import fr.ensicaen.genielogiciel.mvp.model.ship.crew.MaxCrewDecorator;
 import fr.ensicaen.genielogiciel.mvp.model.ship.crew.NormalCrew;
+import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
+import fr.ensicaen.genielogiciel.mvp.model.ship.sail.LargeSailDecorator;
 import fr.ensicaen.genielogiciel.mvp.model.ship.sail.NormalSail;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 
-import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class GamePresenter {
+    private final Player _playerModel;
 
-    private final Model _model;
+    private Map _mapModel;
+
+
     private IGameView _gameView;
     private boolean _started = false;
     private Timeline _timeline;
 
-    public GamePresenter( String nickName ) {
-        Map map;
-        try {
-            map = new Map("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        _model = new Model(map);
-        initGame(nickName);
+    public GamePresenter(String nickName, Map map, ShipModel ship) {
+        _playerModel = new User(nickName,ship);
+
+        _mapModel = map;
     }
 
-    private Player getFirstPlayer(){
-        return _model.getFirstPlayer();
+    private void initView() {
+        _gameView.draw(_mapModel,_playerModel);
     }
+
 
     public void setGameView( IGameView gameView ) {
         _gameView = gameView;
-        _gameView.addShip(getFirstPlayer().getShip().getX(), getFirstPlayer().getShip().getY());
+        initView();
     }
+
+
+
+
 
     public void handleUserAction( UserAction code ) {
         if (code == UserAction.START) {
@@ -60,14 +69,19 @@ public class GamePresenter {
 
     private void changeDirection( UserAction action ) {
         if (action == UserAction.LEFT) {
-            getFirstPlayer().getShip().rotate(-2);
+            _playerModel.getShip().rotate(-2);
         } else if (action == UserAction.RIGHT) {
-            getFirstPlayer().getShip().rotate(+2);
+            _playerModel.getShip().rotate(+2);
         }
     }
 
-    private void initGame(String nickname) {
-        _model.createPlayer(nickname, new NormalSail(), new NormalCrew(), "polaire-figaro.pol");
+    private void initGame() {
+        DataPolar polar = null;
+        try {
+            polar = new DataPolar("polaire-figaro.pol");
+        } catch (FileNotFoundException exception){
+            System.err.println(exception.getMessage());
+        }
     }
 
     private void runGameLoop() {
@@ -80,10 +94,10 @@ public class GamePresenter {
     }
 
     private void update() {
-        getFirstPlayer().getShip().move();
+        _playerModel.getShip().move();
     }
 
     private void render() {
-        _gameView.update(getFirstPlayer().getShip().getDx(), getFirstPlayer().getShip().getDy(), getFirstPlayer().getShip().getAngle());
+        _gameView.update(_playerModel);
     }
 }

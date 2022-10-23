@@ -12,7 +12,7 @@ class MapTest {
     @Test
     public void testReadFirstLine() throws IOException {
         Map m = new Map();
-        assertEquals("50 50 1", m.readFirstLineInFile(new Scanner(new File("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt"))));
+        assertEquals("50 50 1", m.readFirstLineInFile(new Scanner(new File("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte2.txt"))));
     }
 
     @Test
@@ -27,7 +27,7 @@ class MapTest {
     @Test
     public void testCollectBuoys() throws IOException {
         Map m = new Map(50,50,1);
-        File inputFile = new File("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
+        File inputFile = new File("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte2.txt");
         Scanner myReader = new Scanner(inputFile);
         myReader.nextLine();
         m.collectBuoys(myReader);
@@ -38,7 +38,7 @@ class MapTest {
     @Test
     public void testReadMap() throws IOException {
         Map m = new Map(50,50,1);
-        File inputFile = new File("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
+        File inputFile = new File("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte2.txt");
         Scanner myReader = new Scanner(inputFile);
         myReader.nextLine();
         m.collectBuoys(myReader);
@@ -62,7 +62,7 @@ class MapTest {
     @Test
     public void testGetType() throws IOException {
         Map m = new Map(50,50,1);
-        File inputFile = new File("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
+        File inputFile = new File("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte2.txt");
         Scanner myReader = new Scanner(inputFile);
         myReader.nextLine();
         m.collectBuoys(myReader);
@@ -75,7 +75,7 @@ class MapTest {
 
     @Test
     public void testReadFile() throws IOException {
-        Map m = new Map("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
+        Map m = new Map("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte2.txt");
         m.displayInformationMap();
     }
 }
