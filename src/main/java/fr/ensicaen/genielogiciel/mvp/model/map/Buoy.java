@@ -4,6 +4,8 @@ public class Buoy {
     private char _symbol;
     private int _XCoordinate;
     private int _YCoordinate;
+    private boolean _xAxis;
+    private boolean _yAxis;
 
     public int getXCoordinate() {
         return _XCoordinate;
