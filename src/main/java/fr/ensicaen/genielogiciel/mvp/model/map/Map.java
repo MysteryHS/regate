@@ -10,15 +10,15 @@ public class Map {
     private int _width;
     private int _height;
     private int _nbBuoy;
-    private int _nbSand;
-    private int _nbWater;
+    private int _xStartPoint;
+    private int _yStartPoint;
     private double _longitude;
     private double _latitude;
     private final List<Buoy> _buoys = new ArrayList<>();
     private final List<Tile> _tiles = new ArrayList<>();
 
-    private static final int NumberDatasWithBuoys = 3;
-    private static final int NumberDatasWithNotBuoys = 2;
+    private static final int NumberDataWithBuoys = 3;
+    private static final int NumberDataWithNotBuoys = 2;
     private static final String pathToMapFolder = "./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/";
 
     public Map(String filename) throws IOException {
@@ -32,8 +32,6 @@ public class Map {
         _width = 0;
         _height = 0;
         _nbBuoy = 0;
-        _nbSand = 0;
-        _nbWater = 0;
     }
 
     public Map(int width, int height, int nbBuoy){
@@ -52,14 +50,6 @@ public class Map {
 
     public int getNbBuoy() {
         return _nbBuoy;
-    }
-
-    public int getNbSand() {
-        return _nbSand;
-    }
-
-    public int getNbWater() {
-        return _nbWater;
     }
 
     public List<Buoy> getBuoys() {
@@ -87,20 +77,12 @@ public class Map {
         return 0;
     }
 
-    public Buoy getBuoy(int X, int Y) {
-        for (Buoy b : _buoys){
-            if ((b.getXCoordinate() == X) && (b.getYCoordinate() == Y)) {
-                return b;
-            }
-        }
-        return null;
-    }
-
     public void readFile(String filename) throws IOException {
         File inputFile = new File(filename);
         Scanner myReader = new Scanner(inputFile);
         heightWidthAndNumberBuoyRecovery(readWidthHeightAndNumberBuoysInFirstLine(myReader));
         longitudeAndLatitudeRecovery(readLongitudeAndLatitudeSecondLine(myReader));
+        startPointRecovery(readStartPointThirdLine(myReader));
         readMap(myReader);
     }
 
@@ -110,12 +92,12 @@ public class Map {
 
     public void  heightWidthAndNumberBuoyRecovery(String information) {
         String[] delimitation = information.split(" ");
-        if (delimitation.length == NumberDatasWithBuoys) {
+        if (delimitation.length == NumberDataWithBuoys) {
             _width = Integer.parseInt(delimitation[0]);
             _height = Integer.parseInt(delimitation[1]);
             _nbBuoy = Integer.parseInt(delimitation[2]);
         } else {
-            if (delimitation.length == NumberDatasWithNotBuoys) {
+            if (delimitation.length == NumberDataWithNotBuoys) {
                 _width = Integer.parseInt(delimitation[0]);
                 _height = Integer.parseInt(delimitation[1]);
                 _nbBuoy = 0;
@@ -133,16 +115,30 @@ public class Map {
         _latitude = Double.parseDouble(delimitation[1]);
     }
 
+    public String readStartPointThirdLine(Scanner myReader){
+        return myReader.nextLine();
+    }
+
+    public void startPointRecovery(String information){
+        String[] delimitation = information.split(" ");
+        _xStartPoint = Integer.parseInt(delimitation[0]);
+        _yStartPoint = Integer.parseInt(delimitation[1]);
+    }
+
     public void collectBuoys(Scanner myReader) {
         String[] delimitation;
-        int XCoordinate;
-        int YCoordinate;
+        int xCoordinate;
+        int yCoordinate;
+        int xAxis;
+        int yAxis;
         for (int i = 0 ; i < _nbBuoy ; i++) {
             String dataBuoy = myReader.nextLine();
             delimitation = dataBuoy.split(" ");
-            XCoordinate = Integer.parseInt(delimitation[0]);
-            YCoordinate = Integer.parseInt(delimitation[1]);
-            Buoy b = new Buoy(XCoordinate, YCoordinate);
+            xCoordinate = Integer.parseInt(delimitation[0]);
+            yCoordinate = Integer.parseInt(delimitation[1]);
+            xAxis = Integer.parseInt(delimitation[2]);
+            yAxis = Integer.parseInt(delimitation[3]);
+            Buoy b = new Buoy(xCoordinate, yCoordinate, xAxis, yAxis);
             _buoys.add(b);
         }
     }
@@ -155,10 +151,8 @@ public class Map {
                 char c = s.charAt(i);
                 if (c == '~') {
                     _tiles.add(new Water(i, y));
-                    _nbWater++;
                 } else if (c == '.') {
                     _tiles.add(new Sand(i, y));
-                    _nbSand++;
                 }
             }
             y++;
