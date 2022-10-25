@@ -10,11 +10,6 @@ import fr.ensicaen.genielogiciel.mvp.model.ship.DataPolar;
 import fr.ensicaen.genielogiciel.mvp.model.player.User;
 
 import fr.ensicaen.genielogiciel.mvp.model.player.Player;
-import fr.ensicaen.genielogiciel.mvp.model.ship.crew.MaxCrewDecorator;
-import fr.ensicaen.genielogiciel.mvp.model.ship.crew.NormalCrew;
-import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
-import fr.ensicaen.genielogiciel.mvp.model.ship.sail.LargeSailDecorator;
-import fr.ensicaen.genielogiciel.mvp.model.ship.sail.NormalSail;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;

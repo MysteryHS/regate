@@ -5,15 +5,15 @@ public class WindData {
     private final double _knot;
 
     public WindData(WindDirection direction, double knot) {
-        this._direction = direction;
-        this._knot = knot;
+        _direction = direction;
+        _knot = knot;
     }
 
     public WindDirection getDirection() {
         return _direction;
     }
 
-    public double getKnot() {
+    public double getSpeedWindInKnot() {
         return _knot;
     }
 }
