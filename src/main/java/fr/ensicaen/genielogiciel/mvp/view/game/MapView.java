@@ -1,7 +1,5 @@
 package fr.ensicaen.genielogiciel.mvp.view.game;
 
-import fr.ensicaen.genielogiciel.mvp.model.map.Buoy;
-import fr.ensicaen.genielogiciel.mvp.model.map.Map;
 import javafx.scene.layout.AnchorPane;
 
 import java.util.ArrayList;
