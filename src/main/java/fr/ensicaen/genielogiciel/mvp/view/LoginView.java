@@ -9,8 +9,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
@@ -70,12 +72,28 @@ public class LoginView implements ILoginView {
     @FXML
     private void onClickChangeCrew(){
         String text;
-        Label sail = (Label) _scene.lookup("#crew");
-        text = sail.getText();
+        Label crew = (Label) _scene.lookup("#crew");
+        text = crew.getText();
         if (text.equals(_ressource.getString("nbr.crewmates.2"))){
-            sail.setText(_ressource.getString("nbr.crewmates.4"));
+            crew.setText(_ressource.getString("nbr.crewmates.4"));
         } else {
-            sail.setText(_ressource.getString("nbr.crewmates.2"));
+            crew.setText(_ressource.getString("nbr.crewmates.2"));
+        }
+
+    }
+    @FXML
+    private void onClickChangeBoat(){
+        String text;
+        Image Oceanis = new Image("Oceanis.png") ;
+        Label boattext = (Label) _scene.lookup("#boattext");
+        ImageView image = (ImageView) _scene.lookup("#boatimage");
+        text = boattext.getText();
+        if (text.equals("Figaro")){
+            boattext.setText("Océanis");
+            image.setImage("Oceanis.png");
+        } else {
+            boattext.setText("Figaro");
+            image.setImage("Figaro.png");
         }
 
     }
