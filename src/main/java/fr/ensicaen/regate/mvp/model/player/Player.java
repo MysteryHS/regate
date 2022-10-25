@@ -1,7 +1,7 @@
 package fr.ensicaen.genielogiciel.mvp.model.player;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 
@@ -17,11 +17,11 @@ public abstract class Player {
         _score = new Score();
     }
 
-    public ArrayList<String> getScores() {
+    public List<String> getScores() {
         return _score.getScores();
-    } // FIXME préférer une interface à une implémentation
+    }
 
-    public String getScore(int index) throws IOException { // FIXME jamais utilisée
+    public String getScore(int index) throws IOException {
         return _score.getScore(index);
     }
 

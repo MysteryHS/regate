@@ -30,8 +30,8 @@ public class TileUI extends ImageView {
 
         setFitWidth(caseWidthInPixel);
         setFitHeight(caseHeightInPixel);
-        setLayoutX(caseWidthInPixel * _tile.getCoordinateX());
-        setLayoutY(caseHeightInPixel * _tile.getCoordinateY());
+        setLayoutX(caseWidthInPixel * _tile.getX());
+        setLayoutY(caseHeightInPixel * _tile.getY());
         pane.getChildren().add(this);
     }
 }

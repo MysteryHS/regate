@@ -1,9 +1,9 @@
 package fr.ensicaen.genielogiciel.mvp.model.map;
 
 public class Water extends Tile {
-    public Water(int X, int Y) {
-        super(X, Y);
-    } // FIXME respecter la casse des variables
+    public Water(int x, int y) {
+        super(x, y);
+    }
 
     @Override
     public void displayTile() {

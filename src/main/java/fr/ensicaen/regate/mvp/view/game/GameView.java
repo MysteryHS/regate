@@ -2,7 +2,7 @@ package fr.ensicaen.genielogiciel.mvp.view.game;
 
 import fr.ensicaen.genielogiciel.mvp.Main;
 import fr.ensicaen.genielogiciel.mvp.model.player.Player; // FIXME couplage entre vue et modèle !!!!
-import fr.ensicaen.genielogiciel.mvp.model.map.Map;
+import fr.ensicaen.genielogiciel.mvp.model.map.GameMap;
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 import fr.ensicaen.genielogiciel.mvp.presenter.GamePresenter;
 import fr.ensicaen.genielogiciel.mvp.presenter.IGameView;
@@ -59,7 +59,7 @@ public class GameView implements IGameView {
 
 
     @Override
-    public void draw(Map mapModel, Player playerModel) {
+    public void draw(GameMap mapModel, Player playerModel) {
         _map = new MapView(
                 this,mapModel,
                 mapWidthInPixel/mapModel.getWidth(),

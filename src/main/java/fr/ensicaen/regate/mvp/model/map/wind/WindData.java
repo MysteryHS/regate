@@ -5,8 +5,8 @@ public class WindData {
     private final double _knot;
 
     public WindData(WindDirection direction, double knot) {
-        this._direction = direction; // FIXME a l'ancienne : this....'
-        this._knot = knot;
+        _direction = direction;
+        _knot = knot;
     }
 
     public WindDirection getDirection() {
