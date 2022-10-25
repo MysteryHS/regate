@@ -44,7 +44,7 @@
         <TextField fx:id="_nickName" prefHeight="36.0" prefWidth="206.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
 
-            <Button accessibleRole="CHECK_BOX" alignment="CENTER" mnemonicParsing="false" prefHeight="6.0" prefWidth="29.0" styleClass="selector" text="&lt;" textAlignment="CENTER" visible="false">
+            <Button accessibleRole="CHECK_BOX" alignment="CENTER" mnemonicParsing="false" prefHeight="6.0" prefWidth="29.0" styleClass="selector" text="&lt;" textAlignment="CENTER">
                 <font>
                     <Font size="20.0" />
                 </font>
@@ -59,41 +59,41 @@
                <Label text="Figaro" BorderPane.alignment="CENTER" />
             </bottom>
             </BorderPane>
-            <Button blendMode="MULTIPLY" cache="true" mnemonicParsing="false" prefHeight="24.0" prefWidth="6.0" styleClass="selector" text="&gt;" visible="false">
+            <Button blendMode="MULTIPLY" cache="true" mnemonicParsing="false" prefHeight="24.0" prefWidth="6.0" styleClass="selector" text="&gt;">
                 <font>
                     <Font size="20.0" />
                 </font>
             </Button>
         </HBox>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-            <Button mnemonicParsing="false" styleClass="selector" text="&lt;" visible="false">
+            <Button mnemonicParsing="false" onAction="#onClickChangeSail" styleClass="selector" text="&lt;">
                 <font>
                     <Font size="18.0" />
                 </font>
             </Button>
-            <Label text="%type.voile">
+            <Label fx:id="sail" text="%type.voile.normal">
                 <font>
                     <Font size="16.0" />
                 </font>
             </Label>
-            <Button mnemonicParsing="false" styleClass="selector" text="&gt;" visible="false">
+            <Button mnemonicParsing="false" onAction="#onClickChangeSail" styleClass="selector" text="&gt;">
                 <font>
                     <Font size="18.0" />
                 </font>
             </Button>
         </HBox>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-            <Button mnemonicParsing="false" styleClass="selector" text="&lt;" visible="false">
+            <Button mnemonicParsing="false" onAction="#onClickChangeCrew" styleClass="selector" text="&lt;">
                 <font>
                     <Font size="18.0" />
                 </font>
             </Button>
-            <Label text="%nbr.crewmates">
+            <Label fx:id="crew" text="%nbr.crewmates.2">
                 <font>
                     <Font size="16.0" />
                 </font>
             </Label>
-            <Button mnemonicParsing="false" styleClass="selector" text="&gt;" visible="false">
+            <Button mnemonicParsing="false" onAction="#onClickChangeCrew" styleClass="selector" text="&gt;">
                 <font>
                     <Font size="18.0" />
                 </font>
