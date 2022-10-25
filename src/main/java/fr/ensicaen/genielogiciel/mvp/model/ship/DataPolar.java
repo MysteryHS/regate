@@ -14,6 +14,7 @@ public class DataPolar {
     private final File _file;
 
     public DataPolar( String strDataPolarFromResourcesDirectory ) throws FileNotFoundException {
+        // FIXME une variable avec _ ?????
         String _workspacePolarResources = "src/main/resources/fr/ensicaen/genielogiciel/mvp/datapolar/";
         _file = new File(_workspacePolarResources + strDataPolarFromResourcesDirectory);
         _minAngle = 0;

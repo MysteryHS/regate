@@ -21,11 +21,11 @@ import javafx.animation.Timeline;
 import javafx.util.Duration;
 
 import java.io.FileNotFoundException;
-
+// FIXME pourquoi des lignes vides ?
 public class GamePresenter {
     private final Player _playerModel;
 
-    private Map _mapModel;
+    private Map _mapModel; // FIXME doit etre final
 
 
     private IGameView _gameView;
@@ -75,7 +75,7 @@ public class GamePresenter {
         }
     }
 
-    private void initGame() {
+    private void initGame() { // FIXME jamais utilisé
         DataPolar polar = null;
         try {
             polar = new DataPolar("polaire-figaro.pol");

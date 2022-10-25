@@ -1,13 +1,13 @@
 package fr.ensicaen.genielogiciel.mvp.view.game;
 
-import fr.ensicaen.genielogiciel.mvp.model.map.Buoy;
+import fr.ensicaen.genielogiciel.mvp.model.map.Buoy; // FIXME couplage entre vue et modèle !!!!
 import fr.ensicaen.genielogiciel.mvp.model.map.Map;
 import javafx.scene.layout.AnchorPane;
 
 import java.util.ArrayList;
 
 public class MapView {
-    private Map _mapModel;
+    private Map _mapModel; // FIXME tous ces attributs sont final
     private GameView _view;
     private ArrayList<TileUI> _tilesUI;
 
@@ -23,7 +23,7 @@ public class MapView {
     public MapView(GameView view, Map mapModel, int caseWidthInPixel, int caseHeightInPixel) {
         _mapModel = mapModel;
         _view = view;
-        _tilesUI = new ArrayList<TileUI>();
+        _tilesUI = new ArrayList<TileUI>(); // FIXME inutle utilser la déclation diamant
         _buoysView = new ArrayList<BuoyView>();
 
         _caseHeightInPixel = caseHeightInPixel;
@@ -44,7 +44,7 @@ public class MapView {
         for(Buoy buoy : _mapModel.getBuoys()) {
             BuoyView buoyView = new BuoyView(_view,buoy);
             buoyView.draw(pane,_mapModel.getWidth(),_mapModel.getHeight());
-            this._buoysView.add(buoyView);
+            this._buoysView.add(buoyView); // FIXME code debutant
         }
     }
 

@@ -19,9 +19,9 @@ public abstract class Player {
 
     public ArrayList<String> getScores() {
         return _score.getScores();
-    }
+    } // FIXME préférer une interface à une implémentation
 
-    public String getScore(int index) throws IOException {
+    public String getScore(int index) throws IOException { // FIXME jamais utilisée
         return _score.getScore(index);
     }
 

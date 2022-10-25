@@ -12,8 +12,8 @@ public class ShipModel {
     private double _dx = 0;
     private double _dy = 0;
     private double _anglePositive = 0;
-    private final double _inertia = 0.05;
-    private final double _speedRatio = 0.8;
+    private final double _inertia = 0.05; // Une constante -> static
+    private final double _speedRatio = 0.8; // Une constante -> static
     private final Sail _sail;
     private final Crew _crew;
     private final Wind _wind;
@@ -45,7 +45,7 @@ public class ShipModel {
 
     public double getInertia() {
         return _inertia;
-    }
+    } // TODO inutilisé
 
     public double getSpeedRatio() {
         return _speedRatio;

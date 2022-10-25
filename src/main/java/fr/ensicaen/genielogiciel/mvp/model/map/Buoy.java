@@ -1,8 +1,8 @@
 package fr.ensicaen.genielogiciel.mvp.model.map;
 
 public class Buoy {
-    private char _symbol;
-    private int _XCoordinate;
+    private char _symbol; // FIXME en final
+    private int _XCoordinate; // FIXME respecter la casse des attributs
     private int _YCoordinate;
 
     public int getXCoordinate() {
@@ -13,7 +13,7 @@ public class Buoy {
         return _YCoordinate;
     }
 
-    public Buoy(int XCoordinate, int YCoordinate) {
+    public Buoy(int XCoordinate, int YCoordinate) { // FIXME respecter la casse des variables
         _symbol = '#';
         _XCoordinate = XCoordinate;
         _YCoordinate = YCoordinate;
@@ -24,7 +24,7 @@ public class Buoy {
         System.out.println(_YCoordinate);
     }
 
-    public int getX() {return _XCoordinate;}
+    public int getX() {return _XCoordinate;} // FIXME quelle est la différence avec getXCoordinate() ?
 
     public int getY() {return _YCoordinate;}
 

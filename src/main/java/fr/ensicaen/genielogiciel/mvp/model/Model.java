@@ -10,8 +10,8 @@ import fr.ensicaen.genielogiciel.mvp.model.ship.sail.Sail;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Model {
-    List<Player> _players = new ArrayList<>();
+public class Model { // FIXME à supprimer
+    List<Player> _players = new ArrayList<>(); // FIXME HORREUR
     Map _map;
 
     public Model(Map map){

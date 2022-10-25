@@ -1,7 +1,7 @@
 package fr.ensicaen.genielogiciel.mvp.view.game;
 
 import fr.ensicaen.genielogiciel.mvp.Main;
-import fr.ensicaen.genielogiciel.mvp.model.player.Player;
+import fr.ensicaen.genielogiciel.mvp.model.player.Player; // FIXME couplage entre vue et modèle !!!!
 import fr.ensicaen.genielogiciel.mvp.model.map.Map;
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 import fr.ensicaen.genielogiciel.mvp.presenter.GamePresenter;
@@ -22,7 +22,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
+// FIXME arretez de mettre des lignes vides a tout bout de champ !!!!
 public class GameView implements IGameView {
     private static Stage _stage;
     private GamePresenter _gamePresenter;
@@ -40,12 +40,12 @@ public class GameView implements IGameView {
     private AnchorPane _mapPane;
 
     @FXML
-    private AnchorPane _windWear;
+    private AnchorPane _windWear; // FIXME jamais utilisé
 
     @FXML
     private Text _windText;
 
-    public static int mapHeightInPixel = 500;
+    public static int mapHeightInPixel = 500; // FIXME une constante est final!
     public static int mapWidthInPixel = 500;
 
 
@@ -119,6 +119,7 @@ public class GameView implements IGameView {
 
 
         private GameViewFactory() {
+            // FIXME supprimer ce commentaire qui n'était qu'à vertue pédagogique
             // Factory class as Utility class where the constructor is private
         }
 

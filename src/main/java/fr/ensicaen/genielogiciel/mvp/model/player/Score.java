@@ -6,11 +6,11 @@ import java.lang.String;
 
 public class Score {
 
-    private ArrayList<String> _score = new ArrayList<>();
+    private ArrayList<String> _score = new ArrayList<>(); // FIXME en final
 
     public ArrayList<String> getScores() {
         return _score;
-    }
+    } // FIXME préférer une interface à une implémentation
 
     public String getScore(int index) throws IOException {
         if (_score.size() <= 0 || index >= _score.size()) {
@@ -19,7 +19,7 @@ public class Score {
         return _score.get(index);
     }
 
-    public void addScore(int time_in_milliseconds) {
+    public void addScore(int time_in_milliseconds) { // FIXME respecter la casse des variables!!!
         int h = time_in_milliseconds / 3600000;
         time_in_milliseconds = time_in_milliseconds - h*3600000;
         int m = time_in_milliseconds / 60000;

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+// FIXME attention a l'ambiguite avec Map du Java
 public class Map {
     private int _width;
     private int _height;
@@ -17,7 +18,7 @@ public class Map {
     private int _nbWater;
 
     private Wind _wind;
-    private List<Buoy> _buoys = new ArrayList<Buoy>();
+    private List<Buoy> _buoys = new ArrayList<Buoy>(); // FIXME mettre en final + utiliser la declaration diamant (ArrayList<>())
     private List<Tile> _tiles = new ArrayList<Tile>();
 
     public Map(String filename) throws IOException {
@@ -63,11 +64,11 @@ public class Map {
 
     public int getNbSand() {
         return _nbSand;
-    }
+    } // FIXME jamais utilisé
 
     public int getNbWater() {
         return _nbWater;
-    }
+    } // FIXME jamais utilisé
 
 
     public List<Tile> getTiles() {
@@ -76,8 +77,8 @@ public class Map {
 
     public Wind getWind() { return _wind; }
 
-    public char getType(int X, int Y){
-        for (Buoy elem : _buoys) {
+    public char getType(int X, int Y){ // FIXME respecter la casse Java
+        for (Buoy elem : _buoys) { // FIXME elem -> b ou buoy
             if ((elem.getXCoordinate() == X) && (elem.getYCoordinate() == Y)) {
                 return '~';
             }
@@ -98,7 +99,7 @@ public class Map {
     }
 
     public String readFirstLineInFile(Scanner myReader) throws IOException {
-        String firstLine = myReader.nextLine();
+        String firstLine = myReader.nextLine(); // FIXME utiliser la version sport return myReader.nextLine();
         return firstLine;
     }
 
@@ -111,7 +112,7 @@ public class Map {
 
     public void collectBuoys(Scanner myReader) throws IOException {
         String[] delimitation;
-        int XCoordinate;
+        int XCoordinate; // FIXME utiliser la casse Java !
         int YCoordinate;
         for (int i = 0 ; i < _nbBuoy ; i++) {
             String dataBuoy = myReader.nextLine();
@@ -141,7 +142,7 @@ public class Map {
         }
     }
 
-    public void displayInformationMap(){
+    public void displayInformationMap(){ // FIXME jamais utilisé
         System.out.println("Width = " + _width);
         System.out.println("Height = " + _height);
         System.out.println("nbBuoy = " + _nbBuoy);
