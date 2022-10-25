@@ -7,12 +7,24 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
-public class TileUI extends ImageView {
+public class TileView extends ImageView {
     private Tile _tile;
 
+    private int _x;
+    private int _y;
+    private double _caseHeightInPixel;
+    private double _caseWidthInPixel;
 
-    public TileUI(Tile tile) {
+
+    public TileView(Tile tile,double caseWidthInPixel, double caseHeightInPixel, int Xcoordinate, int Ycoordinate) {
+        //TODO decoupler
         _tile = tile;
+
+        _x = Xcoordinate;
+        _y = Ycoordinate;
+        _caseHeightInPixel = caseHeightInPixel;
+        _caseWidthInPixel = caseWidthInPixel;
+
         if(tile instanceof Sand) {
             this.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/sand.png"));
         } else if(tile instanceof Water) {
@@ -20,15 +32,21 @@ public class TileUI extends ImageView {
         } else {
             this.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/water.png"));
         }
-
     }
 
-    public void draw(AnchorPane pane,double caseWidthInPixel, double caseHeightInPixel) {
+    public void draw(AnchorPane pane) {
+        setFitWidth(_caseWidthInPixel);
+        setFitHeight(_caseHeightInPixel);
 
-        setFitWidth(caseWidthInPixel);
-        setFitHeight(caseHeightInPixel);
-        setLayoutX(caseWidthInPixel * _tile.getCoordinateX());
-        setLayoutY(caseHeightInPixel * _tile.getCoordinateY());
+        System.out.println("je draw");
+        System.out.println(_caseWidthInPixel);
+        System.out.println(_caseHeightInPixel);
+        System.out.println(_x);
+        System.out.println(_y);
+
+        setLayoutX(_caseWidthInPixel * _x);
+        setLayoutY(_caseHeightInPixel * _y);
+
         pane.getChildren().add(this);
     }
 }

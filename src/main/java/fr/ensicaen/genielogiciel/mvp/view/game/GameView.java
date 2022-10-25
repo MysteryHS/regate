@@ -2,13 +2,10 @@ package fr.ensicaen.genielogiciel.mvp.view.game;
 
 import fr.ensicaen.genielogiciel.mvp.Main;
 import fr.ensicaen.genielogiciel.mvp.model.player.Player;
-import fr.ensicaen.genielogiciel.mvp.model.map.Map;
-import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 import fr.ensicaen.genielogiciel.mvp.presenter.GamePresenter;
 import fr.ensicaen.genielogiciel.mvp.presenter.IGameView;
 import fr.ensicaen.genielogiciel.mvp.presenter.UserAction;
 import fr.ensicaen.genielogiciel.mvp.view.LoginView;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,11 +24,11 @@ public class GameView implements IGameView {
     private static Stage _stage;
     private GamePresenter _gamePresenter;
 
-    private BoatView _boat;
+    private ShipView _shipView;
 
-    private MapView _map;
+    private MapView _mapView;
 
-    private WindView _wind;
+    private WindView _windView;
 
     @FXML
     private AnchorPane _base;
@@ -54,25 +51,18 @@ public class GameView implements IGameView {
     }
 
 
-
+    public void initView(MapView map, ShipView ship, WindView wind) {
+        _mapView = map;
+        _shipView = ship;
+        _windView = wind;
+    }
 
 
 
     @Override
-    public void draw(Map mapModel, Player playerModel) {
-        System.out.println(mapWidthInPixel/mapModel.getWidth());
-        System.out.println(mapHeightInPixel/mapModel.getHeight());
-        _map = new MapView(
-                this,mapModel,
-                mapWidthInPixel/mapModel.getWidth(),
-                mapHeightInPixel/mapModel.getHeight());
+    public void draw(double boatPosX, double boatPosY,String windDirection,double windKnot) {
 
-        _boat = new BoatView(
-                this,playerModel.getShip(),
-                mapWidthInPixel/mapModel.getWidth(),
-                mapHeightInPixel/mapModel.getHeight());
 
-        _wind = new WindView(playerModel.getShip().getWind(),_windText);
 
         ImageView bg = new ImageView();
         bg.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/bg.png"));
@@ -81,12 +71,10 @@ public class GameView implements IGameView {
         bg.setFitHeight(1080);
         bg.setFitWidth(1920);
 
-        _map.draw(_mapPane);
-        _boat.draw(_mapPane);
-        _wind.draw();
+        _mapView.draw(_mapPane);
+        _shipView.draw(_mapPane,boatPosX,boatPosY);
+        _windView.draw(_windText,windDirection,windKnot);
     }
-
-
 
 
 
@@ -94,8 +82,8 @@ public class GameView implements IGameView {
     @Override
     public void update(Player playerModel) {
 
-        _boat.rotate(playerModel.getShip().getAngle());
-        _boat.move(playerModel.getShip().getDx(), playerModel.getShip().getDy());
+        _shipView.rotate(playerModel.getShip().getAngle());
+        _shipView.move(playerModel.getShip().getDx(), playerModel.getShip().getDy());
     }
 
     public void show() {

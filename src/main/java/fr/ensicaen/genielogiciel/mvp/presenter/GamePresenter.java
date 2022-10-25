@@ -10,11 +10,10 @@ import fr.ensicaen.genielogiciel.mvp.model.ship.DataPolar;
 import fr.ensicaen.genielogiciel.mvp.model.player.User;
 
 import fr.ensicaen.genielogiciel.mvp.model.player.Player;
-import fr.ensicaen.genielogiciel.mvp.model.ship.crew.MaxCrewDecorator;
-import fr.ensicaen.genielogiciel.mvp.model.ship.crew.NormalCrew;
-import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
-import fr.ensicaen.genielogiciel.mvp.model.ship.sail.LargeSailDecorator;
-import fr.ensicaen.genielogiciel.mvp.model.ship.sail.NormalSail;
+import fr.ensicaen.genielogiciel.mvp.view.game.ShipView;
+import fr.ensicaen.genielogiciel.mvp.view.game.MapView;
+import fr.ensicaen.genielogiciel.mvp.view.game.TileView;
+import fr.ensicaen.genielogiciel.mvp.view.game.WindView;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -39,7 +38,27 @@ public class GamePresenter {
     }
 
     private void initView() {
-        _gameView.draw(_mapModel,_playerModel);
+        double caseWidthInPixel = MapView._mapWidthInPixel/ (double)_mapModel.getWidth();
+        double caseHeightInPixel = MapView._mapHeightInPixel/ (double)_mapModel.getHeight();
+
+
+
+        ShipView ship = new ShipView(caseWidthInPixel,caseHeightInPixel);
+        WindView wind = new WindView();
+        MapView map = new MapView(caseWidthInPixel,caseHeightInPixel,_mapModel.getWidth(), _mapModel.getHeight());
+        for(int x=0; x< _mapModel.getWidth(); x++) {
+            for(int y=0; y< _mapModel.getHeight(); y++) {
+                map.addTile(new TileView(_mapModel.getTile(x,y),caseWidthInPixel,caseHeightInPixel,x,y));
+            }
+        }
+
+
+        _gameView.initView(map,ship,wind);
+
+        _gameView.draw( _playerModel.getShip().getX(),
+                        _playerModel.getShip().getY(),
+                        _mapModel.getWind().getWindDirection().name(),
+                        _mapModel.getWind().getWindKnot());
     }
 
 

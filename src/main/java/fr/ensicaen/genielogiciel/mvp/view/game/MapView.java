@@ -7,44 +7,47 @@ import javafx.scene.layout.AnchorPane;
 import java.util.ArrayList;
 
 public class MapView {
-    private Map _mapModel;
-    private GameView _view;
-    private ArrayList<TileUI> _tilesUI;
+    private ArrayList<TileView> _tiles;
 
-    private ArrayList<BuoyView> _buoysView;
+    private ArrayList<BuoyView> _buoys;
 
-
+    public static int _mapWidthInPixel = 500;
+    public static int _mapHeightInPixel = 500;
     private double _caseHeightInPixel;
     private double _caseWidthInPixel;
 
+    private int _mapWidth;
+    private int _mapHeight;
 
 
 
-    public MapView(GameView view, Map mapModel, int caseWidthInPixel, int caseHeightInPixel) {
-        _mapModel = mapModel;
-        _view = view;
-        _tilesUI = new ArrayList<TileUI>();
-        _buoysView = new ArrayList<BuoyView>();
+
+    public MapView(double caseWidthInPixel, double caseHeightInPixel, int mapWidth, int mapHeight) {
+        _tiles = new ArrayList<TileView>();
+        _buoys = new ArrayList<BuoyView>();
 
         _caseHeightInPixel = caseHeightInPixel;
         _caseWidthInPixel = caseWidthInPixel;
+
+        _mapWidth = mapWidth;
+        _mapHeight = mapHeight;
+    }
+
+    public void addTile(TileView tile) {
+        _tiles.add(tile);
     }
 
 
     public void draw(AnchorPane pane) {
-        pane.resize(_mapModel.getWidth(),_mapModel.getHeight());
-        for (int col = 0; col < _mapModel.getWidth(); col++) {
-            for (int row = 0; row < _mapModel.getHeight(); row++) {
-                TileUI tile = new TileUI(_mapModel.getTile(col,row));
-                tile.draw(pane,_caseWidthInPixel,_caseHeightInPixel);
-                _tilesUI.add(tile);
-            }
+        pane.resize(_mapWidthInPixel,_mapHeightInPixel);
+
+        System.out.println("je begin draw");
+        for(TileView tile : _tiles) {
+            tile.draw(pane);
         }
 
-        for(Buoy buoy : _mapModel.getBuoys()) {
-            BuoyView buoyView = new BuoyView(_view,buoy);
-            buoyView.draw(pane,_mapModel.getWidth(),_mapModel.getHeight());
-            this._buoysView.add(buoyView);
+        for(BuoyView buoy : _buoys) {
+            buoy.draw(pane);
         }
     }
 
