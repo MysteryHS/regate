@@ -1,12 +1,15 @@
 package fr.ensicaen.genielogiciel.mvp.presenter;
 
+import fr.ensicaen.genielogiciel.mvp.model.map.Map;
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 
 // Remarque : l'animation n'est pas considérée comme étant du graphisme à proprement parlé.
 //            On peut la considérer comme une bibliothèque tiers de gestion de threading.
 //            On peut donc l'utiliser dans le presenter.
 import fr.ensicaen.genielogiciel.mvp.model.ship.DataPolar;
-import fr.ensicaen.genielogiciel.mvp.model.PlayerModel;
+import fr.ensicaen.genielogiciel.mvp.model.player.User;
+
+import fr.ensicaen.genielogiciel.mvp.model.player.Player;
 import fr.ensicaen.genielogiciel.mvp.model.ship.crew.MaxCrewDecorator;
 import fr.ensicaen.genielogiciel.mvp.model.ship.crew.NormalCrew;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
@@ -20,22 +23,34 @@ import javafx.util.Duration;
 import java.io.FileNotFoundException;
 
 public class GamePresenter {
-    private final PlayerModel _playerModel;
-    private ShipModel _shipModel;
+    private final Player _playerModel;
+
+    private Map _mapModel;
+
+
     private IGameView _gameView;
     private boolean _started = false;
     private Timeline _timeline;
 
-    public GamePresenter( String nickName ) {
-        _playerModel = new PlayerModel();
-        _playerModel.setNickname(nickName);
-        initGame();
+    public GamePresenter(String nickName, Map map, ShipModel ship) {
+        _playerModel = new User(nickName,ship);
+
+        _mapModel = map;
     }
+
+    private void initView() {
+        _gameView.draw(_mapModel,_playerModel);
+    }
+
 
     public void setGameView( IGameView gameView ) {
         _gameView = gameView;
-        _gameView.addShip(_shipModel.getX(), _shipModel.getY());
+        initView();
     }
+
+
+
+
 
     public void handleUserAction( UserAction code ) {
         if (code == UserAction.START) {
@@ -54,9 +69,9 @@ public class GamePresenter {
 
     private void changeDirection( UserAction action ) {
         if (action == UserAction.LEFT) {
-            _shipModel.rotate(-2);
+            _playerModel.getShip().rotate(-2);
         } else if (action == UserAction.RIGHT) {
-            _shipModel.rotate(+2);
+            _playerModel.getShip().rotate(+2);
         }
     }
 
@@ -67,7 +82,6 @@ public class GamePresenter {
         } catch (FileNotFoundException exception){
             System.err.println(exception.getMessage());
         }
-        _shipModel = new ShipModel(new LargeSailDecorator(new NormalSail()), new MaxCrewDecorator(new NormalCrew()), new WindProxy(0,0), polar);
     }
 
     private void runGameLoop() {
@@ -80,10 +94,10 @@ public class GamePresenter {
     }
 
     private void update() {
-        _shipModel.move();
+        _playerModel.getShip().move();
     }
 
     private void render() {
-        _gameView.update(_shipModel.getDx(), _shipModel.getDy(), _shipModel.getAngle());
+        _gameView.update(_playerModel);
     }
 }

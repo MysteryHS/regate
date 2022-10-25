@@ -23,4 +23,9 @@ public class Buoy {
         System.out.println(_XCoordinate);
         System.out.println(_YCoordinate);
     }
+
+    public int getX() {return _XCoordinate;}
+
+    public int getY() {return _YCoordinate;}
+
 }

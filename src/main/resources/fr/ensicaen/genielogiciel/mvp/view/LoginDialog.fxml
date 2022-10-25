@@ -15,93 +15,91 @@
 <?import javafx.scene.text.Font?>
 
 <Pane prefHeight="420.0" prefWidth="818.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ensicaen.genielogiciel.mvp.view.LoginView">
-   <children>
-      <ImageView fitHeight="538.0" fitWidth="817.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/background/bg_test.png" />
-         </image></ImageView>
-      <ImageView fitHeight="442.0" fitWidth="368.0" layoutX="226.0" layoutY="-11.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/background/map-removebg-preview.png" />
-         </image>
-      </ImageView>
-      <GridPane alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="420.0" prefWidth="818.0" styleClass="dialog" stylesheets="@LoginDialog.css">
-          <columnConstraints>
-              <ColumnConstraints hgrow="SOMETIMES" maxWidth="281.0" minWidth="0.0" prefWidth="272.0" />
-              <ColumnConstraints hgrow="SOMETIMES" maxWidth="645.0" minWidth="10.0" prefWidth="247.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="645.0" minWidth="10.0" prefWidth="269.0" />
-          </columnConstraints>
-          <rowConstraints>
-            <RowConstraints maxHeight="171.0" minHeight="24.0" prefHeight="29.0" vgrow="NEVER" />
-              <RowConstraints maxHeight="200.0" minHeight="48.0" prefHeight="48.0" vgrow="NEVER" />
-              <RowConstraints maxHeight="203.0" minHeight="30.0" prefHeight="75.0" vgrow="NEVER" />
-              <RowConstraints maxHeight="172.0" minHeight="14.0" prefHeight="41.0" vgrow="NEVER" />
+    <ImageView fitHeight="538.0" fitWidth="817.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../images/background/bg_test.png" />
+    </ImageView>
+    <ImageView fitHeight="442.0" fitWidth="368.0" layoutX="226.0" layoutY="-11.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../images/background/map-removebg-preview.png" />
+    </ImageView>
+    <GridPane alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="420.0" prefWidth="818.0" styleClass="dialog" stylesheets="@LoginDialog.css">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.0" minWidth="0.0" prefWidth="292.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="645.0" minWidth="10.0" prefWidth="206.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="645.0" minWidth="10.0" prefWidth="290.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="171.0" minHeight="24.0" prefHeight="45.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="200.0" minHeight="32.0" prefHeight="32.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="203.0" minHeight="30.0" prefHeight="75.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="172.0" minHeight="14.0" prefHeight="41.0" vgrow="NEVER" />
             <RowConstraints maxHeight="153.0" minHeight="20.0" prefHeight="20.0" vgrow="NEVER" />
             <RowConstraints maxHeight="137.0" minHeight="36.0" prefHeight="52.0" vgrow="NEVER" />
             <RowConstraints maxHeight="115.0" minHeight="15.0" prefHeight="30.0" vgrow="NEVER" />
-          </rowConstraints>
-          <children>
-              <Label alignment="CENTER" prefHeight="16.0" prefWidth="654.0" styleClass="text" text="%login.message.text" textAlignment="CENTER" GridPane.columnIndex="1" />
-              <TextField fx:id="_nickName" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <children>
-                  <Button accessibleRole="CHECK_BOX" alignment="CENTER" mnemonicParsing="false" prefHeight="6.0" prefWidth="29.0" styleClass="selector" text="&lt;" textAlignment="CENTER" visible="false">
-                     <font>
-                        <Font size="20.0" />
-                     </font></Button>
-                  <BorderPane prefHeight="50.0" prefWidth="62.0">
-                     <center>
-                        <ImageView fitHeight="50.0" fitWidth="63.0" BorderPane.alignment="CENTER">
-                           <image>
-                              <Image url="@../images/boat-removebg-preview.png" />
-                           </image>
-                        </ImageView>
-                     </center>
-                  </BorderPane>
-                  <Button blendMode="MULTIPLY" cache="true" mnemonicParsing="false" prefHeight="24.0" prefWidth="6.0" styleClass="selector" text="&gt;" visible="false">
-                     <font>
-                        <Font size="20.0" />
-                     </font></Button>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <children>
-                  <Button mnemonicParsing="false" styleClass="selector" text="&lt;" visible="false">
-                     <font>
-                        <Font size="18.0" />
-                     </font></Button>
-                  <Label text="%type.voile">
-                     <font>
-                        <Font size="16.0" />
-                     </font></Label>
-                  <Button mnemonicParsing="false" styleClass="selector" text="&gt;" visible="false">
-                     <font>
-                        <Font size="18.0" />
-                     </font></Button>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-               <children>
-                  <Button mnemonicParsing="false" styleClass="selector" text="&lt;" visible="false">
-                     <font>
-                        <Font size="18.0" />
-                     </font></Button>
-                  <Label text="%nbr.crewmates">
-                     <font>
-                        <Font size="16.0" />
-                     </font></Label>
-                  <Button mnemonicParsing="false" styleClass="selector" text="&gt;" visible="false">
-                     <font>
-                        <Font size="18.0" />
-                     </font></Button>
-               </children>
-            </HBox>
-              <Button defaultButton="true" onAction="#onClickOnStartGame" prefHeight="30.0" prefWidth="248.0" text="%launch.button.text" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="5" />
-              <Label fx:id="_errorMessage" prefHeight="16.0" prefWidth="251.0" textFill="#ef0000" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" />
-          </children>
-          <padding>
-              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-          </padding>
-      </GridPane>
-   </children>
+        </rowConstraints>
+
+        <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        </padding>
+        <Label alignment="CENTER" prefHeight="25.0" prefWidth="206.0" styleClass="text" text="%login.message.text" textAlignment="CENTER" GridPane.columnIndex="1" />
+        <TextField fx:id="_nickName" prefHeight="36.0" prefWidth="206.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+
+            <Button accessibleRole="CHECK_BOX" alignment="CENTER" mnemonicParsing="false" prefHeight="6.0" prefWidth="29.0" styleClass="selector" text="&lt;" textAlignment="CENTER" visible="false">
+                <font>
+                    <Font size="20.0" />
+                </font>
+            </Button>
+            <BorderPane prefHeight="50.0" prefWidth="62.0">
+                <center>
+                    <ImageView fitHeight="50.0" fitWidth="63.0" BorderPane.alignment="CENTER">
+                        <Image url="@../images/boat-removebg-preview.png" />
+                    </ImageView>
+                </center>
+            <bottom>
+               <Label text="Figaro" BorderPane.alignment="CENTER" />
+            </bottom>
+            </BorderPane>
+            <Button blendMode="MULTIPLY" cache="true" mnemonicParsing="false" prefHeight="24.0" prefWidth="6.0" styleClass="selector" text="&gt;" visible="false">
+                <font>
+                    <Font size="20.0" />
+                </font>
+            </Button>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Button mnemonicParsing="false" styleClass="selector" text="&lt;" visible="false">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Button>
+            <Label text="%type.voile">
+                <font>
+                    <Font size="16.0" />
+                </font>
+            </Label>
+            <Button mnemonicParsing="false" styleClass="selector" text="&gt;" visible="false">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Button>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <Button mnemonicParsing="false" styleClass="selector" text="&lt;" visible="false">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Button>
+            <Label text="%nbr.crewmates">
+                <font>
+                    <Font size="16.0" />
+                </font>
+            </Label>
+            <Button mnemonicParsing="false" styleClass="selector" text="&gt;" visible="false">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Button>
+        </HBox>
+        <Button defaultButton="true" onAction="#onClickOnStartGame" prefHeight="30.0" prefWidth="206.0" text="%launch.button.text" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="5" />
+        <Label fx:id="_errorMessage" alignment="CENTER" prefHeight="16.0" prefWidth="207.0" textFill="#ef0000" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" />
+    </GridPane>
 </Pane>

@@ -4,9 +4,11 @@ import fr.ensicaen.genielogiciel.mvp.model.ship.crew.Crew;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.Wind;
 import fr.ensicaen.genielogiciel.mvp.model.ship.sail.Sail;
 
+import java.io.FileNotFoundException;
+
 public class ShipModel {
-    private double _x = 580;
-    private double _y = 480;
+    private double _x = 10;
+    private double _y = 10;
     private double _dx = 0;
     private double _dy = 0;
     private double _anglePositive = 0;
@@ -16,12 +18,22 @@ public class ShipModel {
     private final Crew _crew;
     private final Wind _wind;
     private final DataPolar _polar;
-
-    public ShipModel(Sail sail, Crew crew, Wind wind, DataPolar polar){
+    public ShipModel(Sail sail, Crew crew, Wind wind, DataPolar polarName){
         _sail = sail;
         _crew = crew;
         _wind = wind;
-        _polar = polar;
+        _polar = polarName;
+    }
+
+    public ShipModel(Sail sail, Crew crew, Wind wind, String polarName){
+        _sail = sail;
+        _crew = crew;
+        _wind = wind;
+        try {
+            _polar = new DataPolar(polarName);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
     public double getX() {
         return _x;
@@ -38,6 +50,7 @@ public class ShipModel {
     public double getSpeedRatio() {
         return _speedRatio;
     }
+
 
     public void rotate( double angle ) {
         _anglePositive = (360 + _anglePositive + (_sail.getSpeedRotation()* _crew.getSpeedRotation()*angle)) % 360;
@@ -81,5 +94,9 @@ public class ShipModel {
         _dy = getInertiaSpeed(getNewSpeedY(), _dy);
         _x += _dx;
         _y += _dy;
+    }
+
+    public Wind getWind() {
+        return _wind;
     }
 }
