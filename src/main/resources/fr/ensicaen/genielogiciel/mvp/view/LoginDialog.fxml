@@ -44,22 +44,22 @@
         <TextField fx:id="_nickName" prefHeight="36.0" prefWidth="206.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
 
-            <Button accessibleRole="CHECK_BOX" alignment="CENTER" mnemonicParsing="false" prefHeight="6.0" prefWidth="29.0" styleClass="selector" text="&lt;" textAlignment="CENTER">
+            <Button accessibleRole="CHECK_BOX" alignment="CENTER" mnemonicParsing="false" onAction="#onClickChangeBoat" prefHeight="6.0" prefWidth="29.0" styleClass="selector" text="&lt;" textAlignment="CENTER">
                 <font>
                     <Font size="20.0" />
                 </font>
             </Button>
             <BorderPane prefHeight="50.0" prefWidth="62.0">
                 <center>
-                    <ImageView fitHeight="50.0" fitWidth="63.0" BorderPane.alignment="CENTER">
+                    <ImageView fx:id="boatimage" fitHeight="50.0" fitWidth="63.0" BorderPane.alignment="CENTER">
                         <Image url="@../images/boat-removebg-preview.png" />
                     </ImageView>
                 </center>
             <bottom>
-               <Label text="Figaro" BorderPane.alignment="CENTER" />
+               <Label fx:id="boattext" text="Figaro" BorderPane.alignment="CENTER" />
             </bottom>
             </BorderPane>
-            <Button blendMode="MULTIPLY" cache="true" mnemonicParsing="false" prefHeight="24.0" prefWidth="6.0" styleClass="selector" text="&gt;">
+            <Button blendMode="MULTIPLY" cache="true" mnemonicParsing="false" onAction="#onClickChangeBoat" prefHeight="24.0" prefWidth="6.0" styleClass="selector" text="&gt;">
                 <font>
                     <Font size="20.0" />
                 </font>

@@ -3,24 +3,31 @@ package fr.ensicaen.genielogiciel.mvp.view;
 import fr.ensicaen.genielogiciel.mvp.Main;
 import fr.ensicaen.genielogiciel.mvp.presenter.ILoginView;
 import fr.ensicaen.genielogiciel.mvp.presenter.LoginPresenter;
+import fr.ensicaen.genielogiciel.mvp.view.game.type.TypeBoat;
+import fr.ensicaen.genielogiciel.mvp.view.game.type.TypeCrew;
+import fr.ensicaen.genielogiciel.mvp.view.game.type.TypeSail;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
-public class LoginView implements ILoginView {
+public class LoginView<type> implements ILoginView {
     private LoginPresenter _loginPresenter;
     private Stage _stage;
     private Scene _scene;
     private ResourceBundle _ressource;
+    private TypeSail _sail = TypeSail.NORM;
+
+    private TypeCrew _crew = TypeCrew.TWO;
+
+    private TypeBoat _boat = TypeBoat.FIGARO;
+
 
     @FXML
     private TextField _nickName;
@@ -33,6 +40,7 @@ public class LoginView implements ILoginView {
     public void setScene( Scene scene ) {
         _scene = scene;
     }
+
     public void setBundle( ResourceBundle bundle) {
         _ressource = bundle;
     }
@@ -58,42 +66,38 @@ public class LoginView implements ILoginView {
 
     @FXML
     private void onClickChangeSail(){
-        String text;
         Label sail = (Label) _scene.lookup("#sail");
-        text = sail.getText();
-        if (text.equals(_ressource.getString("type.voile.normal"))){
+        if (_sail==TypeSail.NORM){
             sail.setText(_ressource.getString("type.voile.big"));
+            _sail=TypeSail.BIG;
         } else {
             sail.setText(_ressource.getString("type.voile.normal"));
+            _sail=TypeSail.NORM;
         }
 
     }
 
     @FXML
     private void onClickChangeCrew(){
-        String text;
         Label crew = (Label) _scene.lookup("#crew");
-        text = crew.getText();
-        if (text.equals(_ressource.getString("nbr.crewmates.2"))){
+        if (_crew==TypeCrew.TWO){
             crew.setText(_ressource.getString("nbr.crewmates.4"));
+            _crew=TypeCrew.FOUR;
         } else {
             crew.setText(_ressource.getString("nbr.crewmates.2"));
+            _crew=TypeCrew.TWO;
         }
 
     }
     @FXML
     private void onClickChangeBoat(){
-        String text;
-        Image Oceanis = new Image("Oceanis.png") ;
         Label boattext = (Label) _scene.lookup("#boattext");
-        ImageView image = (ImageView) _scene.lookup("#boatimage");
-        text = boattext.getText();
-        if (text.equals("Figaro")){
-            boattext.setText("Océanis");
-            image.setImage("Oceanis.png");
+        if ( _boat==TypeBoat.FIGARO){
+            boattext.setText("Oceanis");
+            _boat=TypeBoat.OCEANIS;
         } else {
             boattext.setText("Figaro");
-            image.setImage("Figaro.png");
+            _boat=TypeBoat.FIGARO;
         }
 
     }
@@ -109,6 +113,7 @@ public class LoginView implements ILoginView {
             LoginView view = loader.getController();
             Scene scene = new Scene(root);
             view._stage = primaryStage;
+
             primaryStage.setScene(scene);
             view.setScene(scene);
             view.setBundle(Main.getMessageBundle());
