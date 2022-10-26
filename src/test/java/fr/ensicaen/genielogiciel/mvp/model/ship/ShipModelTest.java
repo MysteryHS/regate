@@ -2,7 +2,7 @@ package fr.ensicaen.genielogiciel.mvp.model.ship;
 
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStation;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindDirection;
-import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
+import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStationProxy;
 import fr.ensicaen.genielogiciel.mvp.model.ship.crew.NormalCrew;
 import fr.ensicaen.genielogiciel.mvp.model.ship.sail.NormalSail;
 import org.junit.jupiter.api.AfterEach;
@@ -18,17 +18,17 @@ class ShipModelTest {
     private double _angle;
     private double _knot;
     @Mock
-    private WeatherStation _mockedWind;
+    private WeatherStation _mockedWeatherStation;
     @Mock
     private DataPolar _mockedPolar;
 
     @BeforeEach
     void setUp() {
-        _mockedWind = mock(WindProxy.class);
+        _mockedWeatherStation = mock(WeatherStationProxy.class);
         _knot = 6.;
         _mockedPolar = mock(DataPolar.class);
-        doReturn(WindDirection.SOUTH).when(_mockedWind).getWindDirection();
-        doReturn(_knot).when(_mockedWind).getWindSpeedInKnots();
+        doReturn(WindDirection.SOUTH).when(_mockedWeatherStation).getWindDirection();
+        doReturn(_knot).when(_mockedWeatherStation).getSpeedWindInKnot();
         _angle = 60.;
     }
     @AfterEach
@@ -37,9 +37,9 @@ class ShipModelTest {
 
     @Test
     void shipSpeedShouldBeEqualsToMaxSpeed() {
-        ShipModel _ship = new ShipModel(new NormalSail(), new NormalCrew(), _mockedWind, _mockedPolar);
-        double _speedRatio = _ship.getSpeedRatio();
-        double _maxSpeed = new MocktDataPolar().getPolarValues(_angle, _knot) * _speedRatio;
+        _ship = new ShipModel(new NormalSail(), new NormalCrew(), _mockedWeatherStation, _mockedPolar );
+        _speedRatio = _ship.getSpeedRatio();
+        _maxSpeed = new MocktDataPolar().getPolarValues(_angle, _knot) * _speedRatio;
         doReturn(new MocktDataPolar().getPolarValues(_angle, _knot)).when(_mockedPolar).getPolarValues(_angle, _knot);
         _ship.rotate(_angle);
         for ( int i = 0; i < 100; i++ ) {

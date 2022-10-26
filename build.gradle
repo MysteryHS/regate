@@ -28,6 +28,7 @@ javafx {
 
 dependencies {
     implementation(
+            'org.json:json:20220924',
             [files("lib")]
     )
     implementation 'org.jetbrains:annotations:20.1.0'

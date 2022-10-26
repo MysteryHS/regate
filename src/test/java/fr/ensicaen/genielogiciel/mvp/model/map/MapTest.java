@@ -40,8 +40,6 @@ class MapTest {
     }
      */
 
-    //TODO expected 0 but was 1 ??
-    /*
     @Test
     public void testReadMap() throws IOException {
         GameMap m = new GameMap(50,50,1);
@@ -55,6 +53,7 @@ class MapTest {
         for (Tile elem : m.getTiles()) {
             Tile tile = new Water(i, j);
             assertEquals(tile.getX(), elem.getY());
+            assertEquals(tile.getX(), elem.getX());
             if (i == m.getWidth()-1) {
                 i = 0;
                 j++;
@@ -63,7 +62,6 @@ class MapTest {
             }
         }
     }
-     */
 
     @Test
     public void testGetType() throws IOException {

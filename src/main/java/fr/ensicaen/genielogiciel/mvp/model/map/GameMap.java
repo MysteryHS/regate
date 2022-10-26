@@ -1,7 +1,7 @@
 package fr.ensicaen.genielogiciel.mvp.model.map;
 
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStation;
-import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
+import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStationProxy;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,13 +16,14 @@ public class GameMap {
     private int _nbSand;
     private int _nbWater;
 
-    private WeatherStation _wind;
-    private final List<Buoy> _buoys = new ArrayList<>();
-    private final List<Tile> _tiles = new ArrayList<>();
+    private WeatherStation _weatherStation;
+    private final List<Buoy> _buoys = new ArrayList<Buoy>();
+    private final List<Tile> _tiles = new ArrayList<Tile>();
 
     public GameMap(String filename) throws IOException {
         readFile(filename);
-        _wind = new WindProxy(0., 0.);
+        //TODO wind not configured
+        //_weatherStation = new WeatherStationProxy(0., 0.);
     }
 
     public Tile getTile(int x,int y) {
@@ -56,7 +57,6 @@ public class GameMap {
         _nbBuoy = nbBuoy;
     }
 
-
     public int getNbBuoy() {
         return _nbBuoy;
     }
@@ -65,7 +65,7 @@ public class GameMap {
         return _tiles;
     }
 
-    public WeatherStation getWind() { return _wind; }
+    public WeatherStation getWind() { return _weatherStation; }
 
     public char getType(int x, int y){
         for (Buoy b : _buoys) {

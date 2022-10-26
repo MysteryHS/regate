@@ -1,6 +1,10 @@
 package fr.ensicaen.genielogiciel.mvp.presenter;
 import fr.ensicaen.genielogiciel.mvp.model.map.GameMap;
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
+// Remarque : l'animation n'est pas considérée comme étant du graphisme à proprement parlé.
+//            On peut la considérer comme une bibliothèque tiers de gestion de threading.
+//            On peut donc l'utiliser dans le presenter.
+import fr.ensicaen.genielogiciel.mvp.model.ship.DataPolar;
 import fr.ensicaen.genielogiciel.mvp.model.player.User;
 import fr.ensicaen.genielogiciel.mvp.model.player.Player;
 import fr.ensicaen.genielogiciel.mvp.model.ship.builder.ConcreteShipBuilder;
