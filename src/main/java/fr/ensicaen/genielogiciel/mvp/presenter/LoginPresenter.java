@@ -30,7 +30,7 @@ public final class LoginPresenter {
                 ShipModel boat = new ShipModel(
                         new NormalSail(),
                         new MaxCrewDecorator(new NormalCrew()),
-                        new WeatherStationProxy(50,50),
+                        new WeatherStationProxy(-0.25,49.23),
                         new DataPolar("polaire-figaro.pol"));
                 GamePresenter gamePresenter = new GamePresenter(nickName,map,boat);
                 view.setGamePresenter(gamePresenter);

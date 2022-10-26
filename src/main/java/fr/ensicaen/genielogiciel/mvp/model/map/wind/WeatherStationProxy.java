@@ -14,6 +14,7 @@ public class WeatherStationProxy implements WeatherStation {
     public WeatherStationProxy(double longitude, double latitude) {
         _longitude = longitude;
         _latitude = latitude;
+        System.out.println("longitude = " + _longitude + " latitude = " + _latitude);
         _date = new Date(0);
         _windData = requestWindData(longitude, latitude);
         _server = null;

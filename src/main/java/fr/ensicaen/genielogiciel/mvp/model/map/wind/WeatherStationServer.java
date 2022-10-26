@@ -13,11 +13,13 @@ public class WeatherStationServer implements WeatherStation {
     public WeatherStationServer(double longitude, double latitude) throws IOException {
         _longitude = longitude;
         _latitude = latitude;
+        System.out.println("longitude = " + _longitude + " latitude = " + _latitude);
         _windData = queryWindDataFromJSON();
     }
 
     protected WindData queryWindDataFromJSON( ) throws IOException {
         String strUrl = "https://www.prevision-meteo.ch/services/json/lat="+_latitude+"lng="+_longitude;
+        System.out.println(strUrl);
         URL url = new URL(strUrl);
 
         Scanner scanner = new Scanner(url.openStream());

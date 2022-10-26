@@ -22,7 +22,8 @@ public class GameMap {
 
     public GameMap(String filename) throws IOException {
         readFile(filename);
-        _weatherStation = new WeatherStationProxy(0., 0.);
+        //TODO wind not configured
+        //_weatherStation = new WeatherStationProxy(0., 0.);
     }
 
     public Tile getTile(int x,int y) {
