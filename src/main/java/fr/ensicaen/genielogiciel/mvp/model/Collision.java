@@ -1,5 +1,6 @@
-package fr.ensicaen.genielogiciel.mvp.model.map;
+package fr.ensicaen.genielogiciel.mvp.model;
 
+import fr.ensicaen.genielogiciel.mvp.model.map.Map;
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 
 public class Collision {
@@ -58,17 +59,7 @@ public class Collision {
         return _collision;
     }
 
-    public boolean collisionWithShip(ShipModel another) {
-        double nextX = _ship.getX() + _ship.getDx();
-        double nextY = _ship.getY() + _ship.getDy();
+    public void collisionWithOtherPlayers(ShipModel another) {
 
-        boolean collision = (another.getX() == nextX) && (another.getY() == nextY);
-
-        if (collision) {
-            _collision = true;
-        } else {
-            resetCollision();
-        }
-        return _collision;
     }
 }
