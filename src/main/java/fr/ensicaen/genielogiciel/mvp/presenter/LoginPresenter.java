@@ -31,7 +31,8 @@ public final class LoginPresenter {
                         new NormalSail(),
                         new MaxCrewDecorator(new NormalCrew()),
                         new WindProxy(50,50),
-                        new DataPolar("polaire-figaro.pol"));
+                        new DataPolar("polaire-figaro.pol"),
+                        250, 250);
                 GamePresenter gamePresenter = new GamePresenter(nickName,map,boat);
                 view.setGamePresenter(gamePresenter);
                 gamePresenter.setGameView(view);

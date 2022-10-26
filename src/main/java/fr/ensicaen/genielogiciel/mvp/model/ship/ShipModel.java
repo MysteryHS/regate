@@ -1,6 +1,5 @@
 package fr.ensicaen.genielogiciel.mvp.model.ship;
 
-import fr.ensicaen.genielogiciel.mvp.model.ship.command.Command;
 import fr.ensicaen.genielogiciel.mvp.model.ship.command.Move;
 import fr.ensicaen.genielogiciel.mvp.model.ship.crew.Crew;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.Wind;
@@ -13,8 +12,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class ShipModel {
-    private double _x = 10;
-    private double _y = 10;
+    private double _x;
+    private double _y;
+
+    private double _initialX;
+    private double _initialY;
     private double _dx = 0;
     private double _dy = 0;
     private double _anglePositive = 0;
@@ -24,15 +26,21 @@ public class ShipModel {
     private final Crew _crew;
     private final Wind _wind;
     private final DataPolar _polar;
+    private boolean _isReplaying = false;
+    private boolean _canMove = true;
 
     private final Timer _timer = new Timer();
 
     private final List<Move> _commands = new ArrayList<>();
-    public ShipModel(Sail sail, Crew crew, Wind wind, DataPolar polarName){
+    public ShipModel(Sail sail, Crew crew, Wind wind, DataPolar polarName, double x, double y){
         _sail = sail;
         _crew = crew;
         _wind = wind;
         _polar = polarName;
+        _x = x;
+        _y = y;
+        _initialX = x;
+        _initialY = y;
     }
 
     public ShipModel(Sail sail, Crew crew, Wind wind, String polarName){
@@ -57,6 +65,10 @@ public class ShipModel {
         return _inertia;
     }
 
+    public boolean isReplaying(){
+        return _isReplaying;
+    }
+
     public double getSpeedRatio() {
         return _speedRatio;
     }
@@ -66,14 +78,14 @@ public class ShipModel {
         move.execute();
     }
 
-    public void replay(){
-        _x = 10;
-        _y = 10;
+    public void replay(long delayEnd){
+        _x = _initialX;
+        _y = _initialY;
         _dx = 0;
         _dy = 0;
         _anglePositive = 0;
+        _isReplaying = true;
         if(_commands.size() != 0){
-            long maxDelay = _commands.get(_commands.size() - 1).getDelay();
             for(Move move : _commands){
                 _timer.schedule(new TimerTask() {
                     @Override
@@ -86,8 +98,12 @@ public class ShipModel {
                 @Override
                 public void run() {
                     purgeTimer();
+                    _canMove = false;
+                    _isReplaying = false;
+                    _dx = 0;
+                    _dy = 0;
                 }
-            }, maxDelay);
+            }, delayEnd);
             _commands.clear();
         }
     }
@@ -98,7 +114,9 @@ public class ShipModel {
     }
 
     public void rotate( double angle ) {
-        _anglePositive = (360 + _anglePositive + (_sail.getSpeedRotation()* _crew.getSpeedRotation()*angle)) % 360;
+        if(_canMove){
+            _anglePositive = (360 + _anglePositive + (_sail.getSpeedRotation()* _crew.getSpeedRotation()*angle)) % 360;
+        }
     }
 
     public double getAngle() {
@@ -135,10 +153,12 @@ public class ShipModel {
     }
 
     public void move() {
-        _dx = getInertiaSpeed(getNewSpeedX(), _dx);
-        _dy = getInertiaSpeed(getNewSpeedY(), _dy);
-        _x += _dx;
-        _y += _dy;
+        if(_canMove){
+            _dx = getInertiaSpeed(getNewSpeedX(), _dx);
+            _dy = getInertiaSpeed(getNewSpeedY(), _dy);
+            _x += _dx;
+            _y += _dy;
+        }
     }
 
     public Wind getWind() {

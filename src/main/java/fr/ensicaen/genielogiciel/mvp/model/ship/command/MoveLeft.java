@@ -6,8 +6,6 @@ import java.util.Date;
 import java.util.Timer;
 
 public class MoveLeft extends Move {
-    private ShipModel _ship;
-    private long _delay;
 
     public MoveLeft(ShipModel ship, long delay){
        super(ship, delay);

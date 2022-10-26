@@ -39,7 +39,6 @@ public class GamePresenter {
 
     public GamePresenter(String nickName, Map map, ShipModel ship) {
         _playerModel = new User(nickName,ship);
-
         _mapModel = map;
     }
 
@@ -53,8 +52,8 @@ public class GamePresenter {
         initView();
     }
 
-    public void resetShip(){
-        _playerModel.getShip().replay();
+    public void resetShip(long delayEnd){
+        _playerModel.getShip().replay(delayEnd);
     }
 
 
@@ -65,7 +64,7 @@ public class GamePresenter {
         if (code == UserAction.START) {
             startGame();
         } else if(code == UserAction.RESET) {
-            resetShip();
+            resetShip((new Date()).getTime() - _dateStarted.getTime());
         } else {
             changeDirection(code);
         }
@@ -80,6 +79,9 @@ public class GamePresenter {
     }
 
     private void changeDirection( UserAction action ) {
+        if(!_started || _playerModel.getShip().isReplaying()){
+            return;
+        }
         if (action == UserAction.LEFT) {
             _playerModel.getShip().performCommand(new MoveLeft(_playerModel.getShip(), (new Date()).getTime() - _dateStarted.getTime()));
         } else if (action == UserAction.RIGHT) {
