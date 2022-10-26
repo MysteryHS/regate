@@ -51,12 +51,12 @@
             </Button>
             <BorderPane prefHeight="50.0" prefWidth="62.0">
                 <center>
-                    <ImageView fx:id="boatimage" fitHeight="50.0" fitWidth="63.0" BorderPane.alignment="CENTER">
-                        <Image url="@../images/boat-removebg-preview.png" />
+                    <ImageView fitHeight="50.0" fitWidth="63.0" BorderPane.alignment="CENTER">
+                        <Image url="@../images/boats/Figaro.png" />
                     </ImageView>
                 </center>
             <bottom>
-               <Label fx:id="boattext" text="Figaro" BorderPane.alignment="CENTER" />
+               <Label id="boattext" text="Figaro" BorderPane.alignment="CENTER" />
             </bottom>
             </BorderPane>
             <Button blendMode="MULTIPLY" cache="true" mnemonicParsing="false" onAction="#onClickChangeBoat" prefHeight="24.0" prefWidth="6.0" styleClass="selector" text="&gt;">
@@ -71,7 +71,7 @@
                     <Font size="18.0" />
                 </font>
             </Button>
-            <Label fx:id="sail" text="%type.voile.normal">
+            <Label id="sail" text="%type.voile.normal">
                 <font>
                     <Font size="16.0" />
                 </font>
@@ -88,7 +88,7 @@
                     <Font size="18.0" />
                 </font>
             </Button>
-            <Label fx:id="crew" text="%nbr.crewmates.2">
+            <Label id="crew" text="%nbr.crewmates.2">
                 <font>
                     <Font size="16.0" />
                 </font>
