@@ -10,6 +10,8 @@ import fr.ensicaen.genielogiciel.mvp.model.ship.DataPolar;
 import fr.ensicaen.genielogiciel.mvp.model.player.User;
 
 import fr.ensicaen.genielogiciel.mvp.model.player.Player;
+import fr.ensicaen.genielogiciel.mvp.model.ship.command.MoveLeft;
+import fr.ensicaen.genielogiciel.mvp.model.ship.command.MoveRight;
 import fr.ensicaen.genielogiciel.mvp.model.ship.crew.MaxCrewDecorator;
 import fr.ensicaen.genielogiciel.mvp.model.ship.crew.NormalCrew;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
@@ -21,6 +23,7 @@ import javafx.animation.Timeline;
 import javafx.util.Duration;
 
 import java.io.FileNotFoundException;
+import java.util.Date;
 
 public class GamePresenter {
     private final Player _playerModel;
@@ -31,6 +34,8 @@ public class GamePresenter {
     private IGameView _gameView;
     private boolean _started = false;
     private Timeline _timeline;
+
+    private Date _dateStarted;
 
     public GamePresenter(String nickName, Map map, ShipModel ship) {
         _playerModel = new User(nickName,ship);
@@ -48,6 +53,10 @@ public class GamePresenter {
         initView();
     }
 
+    public void resetShip(){
+        _playerModel.getShip().replay();
+    }
+
 
 
 
@@ -55,6 +64,8 @@ public class GamePresenter {
     public void handleUserAction( UserAction code ) {
         if (code == UserAction.START) {
             startGame();
+        } else if(code == UserAction.RESET) {
+            resetShip();
         } else {
             changeDirection(code);
         }
@@ -63,15 +74,16 @@ public class GamePresenter {
     private void startGame() {
         if (!_started) {
             _started = true;
+            _dateStarted = new Date();
             runGameLoop();
         }
     }
 
     private void changeDirection( UserAction action ) {
         if (action == UserAction.LEFT) {
-            _playerModel.getShip().rotate(-2);
+            _playerModel.getShip().performCommand(new MoveLeft(_playerModel.getShip(), (new Date()).getTime() - _dateStarted.getTime()));
         } else if (action == UserAction.RIGHT) {
-            _playerModel.getShip().rotate(+2);
+            _playerModel.getShip().performCommand(new MoveRight(_playerModel.getShip(), (new Date()).getTime() - _dateStarted.getTime()));
         }
     }
 

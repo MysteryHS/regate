@@ -1,10 +1,16 @@
 package fr.ensicaen.genielogiciel.mvp.model.ship;
 
+import fr.ensicaen.genielogiciel.mvp.model.ship.command.Command;
+import fr.ensicaen.genielogiciel.mvp.model.ship.command.Move;
 import fr.ensicaen.genielogiciel.mvp.model.ship.crew.Crew;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.Wind;
 import fr.ensicaen.genielogiciel.mvp.model.ship.sail.Sail;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ShipModel {
     private double _x = 10;
@@ -18,6 +24,10 @@ public class ShipModel {
     private final Crew _crew;
     private final Wind _wind;
     private final DataPolar _polar;
+
+    private final Timer _timer = new Timer();
+
+    private final List<Move> _commands = new ArrayList<>();
     public ShipModel(Sail sail, Crew crew, Wind wind, DataPolar polarName){
         _sail = sail;
         _crew = crew;
@@ -51,6 +61,41 @@ public class ShipModel {
         return _speedRatio;
     }
 
+    public void performCommand(Move move){
+        _commands.add(move);
+        move.execute();
+    }
+
+    public void replay(){
+        _x = 10;
+        _y = 10;
+        _dx = 0;
+        _dy = 0;
+        _anglePositive = 0;
+        if(_commands.size() != 0){
+            long maxDelay = _commands.get(_commands.size() - 1).getDelay();
+            for(Move move : _commands){
+                _timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        move.execute();
+                    }
+                }, move.getDelay());
+            }
+            _timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    purgeTimer();
+                }
+            }, maxDelay);
+            _commands.clear();
+        }
+    }
+
+    public void purgeTimer(){
+        _timer.cancel();
+        _timer.purge();
+    }
 
     public void rotate( double angle ) {
         _anglePositive = (360 + _anglePositive + (_sail.getSpeedRotation()* _crew.getSpeedRotation()*angle)) % 360;

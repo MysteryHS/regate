@@ -26,20 +26,20 @@ public class BoatView extends ImageView {
 
     public void draw(AnchorPane pane) {
 
-        this.setLayoutX(_shipModel.getX()*_caseWidthInPixel);
-        this.setLayoutY(_shipModel.getY()*_caseHeightInPixel);
+        setLayoutX(_shipModel.getX());
+        setLayoutY(_shipModel.getY());
 
-        this.setFitWidth(24);
-        this.setFitHeight(33);
+        setFitWidth(24);
+        setFitHeight(33);
 
 
         pane.getChildren().add(this);
     }
 
 
-    public void move(double dx, double dy) {
-        setLayoutX(getLayoutX() + dx);
-        setLayoutY(getLayoutY() + dy);
+    public void move(double x, double y) {
+        setLayoutX(x);
+        setLayoutY(y);
     }
 
 

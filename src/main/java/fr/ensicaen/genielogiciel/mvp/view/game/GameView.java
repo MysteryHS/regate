@@ -53,11 +53,6 @@ public class GameView implements IGameView {
         _gamePresenter = gamePresenter;
     }
 
-
-
-
-
-
     @Override
     public void draw(Map mapModel, Player playerModel) {
         _map = new MapView(
@@ -91,16 +86,13 @@ public class GameView implements IGameView {
 
     @Override
     public void update(Player playerModel) {
-
         _boat.rotate(playerModel.getShip().getAngle());
-        _boat.move(playerModel.getShip().getDx(), playerModel.getShip().getDy());
+        _boat.move(playerModel.getShip().getX(), playerModel.getShip().getY());
     }
 
     public void show() {
         _stage.show();
     }
-
-
 
 
     private void handleKeyPressed(KeyCode code) {
@@ -110,6 +102,8 @@ public class GameView implements IGameView {
             _gamePresenter.handleUserAction(UserAction.LEFT);
         } else if (code == KeyCode.RIGHT) {
             _gamePresenter.handleUserAction(UserAction.RIGHT);
+        } else if (code == KeyCode.R) {
+            _gamePresenter.handleUserAction(UserAction.RESET);
         }
     }
 
