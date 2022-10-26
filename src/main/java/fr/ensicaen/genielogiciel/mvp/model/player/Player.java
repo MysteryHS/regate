@@ -1,7 +1,7 @@
 package fr.ensicaen.genielogiciel.mvp.model.player;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 
@@ -17,7 +17,7 @@ public abstract class Player {
         _score = new Score();
     }
 
-    public ArrayList<String> getScores() {
+    public List<String> getScores() {
         return _score.getScores();
     }
 
