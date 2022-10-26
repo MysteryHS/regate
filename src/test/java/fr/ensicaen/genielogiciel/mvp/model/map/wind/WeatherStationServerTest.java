@@ -9,10 +9,13 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class WeatherStationServerTest {
-    private WeatherStationServer _weatherStationServer;
+    private final WeatherStationServer _weatherStationServer = new WeatherStationServer(-0.25, 49.23);
+
+    WeatherStationServerTest() throws IOException {
+    }
+
     @BeforeEach
-    void setUp() throws IOException {
-        _weatherStationServer = new WeatherStationServer(-0.25, 49.23);
+    void setUp() {
     }
 
     @AfterEach
