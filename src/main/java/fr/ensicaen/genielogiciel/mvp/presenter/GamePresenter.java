@@ -1,6 +1,6 @@
 package fr.ensicaen.genielogiciel.mvp.presenter;
 
-import fr.ensicaen.genielogiciel.mvp.model.map.Map;
+import fr.ensicaen.genielogiciel.mvp.model.map.GameMap;
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 
 // Remarque : l'animation n'est pas considérée comme étant du graphisme à proprement parlé.
@@ -28,7 +28,7 @@ import java.util.Date;
 public class GamePresenter {
     private final Player _playerModel;
 
-    private Map _mapModel;
+    private GameMap _mapModel;
 
 
     private IGameView _gameView;
@@ -37,7 +37,7 @@ public class GamePresenter {
 
     private Date _dateStarted;
 
-    public GamePresenter(String nickName, Map map, ShipModel ship) {
+    public GamePresenter(String nickName, GameMap map, ShipModel ship) {
         _playerModel = new User(nickName,ship);
         _mapModel = map;
     }
