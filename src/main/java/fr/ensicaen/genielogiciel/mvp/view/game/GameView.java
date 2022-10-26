@@ -3,12 +3,10 @@ package fr.ensicaen.genielogiciel.mvp.view.game;
 import fr.ensicaen.genielogiciel.mvp.Main;
 import fr.ensicaen.genielogiciel.mvp.model.player.Player;
 import fr.ensicaen.genielogiciel.mvp.model.map.Map;
-import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 import fr.ensicaen.genielogiciel.mvp.presenter.GamePresenter;
 import fr.ensicaen.genielogiciel.mvp.presenter.IGameView;
 import fr.ensicaen.genielogiciel.mvp.presenter.UserAction;
 import fr.ensicaen.genielogiciel.mvp.view.LoginView;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -70,7 +68,7 @@ public class GameView implements IGameView {
                 mapWidthInPixel/mapModel.getWidth(),
                 mapHeightInPixel/mapModel.getHeight());
 
-        _wind = new WindView(playerModel.getShip().getWind(),_windText);
+        _wind = new WindView(playerModel.getShip().getWindToDelete(),_windText);
 
         ImageView bg = new ImageView();
         bg.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/bg.png"));

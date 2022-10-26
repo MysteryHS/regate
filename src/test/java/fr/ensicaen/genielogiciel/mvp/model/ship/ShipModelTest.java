@@ -15,11 +15,8 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
 class ShipModelTest {
-    private ShipModel _ship;
     private double _angle;
     private double _knot;
-    private double _speedRatio;
-    private double _maxSpeed;
     @Mock
     private Wind _mockedWind;
     @Mock
@@ -36,14 +33,13 @@ class ShipModelTest {
     }
     @AfterEach
     void tearDown() {
-        _ship = null;
     }
 
     @Test
     void shipSpeedShouldBeEqualsToMaxSpeed() {
-        _ship = new ShipModel(new NormalSail(), new NormalCrew(), _mockedWind, _mockedPolar );
-        _speedRatio = _ship.getSpeedRatio();
-        _maxSpeed = new MocktDataPolar().getPolarValues(_angle, _knot) * _speedRatio;
+        ShipModel _ship = new ShipModel(new NormalSail(), new NormalCrew(), _mockedWind, _mockedPolar);
+        double _speedRatio = _ship.getSpeedRatio();
+        double _maxSpeed = new MocktDataPolar().getPolarValues(_angle, _knot) * _speedRatio;
         doReturn(new MocktDataPolar().getPolarValues(_angle, _knot)).when(_mockedPolar).getPolarValues(_angle, _knot);
         _ship.rotate(_angle);
         for ( int i = 0; i < 100; i++ ) {

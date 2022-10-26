@@ -12,7 +12,6 @@ public class ShipModel {
     private double _dx = 0;
     private double _dy = 0;
     private double _anglePositive = 0;
-    private final double _inertia = 0.05;
     private final double _speedRatio = 0.8;
     private final Sail _sail;
     private final Crew _crew;
@@ -41,10 +40,6 @@ public class ShipModel {
 
     public double getY() {
         return _y;
-    }
-
-    public double getInertia() {
-        return _inertia;
     }
 
     public double getSpeedRatio() {
@@ -83,8 +78,9 @@ public class ShipModel {
     }
 
     private double getInertiaSpeed(double newSpeed, double currentSpeed){
-        if(newSpeed<currentSpeed-_inertia){
-            return currentSpeed-_inertia;
+        double _inertia = 0.05;
+        if(newSpeed<currentSpeed- _inertia){
+            return currentSpeed- _inertia;
         }
         return Math.min(newSpeed, currentSpeed + _inertia);
     }
@@ -96,7 +92,23 @@ public class ShipModel {
         _y += _dy;
     }
 
+    public Wind getWindToDelete() {
+        return _wind;
+    }
+
+    public Sail getSail() {
+        return _sail;
+    }
+
+    public Crew getCrew() {
+        return _crew;
+    }
+
     public Wind getWind() {
         return _wind;
+    }
+
+    public String getPolarName() {
+        return _polar.getPolarName();
     }
 }
