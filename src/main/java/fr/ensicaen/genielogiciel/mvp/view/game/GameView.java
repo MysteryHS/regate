@@ -3,7 +3,6 @@ package fr.ensicaen.genielogiciel.mvp.view.game;
 import fr.ensicaen.genielogiciel.mvp.Main;
 import fr.ensicaen.genielogiciel.mvp.model.player.Player; // FIXME couplage entre vue et modèle !!!!
 import fr.ensicaen.genielogiciel.mvp.model.map.GameMap;
-import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 import fr.ensicaen.genielogiciel.mvp.presenter.GamePresenter;
 import fr.ensicaen.genielogiciel.mvp.presenter.IGameView;
 import fr.ensicaen.genielogiciel.mvp.presenter.UserAction;
@@ -68,7 +67,7 @@ public class GameView implements IGameView {
                 mapWidthInPixel/mapModel.getWidth(),
                 mapHeightInPixel/mapModel.getHeight());
 
-        _wind = new WindView(playerModel.getShip().getWindToDelete(),_windText);
+        _wind = new WindView(playerModel.getShip().getWind(),_windText);
 
         ImageView bg = new ImageView();
         bg.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/bg.png"));

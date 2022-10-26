@@ -1,7 +1,7 @@
 package fr.ensicaen.genielogiciel.mvp.model.ship.builder;
 
+import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStationProxy;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindDirection;
-import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 import fr.ensicaen.genielogiciel.mvp.model.ship.crew.MaxCrewDecorator;
 import fr.ensicaen.genielogiciel.mvp.model.ship.crew.NormalCrew;
@@ -23,13 +23,13 @@ class ShipDirectorTest {
     private ShipDirector _director;
     private ShipModel _ship;
     @Mock
-    private WindProxy _mockedWind;
+    private WeatherStationProxy _mockedWind;
 
     @BeforeEach
     void setUp() {
-        _mockedWind = mock(WindProxy.class);
+        _mockedWind = mock(WeatherStationProxy.class);
         doReturn(WindDirection.SOUTH).when(_mockedWind).getWindDirection();
-        doReturn(4.).when(_mockedWind).getWindSpeedInKnots();
+        doReturn(4.).when(_mockedWind).getSpeedWindInKnot();
         _director = new ShipDirector(new ConcreteShipBuilder());
     }
 

@@ -1,15 +1,14 @@
 package fr.ensicaen.genielogiciel.mvp.presenter;
 import fr.ensicaen.genielogiciel.mvp.model.map.GameMap;
+import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStationProxy;
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 // Remarque : l'animation n'est pas considérée comme étant du graphisme à proprement parlé.
 //            On peut la considérer comme une bibliothèque tiers de gestion de threading.
 //            On peut donc l'utiliser dans le presenter.
-import fr.ensicaen.genielogiciel.mvp.model.ship.DataPolar;
 import fr.ensicaen.genielogiciel.mvp.model.player.User;
 import fr.ensicaen.genielogiciel.mvp.model.player.Player;
 import fr.ensicaen.genielogiciel.mvp.model.ship.builder.ConcreteShipBuilder;
 import fr.ensicaen.genielogiciel.mvp.model.ship.builder.ShipDirector;
-import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
 import fr.ensicaen.genielogiciel.mvp.model.ship.builder.builderType.TypeShip;
 import fr.ensicaen.genielogiciel.mvp.model.ship.builder.builderType.TypeCrew;
 import fr.ensicaen.genielogiciel.mvp.model.ship.builder.builderType.TypeSail;
@@ -87,7 +86,7 @@ public class GamePresenter {
         } else {
             director.buildMaxCrew();
         }
-        director.addWind(new WindProxy(0.3,49));
+        director.addWind(new WeatherStationProxy(0.3,49));
         return director.build();
 
     }
