@@ -16,7 +16,7 @@ class WindProxyTest {
     @AfterEach
     public void tearDown() {
         _windProxy = null;
-    }
+    } // FIXME pas necessaire ce n'est pas du C++
     @Test
     void windSpeedShouldEqualThree() {
         assertEquals(4., _windProxy.getWindKnot());

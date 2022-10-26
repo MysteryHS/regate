@@ -1,7 +1,7 @@
 package fr.ensicaen.genielogiciel.mvp.presenter;
 
 import fr.ensicaen.genielogiciel.mvp.Main;
-import fr.ensicaen.genielogiciel.mvp.model.map.Map;
+import fr.ensicaen.genielogiciel.mvp.model.map.GameMap;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
 import fr.ensicaen.genielogiciel.mvp.model.ship.DataPolar;
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
@@ -26,7 +26,7 @@ public final class LoginPresenter {
         } else {
             try {
                 GameView view = GameView.GameViewFactory.createView();
-                Map map = new Map("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
+                GameMap map = new GameMap("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
                 ShipModel boat = new ShipModel(
                         new NormalSail(),
                         new MaxCrewDecorator(new NormalCrew()),
