@@ -26,23 +26,17 @@ public class TileView extends ImageView {
         _caseWidthInPixel = caseWidthInPixel;
 
         if(tile instanceof Sand) {
-            this.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/sand.png"));
+            this.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/map/sand.png"));
         } else if(tile instanceof Water) {
-            this.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/water.png"));
+            this.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/map/water.png"));
         } else {
-            this.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/water.png"));
+            this.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/map/water.png"));
         }
     }
 
     public void draw(AnchorPane pane) {
         setFitWidth(_caseWidthInPixel);
         setFitHeight(_caseHeightInPixel);
-
-        System.out.println("je draw");
-        System.out.println(_caseWidthInPixel);
-        System.out.println(_caseHeightInPixel);
-        System.out.println(_x);
-        System.out.println(_y);
 
         setLayoutX(_caseWidthInPixel * _x);
         setLayoutY(_caseHeightInPixel * _y);

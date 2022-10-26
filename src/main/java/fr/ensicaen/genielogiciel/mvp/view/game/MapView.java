@@ -39,7 +39,6 @@ public class MapView {
     public void draw(AnchorPane pane) {
         pane.resize(_mapWidthInPixel,_mapHeightInPixel);
 
-        System.out.println("je begin draw");
         for(TileView tile : _tiles) {
             tile.draw(pane);
         }

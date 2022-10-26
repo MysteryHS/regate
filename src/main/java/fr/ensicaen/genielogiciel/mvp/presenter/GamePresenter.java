@@ -2,7 +2,7 @@ package fr.ensicaen.genielogiciel.mvp.presenter;
 
 import fr.ensicaen.genielogiciel.mvp.model.map.Map;
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
-
+import fr.ensicaen.genielogiciel.mvp.model.map.Tile;
 // Remarque : l'animation n'est pas considérée comme étant du graphisme à proprement parlé.
 //            On peut la considérer comme une bibliothèque tiers de gestion de threading.
 //            On peut donc l'utiliser dans le presenter.
@@ -46,10 +46,10 @@ public class GamePresenter {
         ShipView ship = new ShipView(caseWidthInPixel,caseHeightInPixel);
         WindView wind = new WindView();
         MapView map = new MapView(caseWidthInPixel,caseHeightInPixel,_mapModel.getWidth(), _mapModel.getHeight());
-        for(int x=0; x< _mapModel.getWidth(); x++) {
-            for(int y=0; y< _mapModel.getHeight(); y++) {
-                map.addTile(new TileView(_mapModel.getTile(x,y),caseWidthInPixel,caseHeightInPixel,x,y));
-            }
+        for(Tile tile : _mapModel.getTiles()) {
+
+                map.addTile(new TileView(tile,caseWidthInPixel,caseHeightInPixel, tile.getCoordinateX(), tile.getCoordinateY()));
+
         }
 
 

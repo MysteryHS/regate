@@ -22,7 +22,6 @@ public class ShipView extends ImageView {
         this.setLayoutX(dx*_caseWidthInPixel);
         this.setLayoutY(dy*_caseHeightInPixel);
 
-        System.out.println("je draw le boat");
 
         this.setFitWidth(24);
         this.setFitHeight(33);
