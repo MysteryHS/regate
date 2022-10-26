@@ -19,7 +19,7 @@ public class BuoyView extends ImageView {
         _caseHeightInPixel = caseHeightInPixel;
         _caseWidthInPixel = caseWidthInPixel;
 
-        this.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/map/flag.png"));
+        this.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/map/flag_red.png"));
 
     }
 
@@ -27,8 +27,8 @@ public class BuoyView extends ImageView {
         this.setLayoutX(_caseWidthInPixel*_x);
         this.setLayoutY(_caseHeightInPixel*_y);
 
-        this.setFitWidth(10);
-        this.setFitHeight(10);
+        this.setFitWidth(20);
+        this.setFitHeight(20);
         pane.getChildren().add(this);
     }
 

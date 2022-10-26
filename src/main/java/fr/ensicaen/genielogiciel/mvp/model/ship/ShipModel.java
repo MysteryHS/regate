@@ -18,8 +18,6 @@ public class ShipModel {
     private final Crew _crew;
     private final Wind _wind;
     private final DataPolar _polar;
-
-    @Deprecated
     public ShipModel(Sail sail, Crew crew, Wind wind, DataPolar polarName){
         _sail = sail;
         _crew = crew;

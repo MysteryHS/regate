@@ -15,5 +15,6 @@ public class WindView {
 
     public void draw(Text textView, String direction, double knot) {
         textView.setText("direction:"+direction+"  knot:"+knot);
+
     }
 }

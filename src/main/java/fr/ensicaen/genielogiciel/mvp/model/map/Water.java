@@ -6,11 +6,6 @@ public class Water extends Tile {
     }
 
     @Override
-    public void displayTile() {
-        System.out.print('~');
-    }
-
-    @Override
     public char getSymbol(){
         return '~';
     }

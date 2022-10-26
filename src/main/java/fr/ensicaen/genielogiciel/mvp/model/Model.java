@@ -1,6 +1,7 @@
 package fr.ensicaen.genielogiciel.mvp.model;
 
 import fr.ensicaen.genielogiciel.mvp.model.map.Map;
+import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
 import fr.ensicaen.genielogiciel.mvp.model.player.Player;
 import fr.ensicaen.genielogiciel.mvp.model.player.User;
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
@@ -19,7 +20,7 @@ public class Model {
     }
 
     public void createPlayer(String nickname, Sail sail, Crew crew, String polarName){
-        ShipModel model = new ShipModel(sail, crew, _map.getWind(), polarName);
+        ShipModel model = new ShipModel(sail, crew,new WindProxy(50,50), polarName);
         Player player = new User(nickname, model);
         _players.add(player);
     }

@@ -31,6 +31,8 @@ public class GameView implements IGameView {
 
     private WindView _windView;
 
+    private ChronoList _chronoList;
+
     @FXML
     private AnchorPane _base;
 
@@ -42,6 +44,9 @@ public class GameView implements IGameView {
 
     @FXML
     private Text _windText;
+
+    @FXML
+    private AnchorPane _chronoPane;
 
     public static int mapHeightInPixel = 500;
     public static int mapWidthInPixel = 500;
@@ -56,6 +61,7 @@ public class GameView implements IGameView {
         _mapView = map;
         _shipView = ship;
         _windView = wind;
+        _chronoList = new ChronoList(_chronoPane);
     }
 
 
@@ -65,6 +71,11 @@ public class GameView implements IGameView {
         _mapView.draw(_mapPane);
         _shipView.draw(_mapPane,boatPosX,boatPosY);
         _windView.draw(_windText,windDirection,windKnot);
+        _chronoList.addChrono(new ChronoItem("je suis la"));
+        _chronoList.addChrono(new ChronoItem("je suis la 2"));
+        _chronoList.addChrono(new ChronoItem("je suis la 3 "));
+        _chronoList.addChrono(new ChronoItem("je suis la 4"));
+        _chronoList.addChrono(new ChronoItem("je suis la 5"));
     }
 
 

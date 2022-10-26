@@ -2,6 +2,7 @@ package fr.ensicaen.genielogiciel.mvp.presenter;
 
 import fr.ensicaen.genielogiciel.mvp.model.map.Buoy;
 import fr.ensicaen.genielogiciel.mvp.model.map.Map;
+import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 import fr.ensicaen.genielogiciel.mvp.model.map.Tile;
 // Remarque : l'animation n'est pas considérée comme étant du graphisme à proprement parlé.
@@ -56,8 +57,8 @@ public class GamePresenter {
 
         _gameView.draw( _playerModel.getShip().getX(),
                         _playerModel.getShip().getY(),
-                        _mapModel.getWind().getWindDirection().name(),
-                        _mapModel.getWind().getWindKnot());
+                new WindProxy(50,50).getWindDirection().name(),
+                new WindProxy(50,50).getWindKnot());
     }
 
 

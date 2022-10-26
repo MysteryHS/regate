@@ -28,7 +28,7 @@
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0">
                <center>
-                <AnchorPane fx:id="_windWear" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="chrono_bg" stylesheets="@SpotMap.css" BorderPane.alignment="CENTER" />
+                <AnchorPane fx:id="_chronoPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="chrono_bg" stylesheets="@SpotMap.css" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
         </items>
