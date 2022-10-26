@@ -5,7 +5,7 @@ import javafx.scene.text.Text;
 
 
 public class WindView {
-    private WeatherStation _weatherStationModel;
+    private final WeatherStation _weatherStationModel;
     private Text _windView;
 
     public WindView(WeatherStation weatherStation, Text windView) {

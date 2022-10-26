@@ -1,31 +1,22 @@
 package fr.ensicaen.genielogiciel.mvp.model.map;
 
 public class Buoy {
-    private char _symbol;
-    private int _XCoordinate;
-    private int _YCoordinate;
+    private final char _symbol = '#';
+    private int _xCoordinate;
+    private int _yCoordinate;
 
-    public int getXCoordinate() {
-        return _XCoordinate;
-    }
-
-    public int getYCoordinate() {
-        return _YCoordinate;
-    }
-
-    public Buoy(int XCoordinate, int YCoordinate) {
-        _symbol = '#';
-        _XCoordinate = XCoordinate;
-        _YCoordinate = YCoordinate;
+    public Buoy(int xCoordinate, int yCoordinate) {
+        _xCoordinate = xCoordinate;
+        _xCoordinate = yCoordinate;
     }
 
     public void displayBuoy(){
-        System.out.println(_XCoordinate);
-        System.out.println(_YCoordinate);
+        System.out.println(_xCoordinate);
+        System.out.println(_yCoordinate);
     }
 
-    public int getX() {return _XCoordinate;}
+    public int getX() {return _xCoordinate;}
 
-    public int getY() {return _YCoordinate;}
+    public int getY() {return _yCoordinate;}
 
 }

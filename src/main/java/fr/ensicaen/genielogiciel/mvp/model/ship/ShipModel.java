@@ -2,6 +2,7 @@ package fr.ensicaen.genielogiciel.mvp.model.ship;
 
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStation;
 import fr.ensicaen.genielogiciel.mvp.model.ship.crew.Crew;
+import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStation;
 import fr.ensicaen.genielogiciel.mvp.model.ship.sail.Sail;
 
 import java.io.FileNotFoundException;

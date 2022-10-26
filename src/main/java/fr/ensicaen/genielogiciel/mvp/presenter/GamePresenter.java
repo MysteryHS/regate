@@ -1,35 +1,27 @@
 package fr.ensicaen.genielogiciel.mvp.presenter;
-
-import fr.ensicaen.genielogiciel.mvp.model.map.Map;
+import fr.ensicaen.genielogiciel.mvp.model.map.GameMap;
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
-
 // Remarque : l'animation n'est pas considérée comme étant du graphisme à proprement parlé.
 //            On peut la considérer comme une bibliothèque tiers de gestion de threading.
 //            On peut donc l'utiliser dans le presenter.
 import fr.ensicaen.genielogiciel.mvp.model.ship.DataPolar;
 import fr.ensicaen.genielogiciel.mvp.model.player.User;
-
 import fr.ensicaen.genielogiciel.mvp.model.player.Player;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
-
 import java.io.FileNotFoundException;
 
 public class GamePresenter {
     private final Player _playerModel;
-
-    private Map _mapModel;
-
-
+    private final GameMap _mapModel;
     private IGameView _gameView;
     private boolean _started = false;
     private Timeline _timeline;
 
-    public GamePresenter(String nickName, Map map, ShipModel ship) {
+    public GamePresenter(String nickName, GameMap map, ShipModel ship) {
         _playerModel = new User(nickName,ship);
-
         _mapModel = map;
     }
 
@@ -37,15 +29,10 @@ public class GamePresenter {
         _gameView.draw(_mapModel,_playerModel);
     }
 
-
     public void setGameView( IGameView gameView ) {
         _gameView = gameView;
         initView();
     }
-
-
-
-
 
     public void handleUserAction( UserAction code ) {
         if (code == UserAction.START) {
@@ -67,15 +54,6 @@ public class GamePresenter {
             _playerModel.getShip().rotate(-2);
         } else if (action == UserAction.RIGHT) {
             _playerModel.getShip().rotate(+2);
-        }
-    }
-
-    private void initGame() {
-        DataPolar polar = null;
-        try {
-            polar = new DataPolar("polaire-figaro.pol");
-        } catch (FileNotFoundException exception){
-            System.err.println(exception.getMessage());
         }
     }
 
