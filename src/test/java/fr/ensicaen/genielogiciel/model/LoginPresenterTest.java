@@ -38,7 +38,7 @@ class LoginPresenterTest {
         presenter.setLoginView(_view);
 
         // when
-        presenter.launchGame("");
+        //presenter.launchGame("");
 
         // then
         verify(_view, times(1)).displayError(Main.getMessageBundle().getString("error.nickname"));

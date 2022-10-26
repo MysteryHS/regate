@@ -61,7 +61,7 @@ public class LoginView<type> implements ILoginView {
 
     @FXML
     private void onClickOnStartGame() {
-        _loginPresenter.launchGame(_nickName.getText());
+        _loginPresenter.launchGame(_nickName.getText(), _boat, _sail , _crew);
     }
 
     @FXML
