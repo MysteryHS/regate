@@ -1,5 +1,7 @@
 package fr.ensicaen.genielogiciel.mvp.model.map;
 
+import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,10 +14,9 @@ public class Map {
     private int _nbBuoy;
     private int _xStartPoint;
     private int _yStartPoint;
-    private double _longitude;
-    private double _latitude;
     private final List<Buoy> _buoys = new ArrayList<>();
     private final List<Tile> _tiles = new ArrayList<>();
+    private WindProxy _wind;
 
     private static final int NumberDataWithBuoys = 3;
     private static final int NumberDataWithNotBuoys = 2;
@@ -60,12 +61,8 @@ public class Map {
         return _tiles;
     }
 
-    public double getLatitude() {
-        return _latitude;
-    }
-
-    public double getLongitude() {
-        return _longitude;
+    public WindProxy getWind() {
+        return _wind;
     }
 
     public char getType(int X, int Y){
@@ -83,7 +80,9 @@ public class Map {
         heightWidthAndNumberBuoyRecovery(readWidthHeightAndNumberBuoysInFirstLine(myReader));
         longitudeAndLatitudeRecovery(readLongitudeAndLatitudeSecondLine(myReader));
         startPointRecovery(readStartPointThirdLine(myReader));
+        collectBuoys(myReader);
         readMap(myReader);
+        myReader.close();
     }
 
     public String readWidthHeightAndNumberBuoysInFirstLine(Scanner myReader) {
@@ -111,8 +110,9 @@ public class Map {
 
     public void longitudeAndLatitudeRecovery(String information){
         String[] delimitation = information.split(" ");
-        _longitude = Double.parseDouble(delimitation[0]);
-        _latitude = Double.parseDouble(delimitation[1]);
+        double longitude = Double.parseDouble(delimitation[0]);
+        double latitude = Double.parseDouble(delimitation[1]);
+        _wind = new WindProxy(longitude, latitude);
     }
 
     public String readStartPointThirdLine(Scanner myReader){
