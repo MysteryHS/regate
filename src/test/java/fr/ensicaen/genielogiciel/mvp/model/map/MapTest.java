@@ -58,15 +58,15 @@ class MapTest {
     @Test
     public void testCollectBuoys() throws IOException {
         Map m = new Map(50,50,1);
-        File inputFile = new File("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
+        File inputFile = new File("carte1.txt");
         Scanner myReader = new Scanner(inputFile);
         myReader.nextLine();
         m.collectBuoys(myReader);
-        assertEquals(5, m.getBuoys().get(0).getXCoordinate());
-        assertEquals(5, m.getBuoys().get(0).getYCoordinate());
+        assertEquals(5, m.getBuoys().get(0).getX());
+        assertEquals(5, m.getBuoys().get(0).getY());
         
         Map m2 = new Map(100,50,0);
-        File inputFile2 = new File("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte2.txt");
+        File inputFile2 = new File("carte2.txt");
         Scanner myReader2 = new Scanner(inputFile2);
         myReader2.nextLine();
         m2.collectBuoys(myReader2);
@@ -76,7 +76,7 @@ class MapTest {
     @Test
     public void testReadMap() throws IOException {
         Map m = new Map(50,50,1);
-        File inputFile = new File("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
+        File inputFile = new File("carte1.txt");
         Scanner myReader = new Scanner(inputFile);
         myReader.nextLine();
         m.collectBuoys(myReader);
@@ -100,7 +100,7 @@ class MapTest {
     @Test
     public void testGetType() throws IOException {
         Map m = new Map(50,50,1);
-        File inputFile = new File("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
+        File inputFile = new File("carte1.txt");
         Scanner myReader = new Scanner(inputFile);
         myReader.nextLine();
         m.collectBuoys(myReader);
