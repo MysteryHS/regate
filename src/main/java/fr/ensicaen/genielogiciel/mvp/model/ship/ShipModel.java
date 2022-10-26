@@ -20,14 +20,17 @@ public class ShipModel {
     private double _dx = 0;
     private double _dy = 0;
     private double _anglePositive = 0;
-    private final double _inertia = 0.05;
-    private final double _speedRatio = 0.8;
+    private final double _inertia = 0.004;
+    private final double _speedRatio = 0.04;
     private final Sail _sail;
     private final Crew _crew;
     private final WeatherStation _wind;
     private final DataPolar _polar;
     private boolean _isReplaying = false;
-    private boolean _canMove = true;
+
+    private boolean _isCollisioning = false;
+
+    private boolean _isFixed = false;
 
     private final Timer _timer = new Timer();
 
@@ -65,12 +68,12 @@ public class ShipModel {
         return _inertia;
     }
 
-    public boolean isReplaying(){
-        return _isReplaying;
-    }
-
     public double getSpeedRatio() {
         return _speedRatio;
+    }
+
+    public void setCollision(boolean coll){
+        _isCollisioning = coll;
     }
 
     public void performCommand(Move move){
@@ -78,7 +81,7 @@ public class ShipModel {
         move.execute();
     }
 
-    private void resetSpeed(){
+    public void resetSpeed(){
         _dx = 0;
         _dy = 0;
     }
@@ -102,8 +105,8 @@ public class ShipModel {
                 @Override
                 public void run() {
                     purgeTimer();
-                    _canMove = false;
                     _isReplaying = false;
+                    _isFixed = true;
                     _dx = 0;
                     _dy = 0;
                 }
@@ -118,9 +121,11 @@ public class ShipModel {
     }
 
     public void rotate( double angle ) {
-        if(_canMove){
-            _anglePositive = (360 + _anglePositive + (_sail.getSpeedRotation()* _crew.getSpeedRotation()*angle)) % 360;
-        }
+        _anglePositive = (360 + _anglePositive + (_sail.getSpeedRotation()* _crew.getSpeedRotation()*angle)) % 360;
+    }
+
+    public boolean canRotate(){
+        return !(_isFixed || _isReplaying);
     }
 
     public double getAngle() {
@@ -157,7 +162,7 @@ public class ShipModel {
     }
 
     public void move() {
-        if(_canMove){
+        if(!_isFixed && !_isCollisioning){
             _dx = getInertiaSpeed(getNewSpeedX(), _dx);
             _dy = getInertiaSpeed(getNewSpeedY(), _dy);
             _x += _dx;

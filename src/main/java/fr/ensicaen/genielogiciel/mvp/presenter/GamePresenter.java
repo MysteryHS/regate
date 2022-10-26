@@ -1,5 +1,6 @@
 package fr.ensicaen.genielogiciel.mvp.presenter;
 
+import fr.ensicaen.genielogiciel.mvp.model.Collision;
 import fr.ensicaen.genielogiciel.mvp.model.map.GameMap;
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 
@@ -12,11 +13,6 @@ import fr.ensicaen.genielogiciel.mvp.model.player.User;
 import fr.ensicaen.genielogiciel.mvp.model.player.Player;
 import fr.ensicaen.genielogiciel.mvp.model.ship.command.MoveLeft;
 import fr.ensicaen.genielogiciel.mvp.model.ship.command.MoveRight;
-import fr.ensicaen.genielogiciel.mvp.model.ship.crew.MaxCrewDecorator;
-import fr.ensicaen.genielogiciel.mvp.model.ship.crew.NormalCrew;
-import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
-import fr.ensicaen.genielogiciel.mvp.model.ship.sail.LargeSailDecorator;
-import fr.ensicaen.genielogiciel.mvp.model.ship.sail.NormalSail;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -30,6 +26,7 @@ public class GamePresenter {
 
     private GameMap _mapModel;
 
+    private Collision _collision;
 
     private IGameView _gameView;
     private boolean _started = false;
@@ -37,9 +34,10 @@ public class GamePresenter {
 
     private Date _dateStarted;
 
-    public GamePresenter(String nickName, GameMap map, ShipModel ship) {
+    public GamePresenter(String nickName, GameMap map, ShipModel ship, Collision collision) {
         _playerModel = new User(nickName,ship);
         _mapModel = map;
+        _collision = collision;
     }
 
     private void initView() {
@@ -55,10 +53,6 @@ public class GamePresenter {
     public void resetShip(long delayEnd){
         _playerModel.getShip().replay(delayEnd);
     }
-
-
-
-
 
     public void handleUserAction( UserAction code ) {
         if (code == UserAction.START) {
@@ -79,7 +73,7 @@ public class GamePresenter {
     }
 
     private void changeDirection( UserAction action ) {
-        if(!_started || _playerModel.getShip().isReplaying()){
+        if(!_started || !_playerModel.getShip().canRotate()){
             return;
         }
         if (action == UserAction.LEFT) {
@@ -108,6 +102,7 @@ public class GamePresenter {
     }
 
     private void update() {
+        _collision.setMoveShip();
         _playerModel.getShip().move();
     }
 

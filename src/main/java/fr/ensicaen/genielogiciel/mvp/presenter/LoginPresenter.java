@@ -1,6 +1,7 @@
 package fr.ensicaen.genielogiciel.mvp.presenter;
 
 import fr.ensicaen.genielogiciel.mvp.Main;
+import fr.ensicaen.genielogiciel.mvp.model.Collision;
 import fr.ensicaen.genielogiciel.mvp.model.map.GameMap;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
 import fr.ensicaen.genielogiciel.mvp.model.ship.DataPolar;
@@ -32,8 +33,9 @@ public final class LoginPresenter {
                         new MaxCrewDecorator(new NormalCrew()),
                         new WindProxy(50,50),
                         new DataPolar("polaire-figaro.pol"),
-                        250, 250);
-                GamePresenter gamePresenter = new GamePresenter(nickName,map,boat);
+                        10, 10);
+                Collision collision = new Collision(map, boat);
+                GamePresenter gamePresenter = new GamePresenter(nickName, map, boat, collision);
                 view.setGamePresenter(gamePresenter);
                 gamePresenter.setGameView(view);
                 view.show();

@@ -7,13 +7,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 public class BoatView extends ImageView {
-    private GameView _view;
-    private ShipModel _shipModel;
-    private double _caseHeightInPixel;
-    private double _caseWidthInPixel; // FIXME tous ces attributs doivent être final
-
-// FIXME pourquoi toutes ces lignes vides ? Inutiles et rallongent le fichier inutilement
-
+    final private GameView _view;
+    final private ShipModel _shipModel;
+    final private double _caseHeightInPixel;
+    final private double _caseWidthInPixel;
 
     public BoatView(GameView view, ShipModel shipModel, int caseWidthInPixel, int caseHeightInPixel) {
         _view = view;
@@ -26,9 +23,7 @@ public class BoatView extends ImageView {
     }
 
     public void draw(AnchorPane pane) {
-
-        setLayoutX(_shipModel.getX());
-        setLayoutY(_shipModel.getY());
+        move(_shipModel.getX(), _shipModel.getY());
 
         setFitWidth(24);
         setFitHeight(33);
@@ -39,8 +34,8 @@ public class BoatView extends ImageView {
 
 
     public void move(double x, double y) {
-        setLayoutX(x);
-        setLayoutY(y);
+        setLayoutX(x*_caseWidthInPixel);
+        setLayoutY(y*_caseHeightInPixel);
     }
 
 
