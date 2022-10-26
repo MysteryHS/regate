@@ -8,6 +8,7 @@ import fr.ensicaen.genielogiciel.mvp.presenter.UserAction;
 import fr.ensicaen.genielogiciel.mvp.view.LoginView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -61,16 +62,6 @@ public class GameView implements IGameView {
 
     @Override
     public void draw(double boatPosX, double boatPosY,String windDirection,double windKnot) {
-
-
-
-        ImageView bg = new ImageView();
-        bg.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/bg.png"));
-        bg.setLayoutX(0);
-        bg.setLayoutY(0);
-        bg.setFitHeight(1080);
-        bg.setFitWidth(1920);
-
         _mapView.draw(_mapPane);
         _shipView.draw(_mapPane,boatPosX,boatPosY);
         _windView.draw(_windText,windDirection,windKnot);

@@ -19,7 +19,7 @@
         <Image url="@../images/background/bg_test.png" />
     </ImageView>
     <ImageView fitHeight="442.0" fitWidth="368.0" layoutX="226.0" layoutY="-11.0" pickOnBounds="true" preserveRatio="true">
-        <Image url="@../images/background/map-removebg-preview.png" />
+        <Image url="@../images/background/chrono_bg.png" />
     </ImageView>
     <GridPane alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="420.0" prefWidth="818.0" styleClass="dialog" stylesheets="@LoginDialog.css">
         <columnConstraints>

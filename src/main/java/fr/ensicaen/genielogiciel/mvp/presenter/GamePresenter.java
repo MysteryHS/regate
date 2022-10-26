@@ -1,5 +1,6 @@
 package fr.ensicaen.genielogiciel.mvp.presenter;
 
+import fr.ensicaen.genielogiciel.mvp.model.map.Buoy;
 import fr.ensicaen.genielogiciel.mvp.model.map.Map;
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 import fr.ensicaen.genielogiciel.mvp.model.map.Tile;
@@ -10,10 +11,7 @@ import fr.ensicaen.genielogiciel.mvp.model.ship.DataPolar;
 import fr.ensicaen.genielogiciel.mvp.model.player.User;
 
 import fr.ensicaen.genielogiciel.mvp.model.player.Player;
-import fr.ensicaen.genielogiciel.mvp.view.game.ShipView;
-import fr.ensicaen.genielogiciel.mvp.view.game.MapView;
-import fr.ensicaen.genielogiciel.mvp.view.game.TileView;
-import fr.ensicaen.genielogiciel.mvp.view.game.WindView;
+import fr.ensicaen.genielogiciel.mvp.view.game.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -47,11 +45,12 @@ public class GamePresenter {
         WindView wind = new WindView();
         MapView map = new MapView(caseWidthInPixel,caseHeightInPixel,_mapModel.getWidth(), _mapModel.getHeight());
         for(Tile tile : _mapModel.getTiles()) {
-
-                map.addTile(new TileView(tile,caseWidthInPixel,caseHeightInPixel, tile.getCoordinateX(), tile.getCoordinateY()));
-
+            map.addTile(new TileView(tile,caseWidthInPixel,caseHeightInPixel, tile.getCoordinateX(), tile.getCoordinateY()));
         }
 
+        for(Buoy buoy : _mapModel.getBuoys()) {
+            map.addBuoy(new BuoyView(caseWidthInPixel,caseHeightInPixel, buoy.getX(), buoy.getY()));
+        }
 
         _gameView.initView(map,ship,wind);
 

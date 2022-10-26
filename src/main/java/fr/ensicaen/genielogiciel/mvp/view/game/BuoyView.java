@@ -29,7 +29,6 @@ public class BuoyView extends ImageView {
 
         this.setFitWidth(10);
         this.setFitHeight(10);
-
         pane.getChildren().add(this);
     }
 
