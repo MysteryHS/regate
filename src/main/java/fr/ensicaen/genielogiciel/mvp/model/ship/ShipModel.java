@@ -1,7 +1,7 @@
 package fr.ensicaen.genielogiciel.mvp.model.ship;
 
 import fr.ensicaen.genielogiciel.mvp.model.ship.crew.Crew;
-import fr.ensicaen.genielogiciel.mvp.model.map.wind.Wind;
+import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStation;
 import fr.ensicaen.genielogiciel.mvp.model.ship.sail.Sail;
 
 import java.io.FileNotFoundException;
@@ -15,16 +15,16 @@ public class ShipModel {
     private final double _speedRatio = 0.8;
     private final Sail _sail;
     private final Crew _crew;
-    private final Wind _wind;
+    private final WeatherStation _wind;
     private final DataPolar _polar;
-    public ShipModel(Sail sail, Crew crew, Wind wind, DataPolar polarName){
+    public ShipModel(Sail sail, Crew crew, WeatherStation wind, DataPolar polarName){
         _sail = sail;
         _crew = crew;
         _wind = wind;
         _polar = polarName;
     }
 
-    public ShipModel(Sail sail, Crew crew, Wind wind, String polarName){
+    public ShipModel(Sail sail, Crew crew, WeatherStation wind, String polarName){
         _sail = sail;
         _crew = crew;
         _wind = wind;
@@ -66,7 +66,7 @@ public class ShipModel {
     private double getSpeed(){
         int angleToWind360 = (((int)(Math.abs(_wind.getWindDirection().getAngle()-_anglePositive))/10)*10);
         double angle = angleToWind360<180?angleToWind360:Math.abs(360-angleToWind360);
-        return _polar.getPolarValues(angle, _wind.getWindKnot()) * _sail.getShipSpeed(_anglePositive-180) * _crew.getShipSpeed(_anglePositive-180)* _speedRatio;
+        return _polar.getPolarValues(angle, _wind.getWindSpeedInKnots()) * _sail.getShipSpeed(_anglePositive-180) * _crew.getShipSpeed(_anglePositive-180)* _speedRatio;
     }
 
     private double getNewSpeedX(){
@@ -92,7 +92,7 @@ public class ShipModel {
         _y += _dy;
     }
 
-    public Wind getWindToDelete() {
+    public WeatherStation getWindToDelete() {
         return _wind;
     }
 

@@ -1,6 +1,7 @@
 package fr.ensicaen.genielogiciel.mvp.model.map.wind;
 
-public class WindServer implements Wind {
+
+public class WindServer implements WeatherStation {
     private final double _longitude;
     private final double _latitude;
     private final WindData _windData;
@@ -16,7 +17,7 @@ public class WindServer implements Wind {
     }
 
     @Override
-    public double getWindKnot() {
+    public double getWindSpeedInKnots() {
         return _windData.getKnot();
     }
 
