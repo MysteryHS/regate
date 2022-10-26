@@ -3,9 +3,9 @@ package fr.ensicaen.genielogiciel.mvp.view;
 import fr.ensicaen.genielogiciel.mvp.Main;
 import fr.ensicaen.genielogiciel.mvp.presenter.ILoginView;
 import fr.ensicaen.genielogiciel.mvp.presenter.LoginPresenter;
-import fr.ensicaen.genielogiciel.mvp.view.game.type.TypeBoat;
-import fr.ensicaen.genielogiciel.mvp.view.game.type.TypeCrew;
-import fr.ensicaen.genielogiciel.mvp.view.game.type.TypeSail;
+import fr.ensicaen.genielogiciel.mvp.model.ship.builder.builderType.TypeShip;
+import fr.ensicaen.genielogiciel.mvp.model.ship.builder.builderType.TypeCrew;
+import fr.ensicaen.genielogiciel.mvp.model.ship.builder.builderType.TypeSail;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,11 +22,11 @@ public class LoginView<type> implements ILoginView {
     private Stage _stage;
     private Scene _scene;
     private ResourceBundle _ressource;
-    private TypeSail _sail = TypeSail.NORM;
+    private TypeSail _sail = TypeSail.NORMAL_SAIL;
 
-    private TypeCrew _crew = TypeCrew.TWO;
+    private TypeCrew _crew = TypeCrew.NORMAL_CREW;
 
-    private TypeBoat _boat = TypeBoat.FIGARO;
+    private TypeShip _boat = TypeShip.FIGARO37;
 
 
     @FXML
@@ -67,12 +67,12 @@ public class LoginView<type> implements ILoginView {
     @FXML
     private void onClickChangeSail(){
         Label sail = (Label) _scene.lookup("#sail");
-        if (_sail==TypeSail.NORM){
+        if (_sail==TypeSail.NORMAL_SAIL){
             sail.setText(_ressource.getString("type.voile.big"));
-            _sail=TypeSail.BIG;
+            _sail=TypeSail.LARGE_SAIL;
         } else {
             sail.setText(_ressource.getString("type.voile.normal"));
-            _sail=TypeSail.NORM;
+            _sail=TypeSail.NORMAL_SAIL;
         }
 
     }
@@ -80,24 +80,24 @@ public class LoginView<type> implements ILoginView {
     @FXML
     private void onClickChangeCrew(){
         Label crew = (Label) _scene.lookup("#crew");
-        if (_crew==TypeCrew.TWO){
+        if (_crew==TypeCrew.NORMAL_CREW){
             crew.setText(_ressource.getString("nbr.crewmates.4"));
-            _crew=TypeCrew.FOUR;
+            _crew=TypeCrew.MAX_CREW;
         } else {
             crew.setText(_ressource.getString("nbr.crewmates.2"));
-            _crew=TypeCrew.TWO;
+            _crew=TypeCrew.NORMAL_CREW;
         }
 
     }
     @FXML
     private void onClickChangeBoat(){
         Label boattext = (Label) _scene.lookup("#boattext");
-        if ( _boat==TypeBoat.FIGARO){
+        if ( _boat== TypeShip.FIGARO37){
             boattext.setText("Oceanis");
-            _boat=TypeBoat.OCEANIS;
+            _boat= TypeShip.OCEANIS;
         } else {
             boattext.setText("Figaro");
-            _boat=TypeBoat.FIGARO;
+            _boat= TypeShip.FIGARO37;
         }
 
     }

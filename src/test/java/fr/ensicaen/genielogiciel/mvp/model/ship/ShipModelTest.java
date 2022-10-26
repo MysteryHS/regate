@@ -1,6 +1,6 @@
 package fr.ensicaen.genielogiciel.mvp.model.ship;
 
-import fr.ensicaen.genielogiciel.mvp.model.map.wind.Wind;
+import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStation;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindDirection;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
 import fr.ensicaen.genielogiciel.mvp.model.ship.crew.NormalCrew;
@@ -18,7 +18,7 @@ class ShipModelTest {
     private double _angle;
     private double _knot;
     @Mock
-    private Wind _mockedWind;
+    private WeatherStation _mockedWind;
     @Mock
     private DataPolar _mockedPolar;
 
@@ -28,7 +28,7 @@ class ShipModelTest {
         _knot = 6.;
         _mockedPolar = mock(DataPolar.class);
         doReturn(WindDirection.SOUTH).when(_mockedWind).getWindDirection();
-        doReturn(_knot).when(_mockedWind).getWindKnot();
+        doReturn(_knot).when(_mockedWind).getWindSpeedInKnots();
         _angle = 60.;
     }
     @AfterEach

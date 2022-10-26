@@ -1,6 +1,6 @@
 package fr.ensicaen.genielogiciel.mvp.model.ship.builder;
 
-import fr.ensicaen.genielogiciel.mvp.model.map.wind.Wind;
+import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStation;
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 import fr.ensicaen.genielogiciel.mvp.model.ship.crew.MaxCrewDecorator;
 import fr.ensicaen.genielogiciel.mvp.model.ship.crew.NormalCrew;
@@ -47,7 +47,7 @@ public class ShipDirector {
         return this;
     }
 
-    public ShipDirector addWind(Wind wind) {
+    public ShipDirector addWind(WeatherStation wind) {
         _builder.setWind(wind);
         return this;
     }

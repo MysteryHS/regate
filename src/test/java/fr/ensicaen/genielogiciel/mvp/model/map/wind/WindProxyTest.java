@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class WindProxyTest {
-    private Wind _windProxy;
+    private WeatherStation _windProxy;
     @BeforeEach
     public void setUp() {
         _windProxy = new WindProxy(49.183, -0.371);
@@ -19,7 +19,7 @@ class WindProxyTest {
     } // FIXME pas necessaire ce n'est pas du C++
     @Test
     void windSpeedShouldEqualThree() {
-        assertEquals(4., _windProxy.getWindKnot());
+        assertEquals(4., _windProxy.getWindSpeedInKnots());
     }
 
     @Test

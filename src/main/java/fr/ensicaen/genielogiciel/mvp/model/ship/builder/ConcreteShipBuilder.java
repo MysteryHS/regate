@@ -1,6 +1,6 @@
 package fr.ensicaen.genielogiciel.mvp.model.ship.builder;
 
-import fr.ensicaen.genielogiciel.mvp.model.map.wind.Wind;
+import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStation;
 import fr.ensicaen.genielogiciel.mvp.model.ship.DataPolar;
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 import fr.ensicaen.genielogiciel.mvp.model.ship.crew.Crew;
@@ -12,7 +12,7 @@ public class ConcreteShipBuilder implements ShipBuilder {
     private Sail _sail;
     private Crew _crew;
     private DataPolar _polar;
-    private Wind _wind;
+    private WeatherStation _wind;
     @Override
     public ShipBuilder setSail(Sail sail) {
         _sail = sail;
@@ -31,7 +31,7 @@ public class ConcreteShipBuilder implements ShipBuilder {
     }
 
     @Override
-    public ShipBuilder setWind(Wind wind) {
+    public ShipBuilder setWind(WeatherStation wind) {
         _wind = wind;
         return this;
     }

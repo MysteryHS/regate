@@ -1,22 +1,14 @@
 package fr.ensicaen.genielogiciel.mvp.presenter;
 import fr.ensicaen.genielogiciel.mvp.model.map.GameMap;
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
-// Remarque : l'animation n'est pas considérée comme étant du graphisme à proprement parlé.
-//            On peut la considérer comme une bibliothèque tiers de gestion de threading.
-//            On peut donc l'utiliser dans le presenter.
-import fr.ensicaen.genielogiciel.mvp.model.ship.DataPolar;
 import fr.ensicaen.genielogiciel.mvp.model.player.User;
 import fr.ensicaen.genielogiciel.mvp.model.player.Player;
 import fr.ensicaen.genielogiciel.mvp.model.ship.builder.ConcreteShipBuilder;
 import fr.ensicaen.genielogiciel.mvp.model.ship.builder.ShipDirector;
-import fr.ensicaen.genielogiciel.mvp.model.ship.crew.MaxCrewDecorator;
-import fr.ensicaen.genielogiciel.mvp.model.ship.crew.NormalCrew;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
-import fr.ensicaen.genielogiciel.mvp.model.ship.sail.LargeSailDecorator;
-import fr.ensicaen.genielogiciel.mvp.model.ship.sail.NormalSail;
-import fr.ensicaen.genielogiciel.mvp.view.game.type.TypeBoat;
-import fr.ensicaen.genielogiciel.mvp.view.game.type.TypeCrew;
-import fr.ensicaen.genielogiciel.mvp.view.game.type.TypeSail;
+import fr.ensicaen.genielogiciel.mvp.model.ship.builder.builderType.TypeShip;
+import fr.ensicaen.genielogiciel.mvp.model.ship.builder.builderType.TypeCrew;
+import fr.ensicaen.genielogiciel.mvp.model.ship.builder.builderType.TypeSail;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -28,7 +20,6 @@ public class GamePresenter {
     private final GameMap _mapModel;
     private IGameView _gameView;
     private boolean _started = false;
-    private Timeline _timeline;
 
     @Deprecated
     public GamePresenter(String nickName, GameMap map, ShipModel ship) {
@@ -36,9 +27,9 @@ public class GamePresenter {
         _mapModel = map;
     }
 
-    public GamePresenter(String nickName, Map map, TypeBoat typeBoat, TypeSail typeSail , TypeCrew typeCrew) throws FileNotFoundException {
+    public GamePresenter(String nickName, GameMap map, TypeShip typeShip, TypeSail typeSail , TypeCrew typeCrew) throws FileNotFoundException {
         ShipModel ship;
-        ship = initGame(typeBoat, typeSail, typeCrew);
+        ship = initGame(typeShip, typeSail, typeCrew);
         _playerModel = new User(nickName,ship);
         _mapModel = map;
     }
@@ -75,31 +66,30 @@ public class GamePresenter {
         }
     }
 
-    private ShipModel initGame(TypeBoat typeBoat, TypeSail typeSail , TypeCrew typeCrew) throws FileNotFoundException {
+    private ShipModel initGame(TypeShip typeShip, TypeSail typeSail , TypeCrew typeCrew) throws FileNotFoundException {
         ShipDirector director = new ShipDirector(new ConcreteShipBuilder());
-        if (typeBoat == TypeBoat.FIGARO) {
+        if (typeShip == TypeShip.FIGARO37) {
             director.buildFigaro();
         } else {
             director.buildOceanis37();
         }
-        if (typeSail == TypeSail.NORM) {
+        if (typeSail == TypeSail.NORMAL_SAIL) {
             director.buildNormalSail();
         } else {
             director.buildLargerSail();
         }
-        if (typeCrew == TypeCrew.TWO) {
+        if (typeCrew == TypeCrew.NORMAL_CREW) {
             director.buildNormalCrew();
         } else {
             director.buildMaxCrew();
         }
         director.addWind(new WindProxy(0.3,49));
-        ShipModel ship = director.build();
-        return ship;
+        return director.build();
 
     }
 
     private void runGameLoop() {
-        _timeline = new Timeline(new KeyFrame(Duration.millis(50), onFinished -> {
+        Timeline _timeline = new Timeline(new KeyFrame(Duration.millis(50), onFinished -> {
             update();
             render();
         }));

@@ -29,7 +29,7 @@ class ShipDirectorTest {
     void setUp() {
         _mockedWind = mock(WindProxy.class);
         doReturn(WindDirection.SOUTH).when(_mockedWind).getWindDirection();
-        doReturn(4.).when(_mockedWind).getWindKnot();
+        doReturn(4.).when(_mockedWind).getWindSpeedInKnots();
         _director = new ShipDirector(new ConcreteShipBuilder());
     }
 
