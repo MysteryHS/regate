@@ -19,7 +19,7 @@ public class WeatherStationProxy implements WeatherStation {
         _server = null;
     }
 
-    protected WeatherStationProxy(WeatherStationServer server) {
+    public WeatherStationProxy(WeatherStationServer server) {
         _server = server;
         _longitude = 0.;
         _latitude = 0.;
@@ -44,7 +44,7 @@ public class WeatherStationProxy implements WeatherStation {
     }
 
     protected boolean isDateOutdated( long timeInMillisecond ) {
-        return new Date(_date.getTime() + timeInMillisecond).compareTo(_date) <= 0;      //86400000
+        return new Date(_date.getTime() + timeInMillisecond).compareTo(_date) <= 0;
     }
 
     protected WindData requestWindData( double longitude, double latitude ) {
