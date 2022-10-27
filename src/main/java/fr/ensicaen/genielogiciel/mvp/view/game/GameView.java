@@ -38,7 +38,7 @@ public class GameView implements IGameView {
     public void setGamePresenter(GamePresenter gamePresenter) {
         _gamePresenter = gamePresenter;
     }
-
+    @Override
     public void initView(MapView map, ShipView ship, WindView wind) {
         _mapView = map;
         _shipView = ship;
@@ -46,7 +46,6 @@ public class GameView implements IGameView {
         _stopwatchView = new StopwatchView();
         _stopwatchList = new StopwatchList(_stopwatchPane);
     }
-
     @Override
     public void draw(double boatPosX, double boatPosY,String windDirection,double windKnot) {
         _mapView.draw(_mapPane);
@@ -54,7 +53,6 @@ public class GameView implements IGameView {
         _windView.draw(_windText,windDirection,windKnot);
         _stopwatchView.draw(_stopwatchPane);
     }
-
     @Override
     public void addBuoyPassedToDisplayedList(String stopwatch) {
         _stopwatchList.addStopwatchItem(new StopwatchItem(stopwatch));

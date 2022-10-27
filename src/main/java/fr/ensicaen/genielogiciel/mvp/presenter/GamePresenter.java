@@ -1,24 +1,18 @@
 package fr.ensicaen.genielogiciel.mvp.presenter;
 
 
-import fr.ensicaen.genielogiciel.mvp.model.Chrono;
-import fr.ensicaen.genielogiciel.mvp.model.Collision;
 import fr.ensicaen.genielogiciel.mvp.model.Collision;
 import fr.ensicaen.genielogiciel.mvp.model.PassedBuoy;
 import fr.ensicaen.genielogiciel.mvp.model.Stopwatch;
 
 import fr.ensicaen.genielogiciel.mvp.model.map.GameMap;
-import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStation;
-import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStationProxy;
 
 import fr.ensicaen.genielogiciel.mvp.model.map.Buoy;
-import fr.ensicaen.genielogiciel.mvp.model.map.GameMap;
 import fr.ensicaen.genielogiciel.mvp.model.map.Tile;
 import fr.ensicaen.genielogiciel.mvp.model.player.Player;
 import fr.ensicaen.genielogiciel.mvp.model.player.User;
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 
-import fr.ensicaen.genielogiciel.mvp.model.player.Player;
 import fr.ensicaen.genielogiciel.mvp.model.ship.command.MoveLeft;
 import fr.ensicaen.genielogiciel.mvp.model.ship.command.MoveRight;
 import fr.ensicaen.genielogiciel.mvp.model.ship.builder.ConcreteShipBuilder;

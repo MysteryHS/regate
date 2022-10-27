@@ -1,9 +1,7 @@
 package fr.ensicaen.genielogiciel.mvp.presenter;
 
 
-import fr.ensicaen.genielogiciel.mvp.view.game.MapView;
-import fr.ensicaen.genielogiciel.mvp.view.game.ShipView;
-import fr.ensicaen.genielogiciel.mvp.view.game.WindView;
+import fr.ensicaen.genielogiciel.mvp.view.game.*;
 
 public interface IGameView {
 
