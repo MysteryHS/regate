@@ -51,7 +51,7 @@
             </Button>
             <BorderPane prefHeight="50.0" prefWidth="62.0">
                 <center>
-                    <ImageView fitHeight="50.0" fitWidth="63.0" BorderPane.alignment="CENTER">
+                    <ImageView id="boatImage" fitHeight="50.0" fitWidth="63.0" BorderPane.alignment="CENTER">
                         <Image url="@../images/boats/Figaro.png" />
                     </ImageView>
                 </center>

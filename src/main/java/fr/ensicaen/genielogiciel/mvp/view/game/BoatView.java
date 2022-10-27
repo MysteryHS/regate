@@ -19,7 +19,7 @@ public class BoatView extends ImageView {
         _view = view;
         _shipModel = shipModel;
 
-        setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/boat.png"));
+        setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/boats/big_boat.png"));
 
         _caseHeightInPixel = caseHeightInPixel;
         _caseWidthInPixel = caseWidthInPixel;
