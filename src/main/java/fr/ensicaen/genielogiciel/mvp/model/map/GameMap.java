@@ -85,6 +85,8 @@ public class GameMap {
         File inputFile = new File(filename);
         Scanner myReader = new Scanner(inputFile);
         heightWidthAndNumberBuoyRecovery(readFirstLineInFile(myReader));
+        myReader.nextLine();
+        myReader.nextLine();
         readMap(myReader);
     }
 

@@ -14,7 +14,8 @@ import java.util.TimerTask;
 public class ShipModel {
     private double _x;
     private double _y;
-
+    private double _height;
+    private double _width;
     private double _initialX;
     private double _initialY;
     private double _dx = 0;
@@ -31,9 +32,6 @@ public class ShipModel {
     private boolean _isCollisioning = false;
 
     private boolean _isFixed = false;
-
-    private final Timer _timer = new Timer();
-
     private final List<Move> _commands = new ArrayList<>();
     public ShipModel(Sail sail, Crew crew, WeatherStation wind, DataPolar polarName, double x, double y){
         _sail = sail;
@@ -75,6 +73,18 @@ public class ShipModel {
     public void setCollision(boolean coll){
         _isCollisioning = coll;
     }
+    public void setHeight(double height){
+        _height = height;
+    }
+    public double getHeight(){
+        return _height;
+    }
+    public void setWidth(double width){
+        _width = width;
+    }
+    public double getWidth(){
+        return _width;
+    }
 
     public void performCommand(Move move){
         _commands.add(move);
@@ -87,24 +97,27 @@ public class ShipModel {
     }
 
     public void replay(long delayEnd){
+
         resetSpeed();
         _x = _initialX;
         _y = _initialY;
         _anglePositive = 0;
         _isReplaying = true;
         if(_commands.size() != 0){
+            Timer timer = new Timer();
             for(Move move : _commands){
-                _timer.schedule(new TimerTask() {
+                timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
                         move.execute();
                     }
                 }, move.getDelay());
             }
-            _timer.schedule(new TimerTask() {
+            timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    purgeTimer();
+                    timer.cancel();
+                    timer.purge();
                     _isReplaying = false;
                     _isFixed = true;
                     _dx = 0;
@@ -112,12 +125,8 @@ public class ShipModel {
                 }
             }, delayEnd);
             _commands.clear();
+            //TODO is waiting for last to purge, even if the app is closed
         }
-    }
-
-    public void purgeTimer(){
-        _timer.cancel();
-        _timer.purge();
     }
 
     public void rotate( double angle ) {
@@ -162,9 +171,9 @@ public class ShipModel {
     }
 
     public void move() {
+        _dx = getInertiaSpeed(getNewSpeedX(), _dx);
+        _dy = getInertiaSpeed(getNewSpeedY(), _dy);
         if(!_isFixed && !_isCollisioning){
-            _dx = getInertiaSpeed(getNewSpeedX(), _dx);
-            _dy = getInertiaSpeed(getNewSpeedY(), _dy);
             _x += _dx;
             _y += _dy;
         }

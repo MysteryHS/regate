@@ -20,9 +20,9 @@ public class Collision {
 
     public boolean outOfRange() {
         boolean infX = _ship.getX() + _ship.getDx() < 0;
-        boolean supX = _ship.getX() + _ship.getDx() > _map.getWidth();
+        boolean supX = _ship.getX() + _ship.getDx() + _ship.getWidth() >= _map.getWidth();
         boolean infY = _ship.getY() + _ship.getDy() < 0;
-        boolean supY = _ship.getY() + _ship.getDy() > _map.getHeight();
+        boolean supY = _ship.getY() + _ship.getDy() + _ship.getHeight() >= _map.getHeight();
         if (infX || supX || infY || supY) {
             _collision = true;
         } else {
@@ -63,7 +63,8 @@ public class Collision {
     }
 
     private boolean collisionWithSomething() {
-        return outOfRange(); //collisionWithBuoy() || collisionWithSand() ||
+
+        return collisionWithSand() || outOfRange(); //collisionWithBuoy() ||
     }
 
     public void setMoveShip(){
