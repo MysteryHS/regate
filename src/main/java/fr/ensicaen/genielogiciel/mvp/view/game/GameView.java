@@ -42,7 +42,7 @@ public class GameView implements IGameView {
     private AnchorPane _mapPane;
 
     @FXML
-    private AnchorPane _windWear;
+    private AnchorPane _windWear; // FIXME jamais utilisé
 
     @FXML
     private Text _windText;
@@ -75,11 +75,6 @@ public class GameView implements IGameView {
         _shipView.draw(_mapPane,boatPosX,boatPosY);
         _windView.draw(_windText,windDirection,windKnot);
         _chronoView.draw(_chronoPane);
-        _chronoList.addChrono(new ChronoItem("je suis la"));
-        _chronoList.addChrono(new ChronoItem("je suis la 2"));
-        _chronoList.addChrono(new ChronoItem("je suis la 3 "));
-        _chronoList.addChrono(new ChronoItem("je suis la 4"));
-        _chronoList.addChrono(new ChronoItem("je suis la 5"));
 
     }
 
@@ -120,6 +115,7 @@ public class GameView implements IGameView {
 
 
         private GameViewFactory() {
+            // FIXME supprimer ce commentaire qui n'était qu'à vertue pédagogique
             // Factory class as Utility class where the constructor is private
         }
 

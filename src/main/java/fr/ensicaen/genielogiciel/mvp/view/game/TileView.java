@@ -8,8 +8,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 public class TileView extends ImageView {
-    private Tile _tile;
-
     private int _x;
     private int _y;
     private double _caseHeightInPixel;
@@ -17,21 +15,17 @@ public class TileView extends ImageView {
 
 
     public TileView(Tile tile,double caseWidthInPixel, double caseHeightInPixel, int Xcoordinate, int Ycoordinate) {
-        //TODO decoupler
-        _tile = tile;
+
 
         _x = Xcoordinate;
         _y = Ycoordinate;
         _caseHeightInPixel = caseHeightInPixel;
         _caseWidthInPixel = caseWidthInPixel;
-
         if(tile instanceof Sand) {
-            this.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/map/sand.png"));
-        } else if(tile instanceof Water) {
-            this.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/map/water.png"));
-        } else {
-            this.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/map/water.png"));
+            System.out.println("je suis la");
         }
+
+        this.setImage(new Image(tile.getSrcImage()));
     }
 
     public void draw(AnchorPane pane) {

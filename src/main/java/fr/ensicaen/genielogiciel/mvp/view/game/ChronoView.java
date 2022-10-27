@@ -9,10 +9,10 @@ public class ChronoView extends Text {
 
 
     public void draw(AnchorPane pane) {
-        setLayoutX(95);
+        setLayoutX(110);
         setLayoutY(425);
         this.setStyle("-fx-font-size: 25px;-fx-text-inner-color: white;");
-        setText("00-00-00");
+        setText("00:00");
 
 
         pane.getChildren().add(this);
