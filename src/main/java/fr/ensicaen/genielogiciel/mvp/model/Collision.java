@@ -6,21 +6,17 @@ import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 public class Collision {
     final private GameMap _map;
     final private ShipModel _ship;
-
     public Collision(GameMap map, ShipModel ship) {
         _map = map;
         _ship = ship;
     }
-
-
     public boolean outOfRange() {
-        boolean infX = _ship.getX() + _ship.getDx() < 0;
-        boolean supX = _ship.getX() + _ship.getDx() + _ship.getWidth() >= _map.getWidth();
-        boolean infY = _ship.getY() + _ship.getDy() < 0;
-        boolean supY = _ship.getY() + _ship.getDy() + _ship.getHeight() >= _map.getHeight();
-        return infX || supX || infY || supY;
+        boolean collisionLeft = _ship.getNewPositionLeft() < 0;
+        boolean collisionRight = _ship.getNewPositionRight() >= _map.getWidth();
+        boolean collisionTop = _ship.getNewPositionTop() < 0;
+        boolean collisionBottom = _ship.getNewPositionBottom() >= _map.getHeight();
+        return collisionLeft || collisionRight || collisionTop || collisionBottom;
     }
-
     public boolean collisionWithBuoy() {
         boolean checkX;
         boolean checkY;
@@ -33,21 +29,29 @@ public class Collision {
         }
         return false;
     }
-
     public boolean collisionWithSand() {
-        double nextX = _ship.getX() + _ship.getDx();
-        double nextY = _ship.getY() + _ship.getDy();
-        return _map.getType( (int)nextX, (int)nextY) == '.';
+        int left = (int)_ship.getNewPositionLeft();
+        int right = (int)_ship.getNewPositionRight();
+        int top = (int)_ship.getNewPositionTop();
+        int bottom = (int)_ship.getNewPositionBottom();
+        if(bottom > top){
+            bottom = (top + bottom) - (top = bottom);
+        }
+        if(left > right){
+            left = (right + left) - (right = left);
+        }
+        for(int x = left; x<= right; x++){
+            for(int y = bottom; y<= top; y++){
+                if(_map.getType(x, y) == '.'){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
-
-    public void collisionWithOtherPlayers(ShipModel another) {
-
-    }
-
     private boolean collisionWithSomething() {
         return collisionWithSand() || outOfRange(); //collisionWithBuoy() ||
     }
-
     public void setMoveShip(){
         _ship.setCollision(collisionWithSomething());
     }

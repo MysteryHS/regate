@@ -76,28 +76,30 @@ public class ShipModel {
     public void setHeight(double height){
         _height = height;
     }
-    public double getHeight(){
-        return _height;
-    }
     public void setWidth(double width){
         _width = width;
     }
-    public double getWidth(){
-        return _width;
+    public double getNewPositionRight(){
+        return _x + _dx + _width;
     }
-
+    public double getNewPositionLeft(){
+        return _x + _dx;
+    }
+    public double getNewPositionTop(){
+        return _y + _dy;
+    }
+    public double getNewPositionBottom(){
+        return _y + _dy + _height;
+    }
     public void performCommand(Move move){
         _commands.add(move);
         move.execute();
     }
-
     public void resetSpeed(){
         _dx = 0;
         _dy = 0;
     }
-
     public void replay(long delayEnd){
-
         resetSpeed();
         _x = _initialX;
         _y = _initialY;
@@ -126,6 +128,7 @@ public class ShipModel {
             }, delayEnd);
             _commands.clear();
             //TODO is waiting for last to purge, even if the app is closed
+            //TODO maybe extract this function in another class
         }
     }
 
