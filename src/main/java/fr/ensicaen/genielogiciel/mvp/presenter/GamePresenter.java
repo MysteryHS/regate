@@ -25,6 +25,7 @@ public class GamePresenter {
 
     private Map _mapModel;
 
+    private int i =1;
 
     private IGameView _gameView;
     private boolean _started = false;
@@ -117,6 +118,7 @@ public class GamePresenter {
     }
 
     private void render() {
-        _gameView.update(_playerModel);
+        i++;
+        _gameView.update(_playerModel.getShip().getAngle(),_playerModel.getShip().getDx(),_playerModel.getShip().getDy(),i+"");
     }
 }

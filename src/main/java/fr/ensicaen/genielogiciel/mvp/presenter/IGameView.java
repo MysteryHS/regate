@@ -12,5 +12,7 @@ public interface IGameView {
 
     public void initView(MapView map, ShipView ship, WindView wind);
 
-    public void update(Player playerModel);
+    public void update(double angle, double dx,double dy,String chrono);
+
+    public void addBuoyPassedToDisplayedList(String chrono);
 }

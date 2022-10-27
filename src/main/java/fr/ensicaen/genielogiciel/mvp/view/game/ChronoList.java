@@ -2,8 +2,6 @@ package fr.ensicaen.genielogiciel.mvp.view.game;
 
 import javafx.scene.layout.AnchorPane;
 
-import java.util.ArrayList;
-
 public class ChronoList {
 
     private int _nbItems;
@@ -15,8 +13,8 @@ public class ChronoList {
     }
 
     public void addChrono(ChronoItem item) {
-        int posX = 30;
-        int posY = 30+_nbItems*30;
+        int posX = 80;
+        int posY = 80+_nbItems*20;
         item.draw(_pane,posX,posY);
         _nbItems++;
     }

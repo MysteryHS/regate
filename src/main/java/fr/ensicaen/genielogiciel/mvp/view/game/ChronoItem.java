@@ -16,6 +16,7 @@ public class ChronoItem extends Text {
         setLayoutX(posXInPixel);
         setLayoutY(posYInPixel);
         setText(_text);
-        this.setStyle("-fx-font-size: 100px");
+        this.setStyle("-fx-font-size: 17px");
+        pane.getChildren().add(this);
     }
 }

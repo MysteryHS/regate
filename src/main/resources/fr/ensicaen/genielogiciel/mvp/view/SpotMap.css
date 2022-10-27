@@ -11,5 +11,5 @@
 .chrono_bg {
     -fx-background-image:url('../images/background/chrono_bg.png');
     -fx-background-repeat: no-repeat;
-    -fx-background-size: contain;
+    -fx-background-size: 300px 450px;
 }

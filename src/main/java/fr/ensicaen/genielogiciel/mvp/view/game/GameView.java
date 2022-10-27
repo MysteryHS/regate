@@ -31,6 +31,8 @@ public class GameView implements IGameView {
 
     private WindView _windView;
 
+    private ChronoView _chronoView;
+
     private ChronoList _chronoList;
 
     @FXML
@@ -61,6 +63,7 @@ public class GameView implements IGameView {
         _mapView = map;
         _shipView = ship;
         _windView = wind;
+        _chronoView = new ChronoView();
         _chronoList = new ChronoList(_chronoPane);
     }
 
@@ -71,21 +74,27 @@ public class GameView implements IGameView {
         _mapView.draw(_mapPane);
         _shipView.draw(_mapPane,boatPosX,boatPosY);
         _windView.draw(_windText,windDirection,windKnot);
+        _chronoView.draw(_chronoPane);
         _chronoList.addChrono(new ChronoItem("je suis la"));
         _chronoList.addChrono(new ChronoItem("je suis la 2"));
         _chronoList.addChrono(new ChronoItem("je suis la 3 "));
         _chronoList.addChrono(new ChronoItem("je suis la 4"));
         _chronoList.addChrono(new ChronoItem("je suis la 5"));
+
+    }
+
+    @Override
+    public void addBuoyPassedToDisplayedList(String chrono) {
+        _chronoList.addChrono(new ChronoItem(chrono));
     }
 
 
 
-
     @Override
-    public void update(Player playerModel) {
-
-        _shipView.rotate(playerModel.getShip().getAngle());
-        _shipView.move(playerModel.getShip().getDx(), playerModel.getShip().getDy());
+    public void update(double angle, double dx,double dy,String chrono) {
+        _shipView.rotate(angle);
+        _shipView.move(dx, dy);
+        _chronoView.refresh(chrono);
     }
 
     public void show() {
