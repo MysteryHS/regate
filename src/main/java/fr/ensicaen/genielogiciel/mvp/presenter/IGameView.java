@@ -1,6 +1,6 @@
 package fr.ensicaen.genielogiciel.mvp.presenter;
 
-import fr.ensicaen.genielogiciel.mvp.view.game.ShipView;
+import fr.ensicaen.genielogiciel.mvp.view.game.*;
 
 public interface IGameView {
     void draw(double boatPosX, double boatPosY,String windDirection,double windKnot);

@@ -1,4 +1,5 @@
 package fr.ensicaen.genielogiciel.mvp.presenter;
+
 import fr.ensicaen.genielogiciel.mvp.model.Chrono;
 import fr.ensicaen.genielogiciel.mvp.model.Collision;
 import fr.ensicaen.genielogiciel.mvp.model.PassedBuoy;
@@ -23,7 +24,9 @@ import fr.ensicaen.genielogiciel.mvp.model.ship.builder.ShipDirector;
 import fr.ensicaen.genielogiciel.mvp.model.ship.builder.builderType.TypeShip;
 import fr.ensicaen.genielogiciel.mvp.model.ship.builder.builderType.TypeCrew;
 import fr.ensicaen.genielogiciel.mvp.model.ship.builder.builderType.TypeSail;
+import fr.ensicaen.genielogiciel.mvp.view.game.ShipView;
 import fr.ensicaen.genielogiciel.mvp.view.game.*;
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -74,9 +77,7 @@ public class GamePresenter {
         for(Buoy buoy : _mapModel.getBuoys()) {
             map.addBuoy(new BuoyView(caseWidthInPixel,caseHeightInPixel, buoy.getX(), buoy.getY()));
         }
-
         _gameView.initView(map, ship, wind);
-
         _gameView.draw( _playerModel.getShip().getX(),
                         _playerModel.getShip().getY(),
                 _wind.getWindDirection().name(),
