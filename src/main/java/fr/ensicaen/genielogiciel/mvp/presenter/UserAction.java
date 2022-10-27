@@ -1,3 +1,8 @@
 package fr.ensicaen.genielogiciel.mvp.presenter;
 
-public enum UserAction {LEFT, RIGHT, START, RESET}
+public enum UserAction {
+    LEFT,
+    RIGHT,
+    START,
+    RESET
+}

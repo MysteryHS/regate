@@ -19,13 +19,14 @@ public class WeatherStationProxy implements WeatherStation {
         _server = null;
     }
 
-    protected WeatherStationProxy(WeatherStationServer server) {
+    public WeatherStationProxy(WeatherStationServer server) {
         _server = server;
         _longitude = 0.;
         _latitude = 0.;
         _date = new Date(0);
         _windData = requestWindData(0, 0);
     }
+
     @Override
     public double getSpeedWindInKnot() {
         if ( !isDateOutdated( _time ) ) {
@@ -34,6 +35,7 @@ public class WeatherStationProxy implements WeatherStation {
         _windData = requestWindData(_longitude, _latitude);
         return getSpeedWindInKnot();
     }
+
     @Override
     public WindDirection getWindDirection() {
         if ( !isDateOutdated( _time ) ) {
@@ -44,7 +46,7 @@ public class WeatherStationProxy implements WeatherStation {
     }
 
     protected boolean isDateOutdated( long timeInMillisecond ) {
-        return new Date(_date.getTime() + timeInMillisecond).compareTo(_date) <= 0;      //86400000
+        return new Date(_date.getTime() + timeInMillisecond).compareTo(_date) <= 0;
     }
 
     protected WindData requestWindData( double longitude, double latitude ) {

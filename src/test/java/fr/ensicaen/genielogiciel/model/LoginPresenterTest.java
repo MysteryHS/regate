@@ -1,23 +1,21 @@
 package fr.ensicaen.genielogiciel.model;
 
-import fr.ensicaen.genielogiciel.mvp.Main;
-import fr.ensicaen.genielogiciel.mvp.presenter.LoginPresenter;
 import fr.ensicaen.genielogiciel.mvp.view.LoginView;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 class LoginPresenterTest {
 
     @Mock
     private LoginView _view;
     private AutoCloseable closeable;
+
+    LoginPresenterTest(LoginView view) {
+        _view = view;
+    }
 
     @BeforeEach
     public void initMocks() {

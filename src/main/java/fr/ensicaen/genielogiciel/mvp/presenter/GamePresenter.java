@@ -1,29 +1,31 @@
 package fr.ensicaen.genielogiciel.mvp.presenter;
 
+
 import fr.ensicaen.genielogiciel.mvp.model.Chrono;
 import fr.ensicaen.genielogiciel.mvp.model.Collision;
+import fr.ensicaen.genielogiciel.mvp.model.Collision;
 import fr.ensicaen.genielogiciel.mvp.model.PassedBuoy;
+import fr.ensicaen.genielogiciel.mvp.model.Stopwatch;
 
 import fr.ensicaen.genielogiciel.mvp.model.map.GameMap;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStation;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStationProxy;
 
 import fr.ensicaen.genielogiciel.mvp.model.map.Buoy;
-import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
+import fr.ensicaen.genielogiciel.mvp.model.map.GameMap;
 import fr.ensicaen.genielogiciel.mvp.model.map.Tile;
-// Remarque : l'animation n'est pas considérée comme étant du graphisme à proprement parlé.
-//            On peut la considérer comme une bibliothèque tiers de gestion de threading.
-//            On peut donc l'utiliser dans le presenter.
+import fr.ensicaen.genielogiciel.mvp.model.player.Player;
 import fr.ensicaen.genielogiciel.mvp.model.player.User;
+import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 
 import fr.ensicaen.genielogiciel.mvp.model.player.Player;
 import fr.ensicaen.genielogiciel.mvp.model.ship.command.MoveLeft;
 import fr.ensicaen.genielogiciel.mvp.model.ship.command.MoveRight;
 import fr.ensicaen.genielogiciel.mvp.model.ship.builder.ConcreteShipBuilder;
 import fr.ensicaen.genielogiciel.mvp.model.ship.builder.ShipDirector;
-import fr.ensicaen.genielogiciel.mvp.model.ship.builder.builderType.TypeShip;
 import fr.ensicaen.genielogiciel.mvp.model.ship.builder.builderType.TypeCrew;
 import fr.ensicaen.genielogiciel.mvp.model.ship.builder.builderType.TypeSail;
+import fr.ensicaen.genielogiciel.mvp.model.ship.builder.builderType.TypeShip;
 import fr.ensicaen.genielogiciel.mvp.view.game.ShipView;
 import fr.ensicaen.genielogiciel.mvp.view.game.*;
 
@@ -36,27 +38,44 @@ import java.util.Date;
 
 public class GamePresenter {
     private final Player _playerModel;
-
-    private final GameMap _mapModel;
-
-    private final Collision _collision;
-
-    private final Chrono _chronoModel;
+    private final Stopwatch _stopwatchModel;
     private final PassedBuoy _passedBuoy;
-    private WeatherStation _wind;
+    private final Collision _collision;
+    private final GameMap _mapModel;
     private IGameView _gameView;
     private boolean _started = false;
-    private Timeline _timeline;
     private Date _dateStarted;
 
 
-    public GamePresenter(String nickName, GameMap map, TypeShip typeShip, TypeSail typeSail , TypeCrew typeCrew) throws FileNotFoundException {
-        _chronoModel = Chrono.getInstance();
+    public GamePresenter(GameMap map, TypeShip typeShip, TypeSail typeSail , TypeCrew typeCrew) throws FileNotFoundException {
+        ShipModel ship;
+        _stopwatchModel = Stopwatch.getInstance();
         _mapModel = map;
-        ShipModel ship = initGame(typeShip, typeSail, typeCrew);
-        _playerModel = new User(nickName, ship);
+        ship = initGame(typeShip, typeSail, typeCrew);
+        _playerModel = new User(ship);
         _passedBuoy = new PassedBuoy(_playerModel,_mapModel);
         _collision = new Collision(map, ship);
+    }
+
+    private ShipModel initGame(TypeShip typeShip, TypeSail typeSail , TypeCrew typeCrew) throws FileNotFoundException {
+        ShipDirector director = new ShipDirector(new ConcreteShipBuilder()).buildStartPosition(_mapModel.getStartX(), _mapModel.getStartY());
+        if (typeShip == TypeShip.FIGARO37) {
+            director.buildFigaro();
+        } else {
+            director.buildOceanis37();
+        }
+        if (typeSail == TypeSail.NORMAL_SAIL) {
+            director.buildNormalSail();
+        } else {
+            director.buildLargerSail();
+        }
+        if (typeCrew == TypeCrew.NORMAL_CREW) {
+            director.buildNormalCrew();
+        } else {
+            director.buildMaxCrew();
+        }
+        director.addWind(_mapModel.getWind());
+        return director.build();
     }
 
     private void initView() {
@@ -69,19 +88,18 @@ public class GamePresenter {
 
         ShipView ship = new ShipView(_playerModel.getShip().getImageSRC(),caseWidthInPixel,caseHeightInPixel);
         WindView wind = new WindView();
-        MapView map = new MapView(caseWidthInPixel,caseHeightInPixel,_mapModel.getWidth(), _mapModel.getHeight());
+        MapView map = new MapView();
         for(Tile tile : _mapModel.getTiles()) {
             map.addTile(new TileView(tile,caseWidthInPixel,caseHeightInPixel, tile.getX(), tile.getY()));
         }
-
         for(Buoy buoy : _mapModel.getBuoys()) {
             map.addBuoy(new BuoyView(caseWidthInPixel,caseHeightInPixel, buoy.getX(), buoy.getY()));
         }
-        _gameView.initView(map, ship, wind);
+        _gameView.initView(map,ship,wind);
         _gameView.draw( _playerModel.getShip().getX(),
                         _playerModel.getShip().getY(),
-                _wind.getWindDirection().name(),
-                _wind.getSpeedWindInKnot());
+                        _mapModel.getWind().getWindDirection().name(),
+                        _mapModel.getWind().getSpeedWindInKnot());
     }
 
     public void setGameView( IGameView gameView ) {
@@ -106,8 +124,8 @@ public class GamePresenter {
     private void startGame() {
         if (!_started) {
             _started = true;
+            _stopwatchModel.restartReferenceTime();
             _dateStarted = new Date();
-            _chronoModel.restartReferenceTime();
             runGameLoop();
         }
     }
@@ -121,29 +139,6 @@ public class GamePresenter {
         } else if (action == UserAction.RIGHT) {
             _playerModel.getShip().performCommand(new MoveRight(_playerModel.getShip(), (new Date()).getTime() - _dateStarted.getTime()));
         }
-    }
-
-    private ShipModel initGame(TypeShip typeShip, TypeSail typeSail , TypeCrew typeCrew) throws FileNotFoundException {
-        ShipDirector director = new ShipDirector(new ConcreteShipBuilder().setPosition(_mapModel.getStartX(), _mapModel.getStartY()));
-        if (typeShip == TypeShip.FIGARO37) {
-            director.buildFigaro();
-        } else {
-            director.buildOceanis37();
-        }
-        if (typeSail == TypeSail.NORMAL_SAIL) {
-            director.buildNormalSail();
-        } else {
-            director.buildLargerSail();
-        }
-        if (typeCrew == TypeCrew.NORMAL_CREW) {
-            director.buildNormalCrew();
-        } else {
-            director.buildMaxCrew();
-        }
-        _wind = new WeatherStationProxy(0.3,49);
-        director.addWind(_wind);
-        return director.build();
-
     }
 
     private void runGameLoop() {
@@ -161,10 +156,9 @@ public class GamePresenter {
         if(_passedBuoy.detectionPassageBuoy()) {
             _gameView.addBuoyPassedToDisplayedList(_playerModel.getLatestScore());
         }
-
     }
 
     private void render() {
-        _gameView.update(_playerModel.getShip().getAngle(),_playerModel.getShip().getX(),_playerModel.getShip().getY(),_chronoModel.getFormateChrono(),_passedBuoy.getNextBuoyIndexInList());
+        _gameView.update(_playerModel.getShip().getAngle(),_playerModel.getShip().getX(),_playerModel.getShip().getY(), _stopwatchModel.getStringFormatStopwatch(),_passedBuoy.getNextBuoyIndexInList());
     }
 }

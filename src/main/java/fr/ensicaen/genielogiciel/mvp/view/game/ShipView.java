@@ -13,7 +13,6 @@ public class ShipView extends ImageView {
         _caseWidthInPixel = caseWidthInPixel;
         this.setFitWidth(_caseWidthInPixel);
         this.setFitHeight(_caseHeightInPixel*1.2);
-
     }
     public void draw(AnchorPane pane, double dx, double dy) {
         this.setLayoutX(dx*_caseWidthInPixel);

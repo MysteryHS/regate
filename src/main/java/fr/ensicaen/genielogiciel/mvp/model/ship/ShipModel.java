@@ -46,16 +46,6 @@ public class ShipModel {
         _initialY = y;
     }
 
-    public ShipModel(Sail sail, Crew crew, WeatherStation weatherStation, String polarName){
-        _sail = sail;
-        _crew = crew;
-        _weatherStation = weatherStation;
-        try {
-            _polar = new DataPolar(polarName);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
     public double getX() {
         return _x;
     }
@@ -189,10 +179,6 @@ public class ShipModel {
         return _crew;
     }
 
-    public WeatherStation getWind() {
-        return _weatherStation;
-    }
-
     public String getPolarName() {
         return _polar.getPolarName();
     }
@@ -200,8 +186,7 @@ public class ShipModel {
     public String getImageSRC() {
         if(_polar.getPolarName().equals("polaire-figaro.pol")){
             return "file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/boats/small_boat.png";
-        } else {
-            return "file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/boats/big_boat.png";
         }
+        return "file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/boats/big_boat.png";
     }
 }

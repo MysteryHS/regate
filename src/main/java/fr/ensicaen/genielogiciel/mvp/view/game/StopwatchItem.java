@@ -3,14 +3,12 @@ package fr.ensicaen.genielogiciel.mvp.view.game;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
-public class ChronoItem extends Text {
+public class StopwatchItem extends Text {
+    private final String _text;
 
-    private String _text;
-
-    public ChronoItem(String text) {
+    public StopwatchItem(String text) {
         _text = text;
     }
-
 
     public void draw(AnchorPane pane, int posXInPixel, int posYInPixel) {
         setLayoutX(posXInPixel);

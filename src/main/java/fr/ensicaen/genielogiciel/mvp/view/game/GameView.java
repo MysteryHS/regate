@@ -21,31 +21,17 @@ import java.io.IOException;
 public class GameView implements IGameView {
     private static Stage _stage;
     private GamePresenter _gamePresenter;
-
     private ShipView _shipView;
-
     private MapView _mapView;
-
     private WindView _windView;
-
-    private ChronoView _chronoView;
-
-    private ChronoList _chronoList;
-
-    @FXML
-    private AnchorPane _base;
-
+    private StopwatchView _stopwatchView;
+    private StopwatchList _stopwatchList;
     @FXML
     private AnchorPane _mapPane;
-
-    @FXML
-    private AnchorPane _windWear; // FIXME jamais utilisé
-
     @FXML
     private Text _windText;
-
     @FXML
-    private AnchorPane _chronoPane;
+    private AnchorPane _stopwatchPane;
 
     public static int mapHeightInPixel = 800;
     public static int mapWidthInPixel = 600;
@@ -53,13 +39,12 @@ public class GameView implements IGameView {
         _gamePresenter = gamePresenter;
     }
 
-    @Override
     public void initView(MapView map, ShipView ship, WindView wind) {
         _mapView = map;
         _shipView = ship;
         _windView = wind;
-        _chronoView = new ChronoView();
-        _chronoList = new ChronoList(_chronoPane);
+        _stopwatchView = new StopwatchView();
+        _stopwatchList = new StopwatchList(_stopwatchPane);
     }
 
     @Override
@@ -67,13 +52,12 @@ public class GameView implements IGameView {
         _mapView.draw(_mapPane);
         _shipView.draw(_mapPane,boatPosX,boatPosY);
         _windView.draw(_windText,windDirection,windKnot);
-        _chronoView.draw(_chronoPane);
-
+        _stopwatchView.draw(_stopwatchPane);
     }
 
     @Override
-    public void addBuoyPassedToDisplayedList(String chrono) {
-        _chronoList.addChrono(new ChronoItem(chrono));
+    public void addBuoyPassedToDisplayedList(String stopwatch) {
+        _stopwatchList.addStopwatchItem(new StopwatchItem(stopwatch));
     }
 
     public void isNextBuoy(int index) {
@@ -81,17 +65,16 @@ public class GameView implements IGameView {
     }
 
     @Override
-    public void update(double angle, double x, double y,String chrono, int indexInListNextBuoy) {
+    public void update(double angle, double x, double y, String stopwatch, int indexInListNextBuoy) {
         _shipView.rotate(angle);
         _shipView.move(x, y);
         isNextBuoy(indexInListNextBuoy);
-        _chronoView.refresh(chrono);
+        _stopwatchView.refresh(stopwatch);
     }
 
     public void show() {
         _stage.show();
     }
-
 
     private void handleKeyPressed(KeyCode code) {
         if (code == KeyCode.SPACE) {
@@ -105,16 +88,15 @@ public class GameView implements IGameView {
         }
     }
 
-
     public static class GameViewFactory {
+
         private GameViewFactory() {}
+
         public static GameView createView() throws IOException {
             FXMLLoader loader = new FXMLLoader(LoginView.class.getResource("SpotMap.fxml"), Main.getMessageBundle());
             Parent root = loader.load();
-
             GameView view = loader.getController();
-
-            Scene scene = new Scene(root, mapHeightInPixel, mapWidthInPixel);
+            Scene scene = new Scene(root, 800, 600);
             Stage stage = new Stage();
             stage.resizableProperty().setValue(false);
             stage.setTitle(Main.getMessageBundle().getString("project.title"));

@@ -20,7 +20,7 @@ class MapTest {
     }*/
 
     @Test
-    public void testHeightWidthAndNumberBuoyRecovery() throws IOException {
+    public void testHeightWidthAndNumberBuoyRecovery() {
         GameMap m = new GameMap();
         m.heightWidthAndNumberBuoyRecovery("50 50 0");
         assertEquals(50, m.getHeight());

@@ -1,11 +1,10 @@
 package fr.ensicaen.genielogiciel.mvp.model.player;
 
-import fr.ensicaen.genielogiciel.mvp.model.Chrono;
+import fr.ensicaen.genielogiciel.mvp.model.Stopwatch;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.String;
 
 public class Score {
 
@@ -16,7 +15,7 @@ public class Score {
     }
 
     public String getScore(int index) throws IOException {
-        if (_score.size() <= 0 || index >= _score.size()) {
+        if (_score.size() == 0 || index >= _score.size()) {
             throw new IOException("Error wrong size");
         }
         return _score.get(index);
@@ -33,19 +32,7 @@ public class Score {
     }
 
     public void registerScore() {
-        Chrono chrono = Chrono.getInstance();
-        addScore(chrono.getTime());
-    }
-
-    public void resetScore() {
-        _score.clear();
-        Chrono chrono = Chrono.getInstance();
-        chrono.restartReferenceTime();
-    }
-
-
-
-    public int getSizeOfTheScore() {
-        return _score.size();
+        Stopwatch stopwatch = Stopwatch.getInstance();
+        addScore(stopwatch.getTime());
     }
 }
