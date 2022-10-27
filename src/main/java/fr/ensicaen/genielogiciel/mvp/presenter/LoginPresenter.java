@@ -1,6 +1,7 @@
 package fr.ensicaen.genielogiciel.mvp.presenter;
 
 import fr.ensicaen.genielogiciel.mvp.Main;
+import fr.ensicaen.genielogiciel.mvp.model.PassedBuoy;
 import fr.ensicaen.genielogiciel.mvp.model.map.Map;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
 import fr.ensicaen.genielogiciel.mvp.model.ship.DataPolar;

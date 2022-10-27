@@ -1,5 +1,6 @@
 package fr.ensicaen.genielogiciel.mvp.presenter;
 
+import fr.ensicaen.genielogiciel.mvp.model.PassedBuoy;
 import fr.ensicaen.genielogiciel.mvp.model.map.Map;
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 
@@ -26,6 +27,7 @@ public class GamePresenter {
     private final Player _playerModel;
 
     private Map _mapModel;
+    private PassedBuoy _passedBuoy;
 
 
     private IGameView _gameView;
@@ -36,6 +38,7 @@ public class GamePresenter {
         _playerModel = new User(nickName,ship);
 
         _mapModel = map;
+        _passedBuoy = new PassedBuoy(_playerModel, _mapModel);
     }
 
     private void initView() {
@@ -95,6 +98,7 @@ public class GamePresenter {
 
     private void update() {
         _playerModel.getShip().move();
+        _passedBuoy.detectionPassageBuoy();
     }
 
     private void render() {

@@ -158,4 +158,8 @@ public class Map {
             y++;
         }
     }
+
+    public boolean isPassingBuoyNumber(int buoyNumber, int boatX, int boatY){
+        return _buoys.get(buoyNumber).isAxisPassed(boatX, boatY);
+    }
 }
