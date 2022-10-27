@@ -1,10 +1,10 @@
 package fr.ensicaen.genielogiciel.mvp.model.ship;
 
+import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStation;
 import fr.ensicaen.genielogiciel.mvp.model.ship.crew.Crew;
-import fr.ensicaen.genielogiciel.mvp.model.map.wind.Wind;
 import fr.ensicaen.genielogiciel.mvp.model.ship.sail.Sail;
-
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class ShipModel {
     private double _x = 10;
@@ -12,23 +12,22 @@ public class ShipModel {
     private double _dx = 0;
     private double _dy = 0;
     private double _anglePositive = 0;
-    private final double _inertia = 0.05;
     private final double _speedRatio = 0.8;
     private final Sail _sail;
     private final Crew _crew;
-    private final Wind _wind;
+    private final WeatherStation _weatherStation;
     private final DataPolar _polar;
-    public ShipModel(Sail sail, Crew crew, Wind wind, DataPolar polarName){
+    public ShipModel(Sail sail, Crew crew, WeatherStation weatherStation, DataPolar polarName){
         _sail = sail;
         _crew = crew;
-        _wind = wind;
+        _weatherStation = weatherStation;
         _polar = polarName;
     }
 
-    public ShipModel(Sail sail, Crew crew, Wind wind, String polarName){
+    public ShipModel(Sail sail, Crew crew, WeatherStation weatherStation, String polarName){
         _sail = sail;
         _crew = crew;
-        _wind = wind;
+        _weatherStation = weatherStation;
         try {
             _polar = new DataPolar(polarName);
         } catch (FileNotFoundException e) {
@@ -41,10 +40,6 @@ public class ShipModel {
 
     public double getY() {
         return _y;
-    }
-
-    public double getInertia() {
-        return _inertia;
     }
 
     public double getSpeedRatio() {
@@ -68,23 +63,24 @@ public class ShipModel {
         return _dy ;
     }
 
-    private double getSpeed(){
-        int angleToWind360 = (((int)(Math.abs(_wind.getWindDirection().getAngle()-_anglePositive))/10)*10);
+    private double getSpeed() {
+        int angleToWind360 = (((int)(Math.abs(_weatherStation.getWindDirection().getAngle()-_anglePositive))/10)*10);
         double angle = angleToWind360<180?angleToWind360:Math.abs(360-angleToWind360);
-        return _polar.getPolarValues(angle, _wind.getWindKnot()) * _sail.getShipSpeed(_anglePositive-180) * _crew.getShipSpeed(_anglePositive-180)* _speedRatio;
+        return _polar.getPolarValues(angle, _weatherStation.getSpeedWindInKnot()) * _sail.getShipSpeed(_anglePositive-180) * _crew.getShipSpeed(_anglePositive-180)* _speedRatio;
     }
 
-    private double getNewSpeedX(){
+    private double getNewSpeedX() {
         return getSpeed() * Math.sin(_anglePositive * Math.PI / 180);
     }
 
-    private double getNewSpeedY(){
+    private double getNewSpeedY() {
         return getSpeed() * (-Math.cos(_anglePositive * Math.PI / 180));
     }
 
     private double getInertiaSpeed(double newSpeed, double currentSpeed){
-        if(newSpeed<currentSpeed-_inertia){
-            return currentSpeed-_inertia;
+        double _inertia = 0.05;
+        if(newSpeed<currentSpeed- _inertia){
+            return currentSpeed- _inertia;
         }
         return Math.min(newSpeed, currentSpeed + _inertia);
     }
@@ -96,7 +92,19 @@ public class ShipModel {
         _y += _dy;
     }
 
-    public Wind getWind() {
-        return _wind;
+    public Sail getSail() {
+        return _sail;
+    }
+
+    public Crew getCrew() {
+        return _crew;
+    }
+
+    public WeatherStation getWind() {
+        return _weatherStation;
+    }
+
+    public String getPolarName() {
+        return _polar.getPolarName();
     }
 }
