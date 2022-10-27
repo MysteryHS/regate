@@ -111,17 +111,9 @@ public class GameMap {
 
     public void  heightWidthAndNumberBuoyRecovery(String information) {
         String[] delimitation = information.split(" ");
-        if (delimitation.length == numberDataWithBuoys) {
-            _width = Integer.parseInt(delimitation[0]);
-            _height = Integer.parseInt(delimitation[1]);
-            _nbBuoy = Integer.parseInt(delimitation[2]);
-        } else {
-            if (delimitation.length == numberDataWithNotBuoys) {
-                _width = Integer.parseInt(delimitation[0]);
-                _height = Integer.parseInt(delimitation[1]);
-                _nbBuoy = 0;
-            }
-        }
+        _width = Integer.parseInt(delimitation[0]);
+        _height = Integer.parseInt(delimitation[1]);
+        _nbBuoy = delimitation.length == numberDataWithNotBuoys ? 0 : Integer.parseInt(delimitation[2]);
     }
 
     public String readLongitudeAndLatitudeSecondLine(Scanner myReader) {

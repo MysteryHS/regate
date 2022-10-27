@@ -12,15 +12,10 @@ public class PassedBuoy {
         _player = player;
         _map = map;
     }
-
     public boolean detectionPassageBuoy(){
-        System.out.println(_indexBuoyToPass);
-        if(_player.getShip().getX()<0) {
-            System.out.println(_player.getShip().getX());
-        }
-        if (_map.isPassingBuoyNumber(_indexBuoyToPass,
-                (int) _player.getShip().getX(), (int) _player.getShip().getY())){
-
+        int shipX = (int) _player.getShip().getX();
+        int shipY = (int) _player.getShip().getY();
+        if (_map.isPassingBuoyNumber(_indexBuoyToPass, shipX, shipY)){
             _indexBuoyToPass++;
             _player.addScore();
             return true;

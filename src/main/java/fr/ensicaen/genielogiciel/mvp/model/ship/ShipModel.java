@@ -22,7 +22,7 @@ public class ShipModel {
     private double _dx = 0;
     private double _dy = 0;
     private double _anglePositive = 0;
-    private final double _speedRatio = 0.01;
+    private final double _speedRatio = 0.03;
     private final Sail _sail;
     private final Crew _crew;
     private final WeatherStation _weatherStation;
@@ -165,7 +165,7 @@ public class ShipModel {
     }
 
     private double getInertiaSpeed(double newSpeed, double currentSpeed){
-        double _inertia = 0.05;
+        double _inertia = 0.02;
         if(newSpeed<currentSpeed - _inertia){
             return currentSpeed - _inertia;
         }

@@ -1,7 +1,6 @@
 package fr.ensicaen.genielogiciel.mvp.presenter;
 
 import fr.ensicaen.genielogiciel.mvp.Main;
-import fr.ensicaen.genielogiciel.mvp.model.Collision;
 import fr.ensicaen.genielogiciel.mvp.model.map.GameMap;
 import fr.ensicaen.genielogiciel.mvp.view.game.GameView;
 import fr.ensicaen.genielogiciel.mvp.view.LoginView;
@@ -25,15 +24,6 @@ public final class LoginPresenter {
                 GameView view = GameView.GameViewFactory.createView();
                 GameMap map = new GameMap("carte1.txt");
                 GamePresenter gamePresenter = new GamePresenter(nickName, map, typeShip, typeSail, typeCrew);
-//                GameMap map = new GameMap("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
-//                ShipModel boat = new ShipModel(
-//                        new NormalSail(),
-//                        new MaxCrewDecorator(new NormalCrew()),
-//                        new WindProxy(50,50),
-//                        new DataPolar("polaire-figaro.pol"),
-//                        10, 10);
-                Collision collision = new Collision(map, boat);
-//                GamePresenter gamePresenter = new GamePresenter(nickName, map, boat, collision);
                 view.setGamePresenter(gamePresenter);
                 gamePresenter.setGameView(view);
                 view.show();

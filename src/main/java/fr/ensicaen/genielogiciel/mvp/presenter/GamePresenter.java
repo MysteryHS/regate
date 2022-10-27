@@ -3,7 +3,6 @@ import fr.ensicaen.genielogiciel.mvp.model.Chrono;
 import fr.ensicaen.genielogiciel.mvp.model.Collision;
 import fr.ensicaen.genielogiciel.mvp.model.PassedBuoy;
 
-import fr.ensicaen.genielogiciel.mvp.model.Collision;
 import fr.ensicaen.genielogiciel.mvp.model.map.GameMap;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStation;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStationProxy;
@@ -35,14 +34,12 @@ import java.util.Date;
 public class GamePresenter {
     private final Player _playerModel;
 
-    private GameMap _mapModel;
-
-    private Collision _collision;
-
-    private Chrono _chronoModel;
-    private PassedBuoy _passedBuoy;
-
     private final GameMap _mapModel;
+
+    private final Collision _collision;
+
+    private final Chrono _chronoModel;
+    private final PassedBuoy _passedBuoy;
     private WeatherStation _wind;
     private IGameView _gameView;
     private boolean _started = false;
@@ -50,22 +47,22 @@ public class GamePresenter {
     private Date _dateStarted;
 
 
-    public GamePresenter(String nickName, GameMap map, TypeShip typeShip, TypeSail typeSail , TypeCrew typeCrew, Collision collision) throws FileNotFoundException {
-        ShipModel ship;
-
+    public GamePresenter(String nickName, GameMap map, TypeShip typeShip, TypeSail typeSail , TypeCrew typeCrew) throws FileNotFoundException {
         _chronoModel = Chrono.getInstance();
-        _playerModel = new User(nickName,ship);
         _mapModel = map;
-        ship = initGame(typeShip, typeSail, typeCrew);
-        _playerModel = new User(nickName,ship);
-
+        ShipModel ship = initGame(typeShip, typeSail, typeCrew);
+        _playerModel = new User(nickName, ship);
         _passedBuoy = new PassedBuoy(_playerModel,_mapModel);
-        _collision = collision;
+        _collision = new Collision(map, ship);
     }
 
     private void initView() {
         double caseWidthInPixel = MapView._mapWidthInPixel/ (double)_mapModel.getWidth();
         double caseHeightInPixel = MapView._mapHeightInPixel/ (double)_mapModel.getHeight();
+
+        //TODO correct this but i don't see another way to do this :(
+        _playerModel.getShip().setWidth(1);
+        _playerModel.getShip().setHeight(1.2);
 
         ShipView ship = new ShipView(_playerModel.getShip().getImageSRC(),caseWidthInPixel,caseHeightInPixel);
         WindView wind = new WindView();
@@ -78,7 +75,7 @@ public class GamePresenter {
             map.addBuoy(new BuoyView(caseWidthInPixel,caseHeightInPixel, buoy.getX(), buoy.getY()));
         }
 
-        _gameView.initView(map,ship,wind);
+        _gameView.initView(map, ship, wind);
 
         _gameView.draw( _playerModel.getShip().getX(),
                         _playerModel.getShip().getY(),
@@ -125,15 +122,6 @@ public class GamePresenter {
         }
     }
 
-//    private void initGame() {
-//        DataPolar polar = null;
-//        try {
-//            polar = new DataPolar("polaire-figaro.pol");
-//        } catch (FileNotFoundException exception){
-//            System.err.println(exception.getMessage());
-//        }
-//    }
-
     private ShipModel initGame(TypeShip typeShip, TypeSail typeSail , TypeCrew typeCrew) throws FileNotFoundException {
         ShipDirector director = new ShipDirector(new ConcreteShipBuilder().setPosition(_mapModel.getStartX(), _mapModel.getStartY()));
         if (typeShip == TypeShip.FIGARO37) {
@@ -176,6 +164,6 @@ public class GamePresenter {
     }
 
     private void render() {
-        _gameView.update(_playerModel.getShip().getAngle(),_playerModel.getShip().getDx(),_playerModel.getShip().getDy(),_chronoModel.getFormateChrono(),_passedBuoy.getNextBuoyIndexInList());
+        _gameView.update(_playerModel.getShip().getAngle(),_playerModel.getShip().getX(),_playerModel.getShip().getY(),_chronoModel.getFormateChrono(),_passedBuoy.getNextBuoyIndexInList());
     }
 }

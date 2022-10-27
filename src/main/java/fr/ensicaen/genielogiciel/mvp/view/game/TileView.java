@@ -15,16 +15,10 @@ public class TileView extends ImageView {
 
 
     public TileView(Tile tile,double caseWidthInPixel, double caseHeightInPixel, int Xcoordinate, int Ycoordinate) {
-
-
         _x = Xcoordinate;
         _y = Ycoordinate;
         _caseHeightInPixel = caseHeightInPixel;
         _caseWidthInPixel = caseWidthInPixel;
-        if(tile instanceof Sand) {
-            System.out.println("je suis la");
-        }
-
         this.setImage(new Image(tile.getImageSRC()));
     }
 

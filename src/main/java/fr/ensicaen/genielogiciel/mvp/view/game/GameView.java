@@ -1,18 +1,14 @@
 package fr.ensicaen.genielogiciel.mvp.view.game;
 
 import fr.ensicaen.genielogiciel.mvp.Main;
-import fr.ensicaen.genielogiciel.mvp.model.player.Player;
 import fr.ensicaen.genielogiciel.mvp.presenter.GamePresenter;
 import fr.ensicaen.genielogiciel.mvp.presenter.IGameView;
 import fr.ensicaen.genielogiciel.mvp.presenter.UserAction;
 import fr.ensicaen.genielogiciel.mvp.view.LoginView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -20,6 +16,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
 
 public class GameView implements IGameView {
     private static Stage _stage;
@@ -50,15 +47,13 @@ public class GameView implements IGameView {
     @FXML
     private AnchorPane _chronoPane;
 
-    public static int mapHeightInPixel = 500;
-    public static int mapWidthInPixel = 500;
-
-
+    public static int mapHeightInPixel = 800;
+    public static int mapWidthInPixel = 600;
     public void setGamePresenter(GamePresenter gamePresenter) {
         _gamePresenter = gamePresenter;
     }
 
-
+    @Override
     public void initView(MapView map, ShipView ship, WindView wind) {
         _mapView = map;
         _shipView = ship;
@@ -66,8 +61,6 @@ public class GameView implements IGameView {
         _chronoView = new ChronoView();
         _chronoList = new ChronoList(_chronoPane);
     }
-
-
 
     @Override
     public void draw(double boatPosX, double boatPosY,String windDirection,double windKnot) {
@@ -88,9 +81,9 @@ public class GameView implements IGameView {
     }
 
     @Override
-    public void update(double angle, double dx,double dy,String chrono,int indexInListNextBuoy) {
+    public void update(double angle, double x, double y,String chrono, int indexInListNextBuoy) {
         _shipView.rotate(angle);
-        _shipView.move(dx, dy);
+        _shipView.move(x, y);
         isNextBuoy(indexInListNextBuoy);
         _chronoView.refresh(chrono);
     }
@@ -114,25 +107,14 @@ public class GameView implements IGameView {
 
 
     public static class GameViewFactory {
-
-
-
-        private GameViewFactory() {
-            // FIXME supprimer ce commentaire qui n'était qu'à vertue pédagogique
-            // Factory class as Utility class where the constructor is private
-        }
-
-
-
-
-
+        private GameViewFactory() {}
         public static GameView createView() throws IOException {
             FXMLLoader loader = new FXMLLoader(LoginView.class.getResource("SpotMap.fxml"), Main.getMessageBundle());
             Parent root = loader.load();
 
             GameView view = loader.getController();
 
-            Scene scene = new Scene(root, 800, 600);
+            Scene scene = new Scene(root, mapHeightInPixel, mapWidthInPixel);
             Stage stage = new Stage();
             stage.resizableProperty().setValue(false);
             stage.setTitle(Main.getMessageBundle().getString("project.title"));
@@ -142,8 +124,6 @@ public class GameView implements IGameView {
                 KeyCode code = event.getCode();
                 view.handleKeyPressed(code);
             });
-
-
             return view;
         }
     }
