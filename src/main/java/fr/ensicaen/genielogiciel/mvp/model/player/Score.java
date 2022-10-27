@@ -38,7 +38,7 @@ public class Score {
     }
 
     public void resetScore() {
-        _score = new ArrayList<>();
+        _score.clear();
         Chrono chrono = Chrono.getInstance();
         chrono.restartReferenceTime();
     }
