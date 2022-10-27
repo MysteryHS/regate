@@ -51,4 +51,28 @@ public class ConcreteShipBuilder implements ShipBuilder {
     public ShipModel getResult() {
         return new ShipModel( _sail, _crew, _wind, _polar,_startX,_startY );
     }
+
+    protected Sail getSail() {
+        return _sail;
+    }
+
+    protected Crew getCrew() {
+        return _crew;
+    }
+
+    protected DataPolar getPolar() {
+        return _polar;
+    }
+
+    protected WeatherStation getWind() {
+        return _wind;
+    }
+
+    protected double getStartX() {
+        return _startX;
+    }
+
+    protected double getStartY() {
+        return _startY;
+    }
 }

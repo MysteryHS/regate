@@ -11,14 +11,16 @@ import static org.mockito.Mockito.mock;
 
 class WeatherStationProxyTest {
     private WeatherStationProxy _weatherStationProxy;
+    private WindData _windData;
     @Mock
-    private WeatherStationServer _weatherStationServer;
+    private WeatherStationServer _weatherStationServerMocked;
     @BeforeEach
     public void setUp() {
-        _weatherStationServer = mock(WeatherStationServer.class);
-        doReturn(4.).when(_weatherStationServer).getSpeedWindInKnot();
-        doReturn(WindDirection.SOUTH).when(_weatherStationServer).getWindDirection();
-        _weatherStationProxy = new WeatherStationProxy( _weatherStationServer);
+        _windData = new WindData(WindDirection.SOUTH, 4.);
+        _weatherStationServerMocked = mock(WeatherStationServer.class);
+        doReturn(4.).when(_weatherStationServerMocked).getSpeedWindInKnot();
+        doReturn(WindDirection.SOUTH).when(_weatherStationServerMocked).getWindDirection();
+        _weatherStationProxy = new WeatherStationProxy(_weatherStationServerMocked);
     }
 
     @AfterEach
@@ -43,5 +45,15 @@ class WeatherStationProxyTest {
     @Test
     void windDirectionShouldEqualSouth() {
         assertEquals(WindDirection.SOUTH, _weatherStationProxy.getWindDirection());
+    }
+
+    @Test
+    void windSpeedShouldBeEqualsToWindData() {
+        assertEquals(_windData.getSpeedWindInKnot(), _weatherStationProxy.requestWindData(0., 0.).getSpeedWindInKnot());
+    }
+
+    @Test
+    void windDirectionShouldBeEqualsToWindData() {
+        assertEquals(_windData.getDirection(), _weatherStationProxy.requestWindData(0., 0.).getDirection());
     }
 }
