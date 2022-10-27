@@ -107,4 +107,12 @@ public class ShipModel {
     public String getPolarName() {
         return _polar.getPolarName();
     }
+
+    public String getImageURL() {
+        if(_polar.getPolarName().equals("polaire-figaro.pol")){
+            return "file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/boats/small_boat.png";
+        } else {
+            return "file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/boats/big_boat.png";
+        }
+    }
 }
