@@ -1,48 +1,43 @@
 package fr.ensicaen.genielogiciel.mvp.view.game;
 
-import fr.ensicaen.genielogiciel.mvp.model.map.Buoy; // FIXME couplage entre vue et modèle !!!!
+import fr.ensicaen.genielogiciel.mvp.model.map.Buoy;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 public class BuoyView extends ImageView {
-    GameView _view;
-    Buoy _buoy;
+    private double _caseHeightInPixel;
+    private double _caseWidthInPixel;
+    private int _x;
+    private int _y;
 
-    public static int mapHeight = 500;
-    public static int mapWidth = 500;
 
 
-    public BuoyView(GameView view, Buoy buoy) {
-        this._view = view; // FIXME code de débutant!
-        this._buoy = buoy;
+    public BuoyView(double caseWidthInPixel, double caseHeightInPixel, int Xcoordinate, int Ycoordinate) {
+        _x = Xcoordinate;
+        _y = Ycoordinate;
+        _caseHeightInPixel = caseHeightInPixel;
+        _caseWidthInPixel = caseWidthInPixel;
 
-        this.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/flag.png"));
+        this.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/map/flag.png"));
 
     }
 
-    public void draw(AnchorPane pane,int nbColumns, int nbRows) {
-        double sizeWidth = (mapWidth / nbColumns); // FIXME Parenthèses inutiles
-        double sizeHeight = (mapHeight / nbRows); // FIXME attention la division de deux entiers donnent un entier
-        this.setLayoutX(sizeWidth*_buoy.getX());
-        this.setLayoutY(sizeHeight*_buoy.getY());
+    public void draw(AnchorPane pane) {
+        this.setLayoutX(_caseWidthInPixel*(_x+1));
+        this.setLayoutY(_caseHeightInPixel*(_y+1));
 
-        this.setFitWidth(10);
-        this.setFitHeight(10);
-
-
+        this.setFitWidth(_caseWidthInPixel);
+        this.setFitHeight(_caseHeightInPixel);
         pane.getChildren().add(this);
     }
 
-
-    public void move(double dx, double dy) {
-        setLayoutX(getLayoutX() + dx);
-        setLayoutY(getLayoutY() + dy);
+    public void passed() {
+        this.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/map/flag.png"));
     }
 
-
-    public void rotate(double val) {
-        setRotate(val);
+    public void isNext() {
+        this.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/map/flag_red.png"));
     }
 
 }

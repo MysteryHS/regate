@@ -22,7 +22,7 @@ public final class LoginPresenter {
         } else {
             try {
                 GameView view = GameView.GameViewFactory.createView();
-                GameMap map = new GameMap("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
+                GameMap map = new GameMap("carte1.txt");
                 GamePresenter gamePresenter = new GamePresenter(nickName, map, typeShip, typeSail, typeCrew);
                 view.setGamePresenter(gamePresenter);
                 gamePresenter.setGameView(view);

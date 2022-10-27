@@ -12,6 +12,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -92,12 +94,15 @@ public class LoginView<type> implements ILoginView {
     @FXML
     private void onClickChangeBoat(){
         Label boattext = (Label) _scene.lookup("#boattext");
+        ImageView boatImage = (ImageView) _scene.lookup("#boatImage");
         if ( _boat== TypeShip.FIGARO37){
             boattext.setText("Oceanis");
             _boat= TypeShip.OCEANIS;
+            boatImage.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/boats/Oceanis.png"));
         } else {
             boattext.setText("Figaro");
             _boat= TypeShip.FIGARO37;
+            boatImage.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/boats/Figaro.png"));
         }
 
     }

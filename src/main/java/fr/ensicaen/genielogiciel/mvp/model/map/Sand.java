@@ -6,12 +6,12 @@ public class Sand extends Tile{
     }
 
     @Override
-    public void displayTile() {
-        System.out.print('.');
-    }
-
-    @Override
     public char getSymbol(){
         return '.';
     }
+
+    public String getImageSRC() {
+        return "file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/map/sand.png";
+    }
+
 }

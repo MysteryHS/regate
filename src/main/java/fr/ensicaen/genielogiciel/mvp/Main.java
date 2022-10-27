@@ -24,6 +24,7 @@ public final class Main extends Application {
         LoginPresenter presenter = new LoginPresenter();
         presenter.setLoginView(view);
         view.setLoginPresenter(presenter);
+        primaryStage.setResizable(false);
         view.show();
     }
 

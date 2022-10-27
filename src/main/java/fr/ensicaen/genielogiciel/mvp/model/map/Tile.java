@@ -17,7 +17,7 @@ public abstract class Tile {
         return _y;
     }
 
-    public abstract void displayTile();
-
     public abstract char getSymbol();
+
+    public abstract String getImageSRC();
 }

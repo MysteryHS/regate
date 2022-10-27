@@ -25,6 +25,19 @@ public abstract class Player {
         return _score.getScore(index);
     }
 
+    public String getLatestScore() {
+        try {
+            return _score.getScore(_score.getScores().size()-1);
+        } catch (IOException e) {
+            return "";
+        }
+    }
+
+    public void addScore(){
+        _score.registerScore();
+    }
+
+
     public ShipModel getShip(){
         return _ship;
     }

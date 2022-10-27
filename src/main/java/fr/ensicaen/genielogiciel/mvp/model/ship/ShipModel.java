@@ -7,21 +7,24 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class ShipModel {
-    private double _x = 10;
-    private double _y = 10;
+    private double _x = 5;
+    private double _y = 5;
     private double _dx = 0;
     private double _dy = 0;
     private double _anglePositive = 0;
-    private final double _speedRatio = 0.8;
+    private final double _speedRatio = 0.01;
     private final Sail _sail;
     private final Crew _crew;
     private final WeatherStation _weatherStation;
     private final DataPolar _polar;
-    public ShipModel(Sail sail, Crew crew, WeatherStation weatherStation, DataPolar polarName){
+
+    public ShipModel(Sail sail, Crew crew, WeatherStation weatherStation, DataPolar polarName, double start_x, double start_y){
         _sail = sail;
         _crew = crew;
         _weatherStation = weatherStation;
         _polar = polarName;
+        _x = start_x;
+        _y = start_y;
     }
 
     public ShipModel(Sail sail, Crew crew, WeatherStation weatherStation, String polarName){
@@ -106,5 +109,13 @@ public class ShipModel {
 
     public String getPolarName() {
         return _polar.getPolarName();
+    }
+
+    public String getImageSRC() {
+        if(_polar.getPolarName().equals("polaire-figaro.pol")){
+            return "file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/boats/small_boat.png";
+        } else {
+            return "file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/boats/big_boat.png";
+        }
     }
 }

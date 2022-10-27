@@ -1,14 +1,14 @@
 package fr.ensicaen.genielogiciel.mvp.view.game;
 
 import fr.ensicaen.genielogiciel.mvp.Main;
-import fr.ensicaen.genielogiciel.mvp.model.player.Player; // FIXME couplage entre vue et modèle !!!!
-import fr.ensicaen.genielogiciel.mvp.model.map.GameMap;
+import fr.ensicaen.genielogiciel.mvp.model.player.Player;
 import fr.ensicaen.genielogiciel.mvp.presenter.GamePresenter;
 import fr.ensicaen.genielogiciel.mvp.presenter.IGameView;
 import fr.ensicaen.genielogiciel.mvp.presenter.UserAction;
 import fr.ensicaen.genielogiciel.mvp.view.LoginView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -18,17 +18,22 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class GameView implements IGameView {
     private static Stage _stage;
     private GamePresenter _gamePresenter;
 
-    private BoatView _boat;
+    private ShipView _shipView;
 
-    private MapView _map;
+    private MapView _mapView;
 
-    private WindView _wind;
+    private WindView _windView;
+
+    private ChronoView _chronoView;
+
+    private ChronoList _chronoList;
 
     @FXML
     private AnchorPane _base;
@@ -42,7 +47,10 @@ public class GameView implements IGameView {
     @FXML
     private Text _windText;
 
-    public static int mapHeightInPixel = 500; // FIXME une constante est final!
+    @FXML
+    private AnchorPane _chronoPane;
+
+    public static int mapHeightInPixel = 500;
     public static int mapWidthInPixel = 500;
 
 
@@ -51,46 +59,40 @@ public class GameView implements IGameView {
     }
 
 
-
-
-
-
-    @Override
-    public void draw(GameMap mapModel, Player playerModel) {
-        _map = new MapView(
-                this,mapModel,
-                mapWidthInPixel/mapModel.getWidth(),
-                mapHeightInPixel/mapModel.getHeight());
-
-        _boat = new BoatView(
-                this,playerModel.getShip(),
-                mapWidthInPixel/mapModel.getWidth(),
-                mapHeightInPixel/mapModel.getHeight());
-
-        _wind = new WindView(playerModel.getShip().getWind(),_windText);
-
-        ImageView bg = new ImageView();
-        bg.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/bg.png"));
-        bg.setLayoutX(0);
-        bg.setLayoutY(0);
-        bg.setFitHeight(1080);
-        bg.setFitWidth(1920);
-
-        _map.draw(_mapPane);
-        _boat.draw(_mapPane);
-        _wind.draw();
+    public void initView(MapView map, ShipView ship, WindView wind) {
+        _mapView = map;
+        _shipView = ship;
+        _windView = wind;
+        _chronoView = new ChronoView();
+        _chronoList = new ChronoList(_chronoPane);
     }
 
 
 
+    @Override
+    public void draw(double boatPosX, double boatPosY,String windDirection,double windKnot) {
+        _mapView.draw(_mapPane);
+        _shipView.draw(_mapPane,boatPosX,boatPosY);
+        _windView.draw(_windText,windDirection,windKnot);
+        _chronoView.draw(_chronoPane);
 
-
+    }
 
     @Override
-    public void update(Player playerModel) {
+    public void addBuoyPassedToDisplayedList(String chrono) {
+        _chronoList.addChrono(new ChronoItem(chrono));
+    }
 
-        _boat.rotate(playerModel.getShip().getAngle());
-        _boat.move(playerModel.getShip().getDx(), playerModel.getShip().getDy());
+    public void isNextBuoy(int index) {
+        _mapView.isNextBuoy(index);
+    }
+
+    @Override
+    public void update(double angle, double dx,double dy,String chrono,int indexInListNextBuoy) {
+        _shipView.rotate(angle);
+        _shipView.move(dx, dy);
+        isNextBuoy(indexInListNextBuoy);
+        _chronoView.refresh(chrono);
     }
 
     public void show() {

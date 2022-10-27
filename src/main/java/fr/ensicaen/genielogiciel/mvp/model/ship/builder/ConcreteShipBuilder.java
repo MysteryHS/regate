@@ -13,6 +13,17 @@ public class ConcreteShipBuilder implements ShipBuilder {
     private Crew _crew;
     private DataPolar _polar;
     private WeatherStation _wind;
+    private double _startX = 5;
+    private double _startY = 5;
+
+
+    @Override
+    public ShipBuilder setPosition(double x, double y) {
+        _startX = x;
+        _startY = y;
+        return this;
+    }
+
     @Override
     public ShipBuilder setSail(Sail sail) {
         _sail = sail;
@@ -38,6 +49,6 @@ public class ConcreteShipBuilder implements ShipBuilder {
 
     @Override
     public ShipModel getResult() {
-        return new ShipModel( _sail, _crew, _wind, _polar );
+        return new ShipModel( _sail, _crew, _wind, _polar,_startX,_startY );
     }
 }

@@ -46,6 +46,8 @@ public class ShipDirector {
         _builder.setCrew(new NormalCrew());
         return this;
     }
+    
+
 
     public ShipDirector addWind(WeatherStation wind) {
         _builder.setWind(wind);
