@@ -62,6 +62,9 @@ public class GamePresenter {
     }
 
     private void changeDirection( UserAction action ) {
+        if (!_started) {
+            return;
+        }
         if (action == UserAction.LEFT) {
             _playerModel.getShip().rotate(-2);
         } else if (action == UserAction.RIGHT) {
