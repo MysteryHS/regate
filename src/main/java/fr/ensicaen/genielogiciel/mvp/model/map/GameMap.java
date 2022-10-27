@@ -17,8 +17,6 @@ public class GameMap {
     private int _yStartPoint;
     private final List<Buoy> _buoys = new ArrayList<>();
     private final List<Tile> _tiles = new ArrayList<>();
-    private WeatherStationProxy _wind;
-
     private WeatherStation _weatherStation;
 
     private static final int numberDataWithBuoys = 3;
@@ -30,15 +28,9 @@ public class GameMap {
         _height = 0;
         _nbBuoy = 0;
         readFile(pathToMapFolder + filename);
-        //TODO wind not configured
-        //_weatherStation = new WeatherStationProxy(0., 0.);
     }
 
-    public Tile getTile(int x,int y) {
-        return _tiles.get(y*_width+x);
-    }
-
-    public GameMap() throws IOException {
+    public GameMap() {
         _width = 0;
         _height = 0;
         _nbBuoy = 0;
@@ -78,7 +70,9 @@ public class GameMap {
         return _tiles;
     }
 
-    public WeatherStation getWind() { return _weatherStation; }
+    public WeatherStation getWind() {
+        return _weatherStation;
+    }
 
     public char getType(int x, int y){
         for (Buoy b : _buoys) {
@@ -132,7 +126,7 @@ public class GameMap {
         String[] delimitation = information.split(" ");
         double longitude = Double.parseDouble(delimitation[0]);
         double latitude = Double.parseDouble(delimitation[1]);
-        _wind = new WeatherStationProxy(longitude, latitude);
+        _weatherStation = new WeatherStationProxy(longitude, latitude);
     }
 
     public String readStartPointThirdLine(Scanner myReader){
@@ -149,8 +143,6 @@ public class GameMap {
         String[] delimitation;
         int xCoordinate;
         int yCoordinate;
-        int xAxis;
-        int yAxis;
         for (int i = 0 ; i < _nbBuoy ; i++) {
             String dataBuoy = myReader.nextLine();
             delimitation = dataBuoy.split(" ");
@@ -177,13 +169,10 @@ public class GameMap {
         }
     }
 
-
     public boolean isPassingBuoyNumber(int buoyNumber, int boatX, int boatY){
         if(buoyNumber > _buoys.size()-1) {
             return false;
         }
         return _buoys.get(buoyNumber).isPassed(boatX, boatY);
     }
-
-
 }

@@ -5,8 +5,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 public class ShipView extends ImageView {
-    private double _caseHeightInPixel;
-    private double _caseWidthInPixel;
+    private final double _caseHeightInPixel;
+    private final double _caseWidthInPixel;
 
 
 

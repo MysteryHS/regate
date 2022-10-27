@@ -30,6 +30,6 @@ public final class Main extends Application {
 
     @Override
     public void stop() {
-        System.out.println(getMessageBundle().getString("project.bye"));
+        getMessageBundle().getString("project.bye");
     }
 }

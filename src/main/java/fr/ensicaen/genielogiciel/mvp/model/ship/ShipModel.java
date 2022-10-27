@@ -3,12 +3,10 @@ package fr.ensicaen.genielogiciel.mvp.model.ship;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStation;
 import fr.ensicaen.genielogiciel.mvp.model.ship.crew.Crew;
 import fr.ensicaen.genielogiciel.mvp.model.ship.sail.Sail;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 public class ShipModel {
-    private double _x = 5;
-    private double _y = 5;
+    private double _x;
+    private double _y;
     private double _dx = 0;
     private double _dy = 0;
     private double _anglePositive = 0;
@@ -27,16 +25,6 @@ public class ShipModel {
         _y = start_y;
     }
 
-    public ShipModel(Sail sail, Crew crew, WeatherStation weatherStation, String polarName){
-        _sail = sail;
-        _crew = crew;
-        _weatherStation = weatherStation;
-        try {
-            _polar = new DataPolar(polarName);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
     public double getX() {
         return _x;
     }
@@ -103,10 +91,6 @@ public class ShipModel {
         return _crew;
     }
 
-    public WeatherStation getWind() {
-        return _weatherStation;
-    }
-
     public String getPolarName() {
         return _polar.getPolarName();
     }
@@ -114,8 +98,7 @@ public class ShipModel {
     public String getImageSRC() {
         if(_polar.getPolarName().equals("polaire-figaro.pol")){
             return "file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/boats/small_boat.png";
-        } else {
-            return "file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/boats/big_boat.png";
         }
+        return "file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/boats/big_boat.png";
     }
 }

@@ -1,11 +1,11 @@
 package fr.ensicaen.genielogiciel.mvp.view;
 
 import fr.ensicaen.genielogiciel.mvp.Main;
-import fr.ensicaen.genielogiciel.mvp.presenter.ILoginView;
-import fr.ensicaen.genielogiciel.mvp.presenter.LoginPresenter;
-import fr.ensicaen.genielogiciel.mvp.model.ship.builder.builderType.TypeShip;
 import fr.ensicaen.genielogiciel.mvp.model.ship.builder.builderType.TypeCrew;
 import fr.ensicaen.genielogiciel.mvp.model.ship.builder.builderType.TypeSail;
+import fr.ensicaen.genielogiciel.mvp.model.ship.builder.builderType.TypeShip;
+import fr.ensicaen.genielogiciel.mvp.presenter.ILoginView;
+import fr.ensicaen.genielogiciel.mvp.presenter.LoginPresenter;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,11 +19,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
-public class LoginView<type> implements ILoginView {
+public class LoginView implements ILoginView {
     private LoginPresenter _loginPresenter;
     private Stage _stage;
     private Scene _scene;
-    private ResourceBundle _ressource;
+    private ResourceBundle _resource;
     private TypeSail _sail = TypeSail.NORMAL_SAIL;
 
     private TypeCrew _crew = TypeCrew.NORMAL_CREW;
@@ -44,7 +44,7 @@ public class LoginView<type> implements ILoginView {
     }
 
     public void setBundle( ResourceBundle bundle) {
-        _ressource = bundle;
+        _resource = bundle;
     }
 
     public void show() {
@@ -70,10 +70,10 @@ public class LoginView<type> implements ILoginView {
     private void onClickChangeSail(){
         Label sail = (Label) _scene.lookup("#sail");
         if (_sail==TypeSail.NORMAL_SAIL){
-            sail.setText(_ressource.getString("type.voile.big"));
+            sail.setText(_resource.getString("type.voile.big"));
             _sail=TypeSail.LARGE_SAIL;
         } else {
-            sail.setText(_ressource.getString("type.voile.normal"));
+            sail.setText(_resource.getString("type.voile.normal"));
             _sail=TypeSail.NORMAL_SAIL;
         }
 
@@ -83,10 +83,10 @@ public class LoginView<type> implements ILoginView {
     private void onClickChangeCrew(){
         Label crew = (Label) _scene.lookup("#crew");
         if (_crew==TypeCrew.NORMAL_CREW){
-            crew.setText(_ressource.getString("nbr.crewmates.4"));
+            crew.setText(_resource.getString("nbr.crewmates.4"));
             _crew=TypeCrew.MAX_CREW;
         } else {
-            crew.setText(_ressource.getString("nbr.crewmates.2"));
+            crew.setText(_resource.getString("nbr.crewmates.2"));
             _crew=TypeCrew.NORMAL_CREW;
         }
 

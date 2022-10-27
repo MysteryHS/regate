@@ -1,6 +1,6 @@
 package fr.ensicaen.genielogiciel.mvp.model.player;
 
-import fr.ensicaen.genielogiciel.mvp.model.Chrono;
+import fr.ensicaen.genielogiciel.mvp.model.Stopwatch;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -10,10 +10,10 @@ class ScoreTest {
     @Test
     void testGetScore() {
         Score score = new Score();
-        Assertions.assertThrows(IOException.class,() -> { score.getScore(4);});
+        Assertions.assertThrows(IOException.class,() -> score.getScore(4));
         score.addScore(25469834);
         score.addScore(25469834);
-        Assertions.assertThrows(IOException.class,() -> { score.getScore(4);});
+        Assertions.assertThrows(IOException.class,() -> score.getScore(4));
     }
 
 
@@ -25,31 +25,21 @@ class ScoreTest {
     }
 
     @Test
-    void testAddScoreFromChrono() throws IOException {
+    void testAddScoreFromStopwatch() throws IOException {
         Score score = new Score();
         score.registerScore();
         Assertions.assertEquals("0:0:0:0", score.getScore(0));
     }
 
     @Test
-    void testResetScore() throws InterruptedException {
+    void testAddScoreFromStopwatchAfterARestartReferenceStart() throws InterruptedException, IOException {
         Score score = new Score();
-        score.registerScore();
-        Thread.sleep(1000);
-        score.registerScore();
-        score.resetScore();
-        Assertions.assertEquals(0, score.getSizeOfTheScore());
-    }
-
-    @Test
-    void testAddScoreFromChronoAfterARestartReferenceStart() throws IOException, InterruptedException {
-        Score score = new Score();
-        Chrono chrono = Chrono.getInstance();
-        chrono.restartReferenceTime();
+        Stopwatch stopwatch = Stopwatch.getInstance();
+        stopwatch.restartReferenceTime();
         score.registerScore();
         Assertions.assertEquals("0:0:0:0", score.getScore(0));
         Thread.sleep(1000);
-        chrono.restartReferenceTime();
+        stopwatch.restartReferenceTime();
         score.registerScore();
         Assertions.assertEquals("0:0:0:0", score.getScore(1));
     }

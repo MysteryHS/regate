@@ -9,10 +9,10 @@ import java.io.FileNotFoundException;
 
 public interface ShipBuilder {
 
-    ShipBuilder setPosition(double x, double y);
-    ShipBuilder setSail( Sail sail );
-    ShipBuilder setCrew( Crew crew );
+    void setPosition(double x, double y);
+    void setSail(Sail sail );
+    void setCrew(Crew crew );
     void setPolar(String polarNameFromResourcePackage ) throws FileNotFoundException;
-    ShipBuilder setWind( WeatherStation wind );
+    void setWind(WeatherStation wind );
     ShipModel getResult();
 }

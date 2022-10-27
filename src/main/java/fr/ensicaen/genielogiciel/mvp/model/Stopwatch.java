@@ -1,16 +1,16 @@
 package fr.ensicaen.genielogiciel.mvp.model;
 
-public class Chrono {
-    private static Chrono INSTANCE = null;
+public class Stopwatch {
+    private static Stopwatch INSTANCE = null;
     private static int _referenceTime;
 
-    private Chrono() {
+    private Stopwatch() {
         _referenceTime = (int) System.currentTimeMillis();
     }
 
-    public static Chrono getInstance() {
+    public static Stopwatch getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new Chrono();
+            INSTANCE = new Stopwatch();
         }
         return INSTANCE;
     }
@@ -20,14 +20,13 @@ public class Chrono {
         return (currentTime - _referenceTime);
     }
 
-    public String getFormateChrono() {
+    public String getStringFormatStopwatch() {
         int timeInMilliseconds = this.getTime();
         int h = timeInMilliseconds / 3600000;
         timeInMilliseconds = timeInMilliseconds - h*3600000;
         int m = timeInMilliseconds / 60000;
         timeInMilliseconds = timeInMilliseconds - m*60000;
         int s = timeInMilliseconds / 1000;
-
         String sM;
         if(m==0) {
             sM = "00";
@@ -36,7 +35,6 @@ public class Chrono {
         } else {
             sM = m+"";
         }
-
         String sS;
         if(s==0) {
             sS = "00";
@@ -45,13 +43,11 @@ public class Chrono {
         } else {
             sS = s+"";
         }
-
         return sM+":"+sS;
     }
 
     public void restartReferenceTime() {
         _referenceTime = (int) System.currentTimeMillis();
     }
-
 }
 
