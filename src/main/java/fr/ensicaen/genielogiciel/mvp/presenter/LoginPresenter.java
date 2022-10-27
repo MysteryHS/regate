@@ -1,17 +1,13 @@
 package fr.ensicaen.genielogiciel.mvp.presenter;
 
 import fr.ensicaen.genielogiciel.mvp.Main;
+import fr.ensicaen.genielogiciel.mvp.model.map.GameMap;
 import fr.ensicaen.genielogiciel.mvp.model.PassedBuoy;
-import fr.ensicaen.genielogiciel.mvp.model.map.Map;
-import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
-import fr.ensicaen.genielogiciel.mvp.model.ship.DataPolar;
-import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
-import fr.ensicaen.genielogiciel.mvp.model.ship.crew.MaxCrewDecorator;
-import fr.ensicaen.genielogiciel.mvp.model.ship.crew.NormalCrew;
-import fr.ensicaen.genielogiciel.mvp.model.ship.sail.NormalSail;
 import fr.ensicaen.genielogiciel.mvp.view.game.GameView;
 import fr.ensicaen.genielogiciel.mvp.view.LoginView;
-
+import fr.ensicaen.genielogiciel.mvp.model.ship.builder.builderType.TypeShip;
+import fr.ensicaen.genielogiciel.mvp.model.ship.builder.builderType.TypeCrew;
+import fr.ensicaen.genielogiciel.mvp.model.ship.builder.builderType.TypeSail;
 import java.io.IOException;
 
 public final class LoginPresenter {
@@ -21,19 +17,14 @@ public final class LoginPresenter {
         _loginView = loginView;
     }
 
-    public void launchGame( String nickName ) {
+    public void launchGame(String nickName, TypeShip typeShip, TypeSail typeSail , TypeCrew typeCrew) {
         if (nickName.isEmpty()) {
             _loginView.displayError(Main.getMessageBundle().getString("error.nickname"));
         } else {
             try {
                 GameView view = GameView.GameViewFactory.createView();
-                Map map = new Map("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
-                ShipModel boat = new ShipModel(
-                        new NormalSail(),
-                        new MaxCrewDecorator(new NormalCrew()),
-                        new WindProxy(50,50),
-                        new DataPolar("polaire-figaro.pol"));
-                GamePresenter gamePresenter = new GamePresenter(nickName,map,boat);
+                GameMap map = new GameMap("./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte1.txt");
+                GamePresenter gamePresenter = new GamePresenter(nickName, map, typeShip, typeSail, typeCrew);
                 view.setGamePresenter(gamePresenter);
                 gamePresenter.setGameView(view);
                 view.show();

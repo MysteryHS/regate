@@ -1,22 +1,19 @@
 package fr.ensicaen.genielogiciel.mvp.view.game;
 
-import fr.ensicaen.genielogiciel.mvp.model.map.wind.Wind;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
+import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStation;
 import javafx.scene.text.Text;
 
 
 public class WindView {
-    private Wind _windModel;
+    private final WeatherStation _weatherStationModel;
     private Text _windView;
 
-    public WindView(Wind wind,Text windView) {
-        _windModel = wind;
+    public WindView(WeatherStation weatherStation, Text windView) {
+        _weatherStationModel = weatherStation;
         _windView = windView;
     }
 
     public void draw() {
-        _windView.setText("direction:"+_windModel.getWindDirection().name()+"  knot:"+_windModel.getWindKnot());
+        _windView.setText("direction:"+ _weatherStationModel.getWindDirection().name()+"  knot:"+ _weatherStationModel.getSpeedWindInKnot());
     }
 }

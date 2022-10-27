@@ -1,6 +1,7 @@
 package fr.ensicaen.genielogiciel.mvp.model.map;
 
-import fr.ensicaen.genielogiciel.mvp.model.map.wind.WindProxy;
+import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStation;
+import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStationProxy;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Map {
+public class GameMap {
     private int _width;
     private int _height;
     private int _nbBuoy;
@@ -18,24 +19,46 @@ public class Map {
     private final List<Tile> _tiles = new ArrayList<>();
     private WindProxy _wind;
 
-    private static final int NumberDataWithBuoys = 3;
-    private static final int NumberDataWithNotBuoys = 2;
+    private WeatherStation _weatherStation;
+    private final List<Buoy> _buoys = new ArrayList<Buoy>();
+    private final List<Tile> _tiles = new ArrayList<Tile>();
+
+    private static final int numberDataWithBuoys = 3;
+    private static final int numberDataWithNotBuoys = 2;
     private static final String pathToMapFolder = "./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/";
 
-    public Map(String filename) throws IOException {
+    public GameMap(String filename) throws IOException {
         _width = 0;
         _height = 0;
         _nbBuoy = 0;
-        readFile( pathToMapFolder + filename);
+        readFile(pathToMapFolder + filename);
+        //TODO wind not configured
+        //_weatherStation = new WeatherStationProxy(0., 0.);
     }
 
-    public Map(){
+    public Tile getTile(int x,int y) {
+        return _tiles.get(y*_width+x);
+    }
+
+    public List<Buoy> getBuoys() {
+        return _buoys;
+    }
+
+    public int getHeight() {
+        return _height;
+    }
+
+    public int getWidth() {
+        return _width;
+    }
+
+    public GameMap() throws IOException {
         _width = 0;
         _height = 0;
         _nbBuoy = 0;
     }
 
-    public Map(int width, int height, int nbBuoy){
+    public GameMap(int width, int height, int nbBuoy){
         _width = width;
         _height = height;
         _nbBuoy = nbBuoy;
@@ -61,13 +84,16 @@ public class Map {
         return _tiles;
     }
 
-    public WindProxy getWind() {
-        return _wind;
-    }
+    public WeatherStation getWind() { return _weatherStation; }
 
-    public char getType(int X, int Y){
+    public char getType(int x, int y){
+        for (Buoy b : _buoys) {
+            if ((b.getX() == x) && (b.getY() == y)) {
+                return '~';
+            }
+        }
         for (Tile t : _tiles) {
-            if ((t.getCoordinateX() == X) && (t.getCoordinateY() == Y)) {
+            if ((t.getX() == x) && (t.getY() == y)) {
                 return t.getSymbol();
             }
         }

@@ -1,19 +1,22 @@
 package fr.ensicaen.genielogiciel.mvp.model.map;
 
-import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
-
 public class Buoy {
     private final char _symbol = '#';
-    private final int _xCoordinate;
-    private final int _yCoordinate;
+    private int _xCoordinate;
+    private int _yCoordinate;
     private final int _firstAxis;
     private final int _secondAxis; //-1 to the top
 
-    public Buoy(int XCoordinate, int YCoordinate, int xAxis, int yAxis) {
-        _xCoordinate = XCoordinate;
-        _yCoordinate = YCoordinate;
+    public Buoy(int xCoordinate, int yCoordinate, int xAxis, int yAxis) {
+        _xCoordinate = xCoordinate;
+        _yCoordinate = yCoordinate;
         _firstAxis = xAxis;
         _secondAxis = yAxis;
+    }
+
+    public void displayBuoy(){
+        System.out.println(_xCoordinate);
+        System.out.println(_yCoordinate);
     }
 
     public int getX() {return _xCoordinate;}
