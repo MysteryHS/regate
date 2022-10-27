@@ -1,34 +1,29 @@
 package fr.ensicaen.genielogiciel.mvp.view.game;
 
-import fr.ensicaen.genielogiciel.mvp.model.map.Buoy;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 public class BuoyView extends ImageView {
-    private double _caseHeightInPixel;
-    private double _caseWidthInPixel;
-    private int _x;
-    private int _y;
+    private final double _caseHeightInPixel;
+    private final double _caseWidthInPixel;
+    private final int _x;
+    private final int _y;
 
-
-
-    public BuoyView(double caseWidthInPixel, double caseHeightInPixel, int Xcoordinate, int Ycoordinate) {
-        _x = Xcoordinate;
-        _y = Ycoordinate;
+    public BuoyView(double caseWidthInPixel, double caseHeightInPixel, int xCoordinate, int yCoordinate) {
+        _x = xCoordinate;
+        _y = yCoordinate;
         _caseHeightInPixel = caseHeightInPixel;
         _caseWidthInPixel = caseWidthInPixel;
-
-        this.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/map/flag.png"));
-
+        setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/map/flag.png"));
     }
 
     public void draw(AnchorPane pane) {
-        this.setLayoutX(_caseWidthInPixel*(_x+1));
-        this.setLayoutY(_caseHeightInPixel*(_y+1));
-
-        this.setFitWidth(_caseWidthInPixel);
-        this.setFitHeight(_caseHeightInPixel);
+        setLayoutX(_caseWidthInPixel*(_x+1));
+        setLayoutY(_caseHeightInPixel*(_y+1));
+        setFitWidth(_caseWidthInPixel);
+        setFitHeight(_caseHeightInPixel);
         pane.getChildren().add(this);
     }
 
@@ -39,5 +34,4 @@ public class BuoyView extends ImageView {
     public void isNext() {
         this.setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/map/flag_red.png"));
     }
-
 }

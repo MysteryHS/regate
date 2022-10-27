@@ -1,28 +1,16 @@
 package fr.ensicaen.genielogiciel.mvp.model.player;
 
-import java.io.IOException;
-import java.util.List;
-
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 
-public abstract class Player {
-    private Score _score;
-    private final String _name;
+import java.io.IOException;
 
+public abstract class Player {
+    private final Score _score;
     private final ShipModel _ship;
 
-    Player(String name, ShipModel ship) {
+    Player(ShipModel ship) {
         _ship = ship;
-        _name = name;
         _score = new Score();
-    }
-
-    public List<String> getScores() {
-        return _score.getScores();
-    }
-
-    public String getScore(int index) throws IOException {
-        return _score.getScore(index);
     }
 
     public String getLatestScore() {
@@ -37,13 +25,7 @@ public abstract class Player {
         _score.registerScore();
     }
 
-
     public ShipModel getShip(){
         return _ship;
     }
-
-    public String getName(){
-        return _name;
-    }
 }
-

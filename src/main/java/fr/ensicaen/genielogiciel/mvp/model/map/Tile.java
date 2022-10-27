@@ -1,8 +1,8 @@
 package fr.ensicaen.genielogiciel.mvp.model.map;
 
 public abstract class Tile {
-    protected int _x;
-    protected int _y;
+    private final int _x;
+    private final int _y;
 
     public Tile(int x, int y) {
         _x = x;

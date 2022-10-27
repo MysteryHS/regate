@@ -14,13 +14,8 @@ public class PassedBuoy {
     }
 
     public boolean detectionPassageBuoy(){
-        System.out.println(_indexBuoyToPass);
-        if(_player.getShip().getX()<0) {
-            System.out.println(_player.getShip().getX());
-        }
         if (_map.isPassingBuoyNumber(_indexBuoyToPass,
                 (int) _player.getShip().getX(), (int) _player.getShip().getY())){
-
             _indexBuoyToPass++;
             _player.addScore();
             return true;

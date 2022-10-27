@@ -5,33 +5,20 @@ import javafx.scene.layout.AnchorPane;
 import java.util.ArrayList;
 
 public class MapView {
-    private ArrayList<TileView> _tiles;
+    private final ArrayList<TileView> _tiles;
 
-    private ArrayList<BuoyView> _buoys;
+    private final ArrayList<BuoyView> _buoys;
 
-    public static int _mapWidthInPixel = 500;
-    public static int _mapHeightInPixel = 500;
-    private double _caseHeightInPixel;
-    private double _caseWidthInPixel;
-
-    private int _mapWidth;
-    private int _mapHeight;
+    public static final int _mapWidthInPixel = 500;
+    public static final int _mapHeightInPixel = 500;
 
 
+    public MapView() {
+        _tiles = new ArrayList<>();
+        _buoys = new ArrayList<>();
 
-
-    public MapView(double caseWidthInPixel, double caseHeightInPixel, int mapWidth, int mapHeight) {
-        _tiles = new ArrayList<TileView>();
-        _buoys = new ArrayList<BuoyView>();
-
-        _caseHeightInPixel = caseHeightInPixel;
-        _caseWidthInPixel = caseWidthInPixel;
-
-        _mapWidth = mapWidth;
-        _mapHeight = mapHeight;
     }
     public void isNextBuoy(int index) {
-
         for(BuoyView buoy : _buoys) {
             buoy.passed();
         }
@@ -40,7 +27,6 @@ public class MapView {
         }
         _buoys.get(index).isNext();
     }
-
 
     public void addTile(TileView tile) {
         _tiles.add(tile);
@@ -52,14 +38,11 @@ public class MapView {
 
     public void draw(AnchorPane pane) {
         pane.resize(_mapWidthInPixel,_mapHeightInPixel);
-
         for(TileView tile : _tiles) {
             tile.draw(pane);
         }
-
         for(BuoyView buoy : _buoys) {
             buoy.draw(pane);
         }
     }
-
 }

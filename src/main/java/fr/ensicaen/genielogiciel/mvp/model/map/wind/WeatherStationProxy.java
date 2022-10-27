@@ -26,6 +26,7 @@ public class WeatherStationProxy implements WeatherStation {
         _date = new Date(0);
         _windData = requestWindData(0, 0);
     }
+
     @Override
     public double getSpeedWindInKnot() {
         if ( !isDateOutdated( _time ) ) {
@@ -34,6 +35,7 @@ public class WeatherStationProxy implements WeatherStation {
         _windData = requestWindData(_longitude, _latitude);
         return getSpeedWindInKnot();
     }
+
     @Override
     public WindDirection getWindDirection() {
         if ( !isDateOutdated( _time ) ) {

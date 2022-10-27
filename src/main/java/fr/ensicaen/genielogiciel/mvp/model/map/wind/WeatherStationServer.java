@@ -1,6 +1,7 @@
 package fr.ensicaen.genielogiciel.mvp.model.map.wind;
 
-import org.json.*;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;

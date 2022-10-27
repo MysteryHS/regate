@@ -17,6 +17,11 @@ public class ShipDirector {
         _builder = builder;
     }
 
+    public ShipDirector buildStartPosition(double x, double y) {
+        _builder.setPosition(x, y);
+        return this;
+    }
+
     public ShipDirector buildFigaro() throws FileNotFoundException {
         _builder.setPolar("polaire-figaro.pol");
         return this;
@@ -46,8 +51,6 @@ public class ShipDirector {
         _builder.setCrew(new NormalCrew());
         return this;
     }
-    
-
 
     public ShipDirector addWind(WeatherStation wind) {
         _builder.setWind(wind);

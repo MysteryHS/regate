@@ -16,24 +16,20 @@ public class ConcreteShipBuilder implements ShipBuilder {
     private double _startX = 5;
     private double _startY = 5;
 
-
     @Override
-    public ShipBuilder setPosition(double x, double y) {
+    public void setPosition(double x, double y) {
         _startX = x;
         _startY = y;
-        return this;
     }
 
     @Override
-    public ShipBuilder setSail(Sail sail) {
+    public void setSail(Sail sail) {
         _sail = sail;
-        return this;
     }
 
     @Override
-    public ShipBuilder setCrew(Crew crew) {
+    public void setCrew(Crew crew) {
         _crew = crew;
-        return this;
     }
 
     @Override
@@ -42,9 +38,8 @@ public class ConcreteShipBuilder implements ShipBuilder {
     }
 
     @Override
-    public ShipBuilder setWind(WeatherStation wind) {
+    public void setWind(WeatherStation wind) {
         _wind = wind;
-        return this;
     }
 
     @Override
