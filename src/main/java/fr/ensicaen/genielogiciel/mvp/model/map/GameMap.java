@@ -17,11 +17,9 @@ public class GameMap {
     private int _yStartPoint;
     private final List<Buoy> _buoys = new ArrayList<>();
     private final List<Tile> _tiles = new ArrayList<>();
-    private WindProxy _wind;
+    private WeatherStationProxy _wind;
 
     private WeatherStation _weatherStation;
-    private final List<Buoy> _buoys = new ArrayList<Buoy>();
-    private final List<Tile> _tiles = new ArrayList<Tile>();
 
     private static final int numberDataWithBuoys = 3;
     private static final int numberDataWithNotBuoys = 2;
@@ -38,18 +36,6 @@ public class GameMap {
 
     public Tile getTile(int x,int y) {
         return _tiles.get(y*_width+x);
-    }
-
-    public List<Buoy> getBuoys() {
-        return _buoys;
-    }
-
-    public int getHeight() {
-        return _height;
-    }
-
-    public int getWidth() {
-        return _width;
     }
 
     public GameMap() throws IOException {
@@ -117,12 +103,12 @@ public class GameMap {
 
     public void  heightWidthAndNumberBuoyRecovery(String information) {
         String[] delimitation = information.split(" ");
-        if (delimitation.length == NumberDataWithBuoys) {
+        if (delimitation.length == numberDataWithBuoys) {
             _width = Integer.parseInt(delimitation[0]);
             _height = Integer.parseInt(delimitation[1]);
             _nbBuoy = Integer.parseInt(delimitation[2]);
         } else {
-            if (delimitation.length == NumberDataWithNotBuoys) {
+            if (delimitation.length == numberDataWithNotBuoys) {
                 _width = Integer.parseInt(delimitation[0]);
                 _height = Integer.parseInt(delimitation[1]);
                 _nbBuoy = 0;
@@ -138,7 +124,7 @@ public class GameMap {
         String[] delimitation = information.split(" ");
         double longitude = Double.parseDouble(delimitation[0]);
         double latitude = Double.parseDouble(delimitation[1]);
-        _wind = new WindProxy(longitude, latitude);
+        _wind = new WeatherStationProxy(longitude, latitude);
     }
 
     public String readStartPointThirdLine(Scanner myReader){
@@ -186,6 +172,10 @@ public class GameMap {
     }
 
     public boolean isPassingBuoyNumber(int buoyNumber, int boatX, int boatY){
+        System.out.println(buoyNumber);
+        if(buoyNumber > _buoys.size()-1){
+            return false;
+        }
         return _buoys.get(buoyNumber).isAxisPassed(boatX, boatY);
     }
 }

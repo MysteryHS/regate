@@ -25,6 +25,10 @@ public abstract class Player {
         return _score.getScore(index);
     }
 
+    public void addScore(){
+        _score.registerScore();
+    }
+
     public ShipModel getShip(){
         return _ship;
     }
