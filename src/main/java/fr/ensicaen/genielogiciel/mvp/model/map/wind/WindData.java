@@ -13,7 +13,7 @@ public class WindData {
         return _direction;
     }
 
-    public double getKnot() {
+    public double getSpeedWindInKnot() {
         return _knot;
     }
 }

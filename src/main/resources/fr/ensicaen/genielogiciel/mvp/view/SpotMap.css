@@ -1,3 +1,15 @@
-.back {
+.background {
     -fx-background-image:url('../images/bg.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+}
+
+.transparent {
+    -fx-background-color: transparent;
+}
+
+.chrono_bg {
+    -fx-background-image:url('../images/background/chrono_bg.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 300px 450px;
 }

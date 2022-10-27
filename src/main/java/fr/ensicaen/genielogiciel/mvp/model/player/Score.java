@@ -1,5 +1,7 @@
 package fr.ensicaen.genielogiciel.mvp.model.player;
 
+import fr.ensicaen.genielogiciel.mvp.model.Chrono;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +17,7 @@ public class Score {
 
     public String getScore(int index) throws IOException {
         if (_score.size() <= 0 || index >= _score.size()) {
-            throw new IOException("Error");
+            throw new IOException("Error wrong size");
         }
         return _score.get(index);
     }
@@ -30,5 +32,20 @@ public class Score {
         _score.add(h+":"+m+":"+s+":"+ms);
     }
 
+    public void registerScore() {
+        Chrono chrono = Chrono.getInstance();
+        addScore(chrono.getTime());
+    }
 
+    public void resetScore() {
+        _score.clear();
+        Chrono chrono = Chrono.getInstance();
+        chrono.restartReferenceTime();
+    }
+
+
+
+    public int getSizeOfTheScore() {
+        return _score.size();
+    }
 }

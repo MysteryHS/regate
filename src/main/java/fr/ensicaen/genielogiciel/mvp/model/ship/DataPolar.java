@@ -12,8 +12,10 @@ public class DataPolar {
     private final int _minAngle;
     private final int _maxAngle;
     private final File _file;
+    private final String _strDataPolarFromResourcesDirectory;
 
     public DataPolar( String strDataPolarFromResourcesDirectory ) throws FileNotFoundException {
+        _strDataPolarFromResourcesDirectory = strDataPolarFromResourcesDirectory;
         String workspacePolarResources = "src/main/resources/fr/ensicaen/genielogiciel/mvp/datapolar/";
         _file = new File(workspacePolarResources + strDataPolarFromResourcesDirectory);
         _minAngle = 0;
@@ -70,5 +72,9 @@ public class DataPolar {
 
     private static boolean isFirstColumn(int knotIndex) {
         return knotIndex == 0;
+    }
+
+    public String getPolarName() {
+        return _strDataPolarFromResourcesDirectory;
     }
 }
