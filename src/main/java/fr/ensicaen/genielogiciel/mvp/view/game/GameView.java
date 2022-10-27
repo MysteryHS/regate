@@ -83,12 +83,15 @@ public class GameView implements IGameView {
         _chronoList.addChrono(new ChronoItem(chrono));
     }
 
-
+    public void isNextBuoy(int index) {
+        _mapView.isNextBuoy(index);
+    }
 
     @Override
-    public void update(double angle, double dx,double dy,String chrono) {
+    public void update(double angle, double dx,double dy,String chrono,int indexInListNextBuoy) {
         _shipView.rotate(angle);
         _shipView.move(dx, dy);
+        isNextBuoy(indexInListNextBuoy);
         _chronoView.refresh(chrono);
     }
 

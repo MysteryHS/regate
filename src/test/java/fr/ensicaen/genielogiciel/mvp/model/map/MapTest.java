@@ -11,11 +11,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class MapTest {
 
     final String filePath = "./src/main/resources/fr/ensicaen/genielogiciel/mvp/maps/carte2.txt";
+
+    /* TODO refactor
     @Test
     public void testReadFirstLine() throws IOException {
         GameMap m = new GameMap();
         assertEquals("50 50 2", m.readFirstLineInFile(new Scanner(new File(filePath))));
-    }
+    }*/
 
     @Test
     public void testHeightWidthAndNumberBuoyRecovery() throws IOException {

@@ -30,6 +30,17 @@ public class MapView {
         _mapWidth = mapWidth;
         _mapHeight = mapHeight;
     }
+    public void isNextBuoy(int index) {
+
+        for(BuoyView buoy : _buoys) {
+            buoy.passed();
+        }
+        if(index>=_buoys.size()) {
+            return;
+        }
+        _buoys.get(index).isNext();
+    }
+
 
     public void addTile(TileView tile) {
         _tiles.add(tile);

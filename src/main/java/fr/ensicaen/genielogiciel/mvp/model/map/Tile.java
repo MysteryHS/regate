@@ -19,5 +19,5 @@ public abstract class Tile {
 
     public abstract char getSymbol();
 
-    public abstract String getSrcImage();
+    public abstract String getImageSRC();
 }

@@ -10,7 +10,7 @@ public interface IGameView {
 
     public void initView(MapView map, ShipView ship, WindView wind);
 
-    public void update(double angle, double dx,double dy,String chrono);
+    public void update(double angle, double dx,double dy,String chrono,int indexInListNextBuoy);
 
     public void addBuoyPassedToDisplayedList(String chrono);
 }

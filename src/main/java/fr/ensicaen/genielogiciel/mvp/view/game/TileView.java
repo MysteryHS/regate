@@ -25,7 +25,7 @@ public class TileView extends ImageView {
             System.out.println("je suis la");
         }
 
-        this.setImage(new Image(tile.getSrcImage()));
+        this.setImage(new Image(tile.getImageSRC()));
     }
 
     public void draw(AnchorPane pane) {

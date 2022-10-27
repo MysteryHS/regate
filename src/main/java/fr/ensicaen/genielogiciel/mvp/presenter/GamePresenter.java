@@ -1,5 +1,6 @@
 package fr.ensicaen.genielogiciel.mvp.presenter;
 import fr.ensicaen.genielogiciel.mvp.model.Chrono;
+import fr.ensicaen.genielogiciel.mvp.model.PassedBuoy;
 import fr.ensicaen.genielogiciel.mvp.model.map.GameMap;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStation;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStationProxy;
@@ -28,6 +29,7 @@ import java.io.FileNotFoundException;
 public class GamePresenter {
     private final Player _playerModel;
     private Chrono _chronoModel;
+    private PassedBuoy _passedBuoy;
 
     private final GameMap _mapModel;
     private WeatherStation _wind;
@@ -38,10 +40,13 @@ public class GamePresenter {
 
     public GamePresenter(String nickName, GameMap map, TypeShip typeShip, TypeSail typeSail , TypeCrew typeCrew) throws FileNotFoundException {
         ShipModel ship;
-        ship = initGame(typeShip, typeSail, typeCrew);
-        _playerModel = new User(nickName,ship);
+
         _chronoModel = Chrono.getInstance();
         _mapModel = map;
+        ship = initGame(typeShip, typeSail, typeCrew);
+        _playerModel = new User(nickName,ship);
+
+        _passedBuoy = new PassedBuoy(_playerModel,_mapModel);
     }
 
     private void initView() {
@@ -50,7 +55,7 @@ public class GamePresenter {
 
 
 
-        ShipView ship = new ShipView(caseWidthInPixel,caseHeightInPixel);
+        ShipView ship = new ShipView(_playerModel.getShip().getImageSRC(),caseWidthInPixel,caseHeightInPixel);
         WindView wind = new WindView();
         MapView map = new MapView(caseWidthInPixel,caseHeightInPixel,_mapModel.getWidth(), _mapModel.getHeight());
         for(Tile tile : _mapModel.getTiles()) {
@@ -104,7 +109,7 @@ public class GamePresenter {
     }
 
     private ShipModel initGame(TypeShip typeShip, TypeSail typeSail , TypeCrew typeCrew) throws FileNotFoundException {
-        ShipDirector director = new ShipDirector(new ConcreteShipBuilder());
+        ShipDirector director = new ShipDirector(new ConcreteShipBuilder().setPosition(_mapModel.getStartX(), _mapModel.getStartY()));
         if (typeShip == TypeShip.FIGARO37) {
             director.buildFigaro();
         } else {
@@ -137,9 +142,13 @@ public class GamePresenter {
 
     private void update() {
         _playerModel.getShip().move();
+        if(_passedBuoy.detectionPassageBuoy()) {
+            _gameView.addBuoyPassedToDisplayedList(_playerModel.getLatestScore());
+        }
+
     }
 
     private void render() {
-        _gameView.update(_playerModel.getShip().getAngle(),_playerModel.getShip().getDx(),_playerModel.getShip().getDy(),_chronoModel.getFormateChrono());
+        _gameView.update(_playerModel.getShip().getAngle(),_playerModel.getShip().getDx(),_playerModel.getShip().getDy(),_chronoModel.getFormateChrono(),_passedBuoy.getNextBuoyIndexInList());
     }
 }

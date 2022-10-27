@@ -31,7 +31,7 @@ public class Chrono {
         String sM;
         if(m==0) {
             sM = "00";
-        } else if(m<9) {
+        } else if(m<=9) {
             sM = "0"+m;
         } else {
             sM = m+"";
@@ -40,7 +40,7 @@ public class Chrono {
         String sS;
         if(s==0) {
             sS = "00";
-        } else if(s<9) {
+        } else if(s<=9) {
             sS = "0"+s;
         } else {
             sS = s+"";

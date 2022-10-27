@@ -11,8 +11,8 @@ public class ShipView extends ImageView {
 
 
 
-    public ShipView(double caseWidthInPixel, double caseHeightInPixel) {
-        setImage(new Image("file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/boats/boat.png"));
+    public ShipView(String imageSRC,double caseWidthInPixel, double caseHeightInPixel) {
+        setImage(new Image(imageSRC));
 
         _caseHeightInPixel = caseHeightInPixel;
         _caseWidthInPixel = caseWidthInPixel;
@@ -23,16 +23,16 @@ public class ShipView extends ImageView {
         this.setLayoutY(dy*_caseHeightInPixel);
 
 
-        this.setFitWidth(24);
-        this.setFitHeight(33);
+        this.setFitWidth(_caseWidthInPixel);
+        this.setFitHeight(_caseHeightInPixel*1.2);
 
         pane.getChildren().add(this);
     }
 
 
     public void move(double dx, double dy) {
-        setLayoutX(getLayoutX() + dx);
-        setLayoutY(getLayoutY() + dy);
+        setLayoutX(getLayoutX() + dx*_caseWidthInPixel);
+        setLayoutY(getLayoutY() + dy*_caseHeightInPixel);
     }
 
 

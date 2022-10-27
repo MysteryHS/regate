@@ -10,7 +10,7 @@ public class Water extends Tile {
         return '~';
     }
 
-    public String getSrcImage() {
+    public String getImageSRC() {
         return "file:src/main/resources/fr/ensicaen/genielogiciel/mvp/images/map/water.png";
     }
 }

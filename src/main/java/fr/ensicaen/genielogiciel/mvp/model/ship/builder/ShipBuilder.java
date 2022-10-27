@@ -8,6 +8,8 @@ import fr.ensicaen.genielogiciel.mvp.model.ship.sail.Sail;
 import java.io.FileNotFoundException;
 
 public interface ShipBuilder {
+
+    ShipBuilder setPosition(double x, double y);
     ShipBuilder setSail( Sail sail );
     ShipBuilder setCrew( Crew crew );
     void setPolar(String polarNameFromResourcePackage ) throws FileNotFoundException;
