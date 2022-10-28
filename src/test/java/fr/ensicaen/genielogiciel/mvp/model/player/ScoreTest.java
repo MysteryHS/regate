@@ -19,14 +19,14 @@ class ScoreTest {
     void testAddScore() throws IndexOutOfBoundsException {
         Score score = new Score();
         score.addScore(25469834);
-        Assertions.assertEquals("7:4:29:834", score.getScore(0));
+        Assertions.assertEquals("04:29:834", score.getScore(0));
     }
 
     @Test
     void testAddScoreFromStopwatch() throws IndexOutOfBoundsException {
         Score score = new Score();
         score.registerScore();
-        Assertions.assertEquals("0:0:0:0", score.getScore(0));
+        Assertions.assertEquals("00:00:000", score.getScore(0));
     }
 
     @Test
@@ -35,10 +35,10 @@ class ScoreTest {
         Stopwatch stopwatch = Stopwatch.getInstance();
         stopwatch.restartReferenceTime();
         score.registerScore();
-        Assertions.assertEquals("0:0:0:0", score.getScore(0));
+        Assertions.assertEquals("00:00:000", score.getScore(0));
         Thread.sleep(1000);
         stopwatch.restartReferenceTime();
         score.registerScore();
-        Assertions.assertEquals("0:0:0:0", score.getScore(1));
+        Assertions.assertEquals("00:00:000", score.getScore(1));
     }
 }
