@@ -24,17 +24,16 @@ public class ShipModel {
     private final Crew _crew;
     private final WeatherStation _weatherStation;
     private final DataPolar _polar;
-
     private boolean _isReplaying = false;
-
     private boolean _isCollisioning = false;
-
     private boolean _isFixed = false;
+    private final Timer _timer;
     private final List<Move> _commands = new ArrayList<>();
 
-    public ShipModel(Sail sail, Crew crew, WeatherStation weatherStation, DataPolar polarName, double x, double y){
+    public ShipModel(Sail sail, Crew crew, WeatherStation weatherStation, DataPolar polarName, Timer timer, double x, double y){
         _sail = sail;
         _crew = crew;
+        _timer = timer;
         _weatherStation = weatherStation;
         _polar = polarName;
         _x = x;
@@ -89,22 +88,24 @@ public class ShipModel {
         _x = _initialX;
         _y = _initialY;
         _anglePositive = 0;
+        if(_isReplaying){
+            _isFixed = true;
+            _timer.cancel();
+            return;
+        }
         _isReplaying = true;
         if(_commands.size() != 0){
-            Timer timer = new Timer();
             for(Move move : _commands){
-                timer.schedule(new TimerTask() {
+                _timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
                         move.execute();
                     }
                 }, move.getDelay());
             }
-            timer.schedule(new TimerTask() {
+            _timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    timer.cancel();
-                    timer.purge();
                     _isReplaying = false;
                     _isFixed = true;
                     _dx = 0;
@@ -112,8 +113,6 @@ public class ShipModel {
                 }
             }, delayEnd);
             _commands.clear();
-            //TODO is waiting for last to purge, even if the app is closed
-            //TODO maybe extract this function in another class
         }
     }
 

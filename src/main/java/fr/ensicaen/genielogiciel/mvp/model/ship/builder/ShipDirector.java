@@ -8,6 +8,7 @@ import fr.ensicaen.genielogiciel.mvp.model.ship.sail.LargeSailDecorator;
 import fr.ensicaen.genielogiciel.mvp.model.ship.sail.NormalSail;
 
 import java.io.FileNotFoundException;
+import java.util.Timer;
 
 public class ShipDirector {
 
@@ -49,6 +50,11 @@ public class ShipDirector {
 
     public ShipDirector buildNormalCrew() {
         _builder.setCrew(new NormalCrew());
+        return this;
+    }
+
+    public ShipDirector addTimer(Timer timer){
+        _builder.setTimer(timer);
         return this;
     }
 

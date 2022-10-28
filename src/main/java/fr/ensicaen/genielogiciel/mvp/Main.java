@@ -6,8 +6,10 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 import java.util.ResourceBundle;
+import java.util.Timer;
 
 public final class Main extends Application {
+    private Timer _timer;
 
     public static void main( String[] args ) {
         launch(args);
@@ -19,9 +21,10 @@ public final class Main extends Application {
 
     @Override
     public void start( final Stage primaryStage ) throws Exception {
+        _timer = new Timer();
         primaryStage.setTitle(getMessageBundle().getString("project.title"));
         LoginView view = LoginView.LoginViewFactory.createView(primaryStage);
-        LoginPresenter presenter = new LoginPresenter();
+        LoginPresenter presenter = new LoginPresenter(_timer);
         presenter.setLoginView(view);
         view.setLoginPresenter(presenter);
         primaryStage.setResizable(false);
@@ -30,6 +33,7 @@ public final class Main extends Application {
 
     @Override
     public void stop() {
-        getMessageBundle().getString("project.bye");
+        System.out.println("Bye bye !");
+        _timer.cancel();
     }
 }

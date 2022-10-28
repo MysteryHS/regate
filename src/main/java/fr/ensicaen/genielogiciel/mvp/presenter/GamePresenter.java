@@ -29,6 +29,7 @@ import javafx.animation.Timeline;
 import javafx.util.Duration;
 import java.io.FileNotFoundException;
 import java.util.Date;
+import java.util.Timer;
 
 public class GamePresenter {
     private final Player _playerModel;
@@ -43,17 +44,17 @@ public class GamePresenter {
     private Date _dateStarted;
 
 
-    public GamePresenter(GameMap map, TypeShip typeShip, TypeSail typeSail , TypeCrew typeCrew) throws FileNotFoundException {
+    public GamePresenter(GameMap map, TypeShip typeShip, TypeSail typeSail , TypeCrew typeCrew, Timer timer) throws FileNotFoundException {
         ShipModel ship;
         _stopwatchModel = Stopwatch.getInstance();
         _mapModel = map;
-        ship = initGame(typeShip, typeSail, typeCrew);
+        ship = initGame(typeShip, typeSail, typeCrew, timer);
         _playerModel = new User(ship);
         _passedBuoy = new PassedBuoy(_playerModel,_mapModel);
         _collision = new Collision(map, ship);
     }
 
-    private ShipModel initGame(TypeShip typeShip, TypeSail typeSail , TypeCrew typeCrew) throws FileNotFoundException {
+    private ShipModel initGame(TypeShip typeShip, TypeSail typeSail , TypeCrew typeCrew, Timer timer) throws FileNotFoundException {
         ShipDirector director = new ShipDirector(new ConcreteShipBuilder()).buildStartPosition(_mapModel.getStartX(), _mapModel.getStartY());
         if (typeShip == TypeShip.FIGARO37) {
             director.buildFigaro();
@@ -71,6 +72,7 @@ public class GamePresenter {
             director.buildMaxCrew();
         }
         director.addWind(_mapModel.getWind());
+        director.addTimer(timer);
         return director.build();
     }
 
