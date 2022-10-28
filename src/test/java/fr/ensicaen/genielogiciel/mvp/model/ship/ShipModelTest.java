@@ -10,6 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
+import java.util.Timer;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -21,10 +23,13 @@ class ShipModelTest {
     private WeatherStation _mockedWeatherStation;
     @Mock
     private DataPolar _mockedPolar;
+    @Mock
+    private Timer _mockedTimer;
 
     @BeforeEach
     void setUp() {
         _mockedWeatherStation = mock(WeatherStationProxy.class);
+        _mockedTimer = mock(Timer.class);
         _knot = 6.;
         _mockedPolar = mock(DataPolar.class);
         doReturn(WindDirection.SOUTH).when(_mockedWeatherStation).getWindDirection();
@@ -37,7 +42,7 @@ class ShipModelTest {
 
     @Test
     void shipSpeedShouldBeEqualsToMaxSpeed() {
-        ShipModel _ship = new ShipModel(new NormalSail(), new NormalCrew(), _mockedWeatherStation, _mockedPolar, 17, 13);
+        ShipModel _ship = new ShipModel(new NormalSail(), new NormalCrew(), _mockedWeatherStation, _mockedPolar, _mockedTimer,17, 13);
         double _speedRatio = _ship.getSpeedRatio();
         double _maxSpeed = new MocktDataPolar().getPolarValues(_angle, _knot) * _speedRatio;
         doReturn(new MocktDataPolar().getPolarValues(_angle, _knot)).when(_mockedPolar).getPolarValues(_angle, _knot);
