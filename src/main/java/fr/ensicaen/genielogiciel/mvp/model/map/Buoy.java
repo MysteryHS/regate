@@ -3,10 +3,9 @@ package fr.ensicaen.genielogiciel.mvp.model.map;
 public class Buoy {
     private final int _xCoordinate;
     private final int _yCoordinate;
-    private static final double hitDistance = 1;
+    private static final double hitDistance = 1.5;
 
     public Buoy(int xCoordinate, int yCoordinate) {
-
         _xCoordinate = xCoordinate;
         _yCoordinate = yCoordinate;
     }

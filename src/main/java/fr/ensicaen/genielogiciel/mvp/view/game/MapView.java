@@ -31,11 +31,9 @@ public class MapView {
     public void addTile(TileView tile) {
         _tiles.add(tile);
     }
-
     public void addBuoy(BuoyView buoy) {
         _buoys.add(buoy);
     }
-
     public void draw(AnchorPane pane) {
         pane.resize(_mapWidthInPixel,_mapHeightInPixel);
         for(TileView tile : _tiles) {

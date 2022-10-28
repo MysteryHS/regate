@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+
 public class GameView implements IGameView {
     private static Stage _stage;
     private GamePresenter _gamePresenter;
@@ -32,10 +33,12 @@ public class GameView implements IGameView {
     @FXML
     private AnchorPane _stopwatchPane;
 
+    public static int mapHeightInPixel = 800;
+    public static int mapWidthInPixel = 600;
     public void setGamePresenter(GamePresenter gamePresenter) {
         _gamePresenter = gamePresenter;
     }
-
+    @Override
     public void initView(MapView map, ShipView ship, WindView wind) {
         _mapView = map;
         _shipView = ship;
@@ -43,7 +46,6 @@ public class GameView implements IGameView {
         _stopwatchView = new StopwatchView();
         _stopwatchList = new StopwatchList(_stopwatchPane);
     }
-
     @Override
     public void draw(double boatPosX, double boatPosY,String windDirection,double windKnot) {
         _mapView.draw(_mapPane);
@@ -51,7 +53,6 @@ public class GameView implements IGameView {
         _windView.draw(_windText,windDirection,windKnot);
         _stopwatchView.draw(_stopwatchPane);
     }
-
     @Override
     public void addBuoyPassedToDisplayedList(String stopwatch) {
         _stopwatchList.addStopwatchItem(new StopwatchItem(stopwatch));
@@ -62,9 +63,9 @@ public class GameView implements IGameView {
     }
 
     @Override
-    public void update(double angle, double dx, double dy, String stopwatch, int indexInListNextBuoy) {
+    public void update(double angle, double x, double y, String stopwatch, int indexInListNextBuoy) {
         _shipView.rotate(angle);
-        _shipView.move(dx, dy);
+        _shipView.move(x, y);
         isNextBuoy(indexInListNextBuoy);
         _stopwatchView.refresh(stopwatch);
     }
@@ -80,13 +81,14 @@ public class GameView implements IGameView {
             _gamePresenter.handleUserAction(UserAction.LEFT);
         } else if (code == KeyCode.RIGHT) {
             _gamePresenter.handleUserAction(UserAction.RIGHT);
+        } else if (code == KeyCode.R) {
+            _gamePresenter.handleUserAction(UserAction.RESET);
         }
     }
 
     public static class GameViewFactory {
 
-        private GameViewFactory() {
-        }
+        private GameViewFactory() {}
 
         public static GameView createView() throws IOException {
             FXMLLoader loader = new FXMLLoader(LoginView.class.getResource("SpotMap.fxml"), Main.getMessageBundle());

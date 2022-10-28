@@ -6,6 +6,7 @@ import fr.ensicaen.genielogiciel.mvp.model.ship.crew.Crew;
 import fr.ensicaen.genielogiciel.mvp.model.ship.sail.Sail;
 
 import java.io.FileNotFoundException;
+import java.util.Timer;
 
 public interface ShipBuilder {
 
@@ -13,6 +14,7 @@ public interface ShipBuilder {
     void setSail(Sail sail );
     void setCrew(Crew crew );
     void setPolar(String polarNameFromResourcePackage ) throws FileNotFoundException;
-    void setWind(WeatherStation wind );
+    void setWind(WeatherStation wind);
+    void setTimer(Timer timer);
     ShipModel getResult();
 }

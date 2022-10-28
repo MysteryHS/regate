@@ -2,7 +2,6 @@ package fr.ensicaen.genielogiciel.mvp.model.player;
 
 import fr.ensicaen.genielogiciel.mvp.model.Stopwatch;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,10 +13,7 @@ public class Score {
         return _score;
     }
 
-    public String getScore(int index) throws IOException {
-        if (_score.size() == 0 || index >= _score.size()) {
-            throw new IOException("Error wrong size");
-        }
+    public String getScore(int index) throws IndexOutOfBoundsException {
         return _score.get(index);
     }
 
@@ -28,7 +24,7 @@ public class Score {
         timeInMilliseconds = timeInMilliseconds - m*60000;
         int s = timeInMilliseconds / 1000;
         int ms =  timeInMilliseconds - s*1000;
-        _score.add(h+":"+m+":"+s+":"+ms);
+        _score.add(String.format("%02d:%02d:%03d", m, s, ms));
     }
 
     public void registerScore() {

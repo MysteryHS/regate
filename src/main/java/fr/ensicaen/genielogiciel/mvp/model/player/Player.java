@@ -2,8 +2,6 @@ package fr.ensicaen.genielogiciel.mvp.model.player;
 
 import fr.ensicaen.genielogiciel.mvp.model.ship.ShipModel;
 
-import java.io.IOException;
-
 public abstract class Player {
     private final Score _score;
     private final ShipModel _ship;
@@ -16,7 +14,7 @@ public abstract class Player {
     public String getLatestScore() {
         try {
             return _score.getScore(_score.getScores().size()-1);
-        } catch (IOException e) {
+        } catch (IndexOutOfBoundsException e) {
             return "";
         }
     }
