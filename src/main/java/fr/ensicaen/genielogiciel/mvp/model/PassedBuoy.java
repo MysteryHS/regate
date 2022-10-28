@@ -23,6 +23,10 @@ public class PassedBuoy {
         return false;
     }
 
+    public void resetPassage(){
+        _indexBuoyToPass = 0;
+    }
+
     public int getNextBuoyIndexInList() {
         return _indexBuoyToPass;
     }

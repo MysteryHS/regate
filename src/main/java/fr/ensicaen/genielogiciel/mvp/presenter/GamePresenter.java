@@ -38,6 +38,8 @@ public class GamePresenter {
     private final GameMap _mapModel;
     private IGameView _gameView;
     private boolean _started = false;
+
+    private boolean _reset = false;
     private Date _dateStarted;
 
 
@@ -102,6 +104,9 @@ public class GamePresenter {
     }
 
     public void resetShip(long delayEnd){
+        _reset = true;
+        _stopwatchModel.restartReferenceTime();
+        _passedBuoy.resetPassage();
         _playerModel.getShip().replay(delayEnd);
     }
 
@@ -147,7 +152,7 @@ public class GamePresenter {
     private void update() {
         _collision.setMoveShip();
         _playerModel.getShip().move();
-        if(_passedBuoy.detectionPassageBuoy()) {
+        if(!_reset && _passedBuoy.detectionPassageBuoy()) {
             _gameView.addBuoyPassedToDisplayedList(_playerModel.getLatestScore());
         }
     }

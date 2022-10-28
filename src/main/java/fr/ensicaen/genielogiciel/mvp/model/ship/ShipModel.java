@@ -3,10 +3,7 @@ package fr.ensicaen.genielogiciel.mvp.model.ship;
 import fr.ensicaen.genielogiciel.mvp.model.ship.command.Move;
 import fr.ensicaen.genielogiciel.mvp.model.ship.crew.Crew;
 import fr.ensicaen.genielogiciel.mvp.model.map.wind.WeatherStation;
-import fr.ensicaen.genielogiciel.mvp.model.ship.crew.Crew;
 import fr.ensicaen.genielogiciel.mvp.model.ship.sail.Sail;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -17,8 +14,8 @@ public class ShipModel {
     private double _y;
     private double _height;
     private double _width;
-    private double _initialX;
-    private double _initialY;
+    private final double _initialX;
+    private final double _initialY;
     private double _dx = 0;
     private double _dy = 0;
     private double _anglePositive = 0;
@@ -155,7 +152,7 @@ public class ShipModel {
     }
 
     private double getInertiaSpeed(double newSpeed, double currentSpeed){
-        double _inertia = 0.02;
+        double _inertia = 0.004;
         if(newSpeed<currentSpeed - _inertia){
             return currentSpeed - _inertia;
         }
