@@ -10,7 +10,7 @@ version '0.1'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 application {
-    mainClass = 'fr.ensicaen.genielogiciel.mvp.Main'
+    mainClass = 'fr.ensicaen.regate.mvp.Main'
 }
 
 repositories {
@@ -31,7 +31,7 @@ dependencies {
             'org.json:json:20220924',
             [files("lib")]
     )
-    implementation 'org.jetbrains:annotations:20.1.0'
+    implementation 'org.jetbrains:annotations:23.0.0'
     implementation 'org.jetbrains:annotations:20.1.0'
     testImplementation(
             ['org.junit.jupiter:junit-jupiter:5.+'],

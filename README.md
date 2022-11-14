@@ -24,18 +24,18 @@ Le projet a la structure suivante :
     └── src
         ├── main
         │   ├── java
-        │   │      ├── fr.ensicaen.genielogiciel.mvp/*.java
-        │   │      ├── fr.ensicaen.genielogiciel.mvp.model/*.java
-        │   │      ├── fr.ensicaen.genielogiciel.mvp.presenter/*.java
-        │   │      └── fr.ensicaen.genielogiciel.mvp.view/*.java
+        │   │      ├── fr.ensicaen.regate.mvp/*.java
+        │   │      ├── fr.ensicaen.regate.mvp.model/*.java
+        │   │      ├── fr.ensicaen.regate.mvp.presenter/*.java
+        │   │      └── fr.ensicaen.regate.mvp.view/*.java
         │   │
         │   └── resources
-        │          ├── fr.ensicaen.genielogiciel.mvp/view/*.fxml
-        │          ├── fr.ensicaen.genielogiciel.mvp/view/*.css
-        │          └── fr.ensicaen.genielogiciel.mvp/MessageBundle.properties.properties
+        │          ├── fr.ensicaen.regate.mvp/view/*.fxml
+        │          ├── fr.ensicaen.regate.mvp/view/*.css
+        │          └── fr.ensicaen.regate.mvp/MessageBundle.properties.properties
         ├── test
             ├── java
-            │      └── fr.ensicaen.genielogiciel.mvp/*.java
+            │      └── fr.ensicaen.regate.mvp/*.java
             └── resources
 
 # À vous de jouer !
