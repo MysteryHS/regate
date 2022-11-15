@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="_base" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="1080.0" prefWidth="1920.0" styleClass="background" stylesheets="@SpotMap.css"
+            xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="fr.ensicaen.regate.mvp.view.game.GameView">
+    <SplitPane dividerPositions="0.6167883211678832" prefHeight="160.0" prefWidth="200.0" styleClass="transparent"
+               stylesheets="@SpotMap.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+               AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="red" stylesheets="@SpotMap.css">
+            <center>
+                <AnchorPane fx:id="_mapPane" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="500.0"
+                            BorderPane.alignment="CENTER">
+                    <BorderPane.margin>
+                        <Insets/>
+                    </BorderPane.margin>
+                </AnchorPane>
+            </center>
+            <top>
+                <Text fx:id="_windText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text"
+                      BorderPane.alignment="CENTER">
+                    <font>
+                        <Font size="25.0"/>
+                    </font>
+                </Text>
+            </top>
+        </BorderPane>
+        <BorderPane prefHeight="200.0" prefWidth="200.0">
+            <center>
+                <AnchorPane fx:id="_stopwatchPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0"
+                            styleClass="chrono_bg" stylesheets="@SpotMap.css" BorderPane.alignment="CENTER"/>
+            </center>
+        </BorderPane>
+    </SplitPane>
+</AnchorPane>
