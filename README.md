@@ -5,37 +5,24 @@ Projet de régate
 
 ## Description du projet
 
-Ce projet contient un exemple d'une application graphique écrite en Java avec
-la bibliothèque graphique JavaFX. Elle est basée sur le patron d'architecture
-Modèle-Vue-Présentation.
+Ce projet a pour but de créer une application graphique afin de jouer un bateau lors d'une régate.
+Elle est développée en Java et JavaFX et permet de choisir son bateau et le piloter pour atteindre les bouées
+et revoir sa course.
 
-Le projet est géré par le moteur de production 'gradle'.
+Lors de la page d'accueil vous pouvez choisir entre deux bateaux : L'océanis et le Figaro. Ceux-ci ont
+des rapports aux vents différents donc choisissez bien ! Vous pouvez également choisir la taille de
+votre voile et le nombre de personnes dans l'équipage. Chacun de ces choix a un impact sur la conduite
+de votre bateau. Lancez la course en appuyant sur espace une fois que vous avez choisi.
+Ensuite lors de la course vous dirigez le bateau avec les touches <- et -> pour tourner
+dans un sens ou dans l'autre. Le bateau avance alors tout seul en fonction de son angle au vent.
+Lorsque vous avez fini la course, vous pouvez appuyer sur R afin de revoir votre parcours.
 
-## Organisation du projet
- 
-Le projet a la structure suivante :
-
-    .
-    │
-    ├── build.gradle, settings.gradle, gradle.properties
-    │
-    ├── .gitlab-ci.yml
-    │
-    └── src
-        ├── main
-        │   ├── java
-        │   │      ├── fr.ensicaen.regate.mvp/*.java
-        │   │      ├── fr.ensicaen.regate.mvp.model/*.java
-        │   │      ├── fr.ensicaen.regate.mvp.presenter/*.java
-        │   │      └── fr.ensicaen.regate.mvp.view/*.java
-        │   │
-        │   └── resources
-        │          ├── fr.ensicaen.regate.mvp/view/*.fxml
-        │          ├── fr.ensicaen.regate.mvp/view/*.css
-        │          └── fr.ensicaen.regate.mvp/MessageBundle.properties.properties
-        ├── test
-            ├── java
-            │      └── fr.ensicaen.regate.mvp/*.java
-            └── resources
-
-# À vous de jouer !
+### Membre du projet : 
++ Jordy Gelb
++ Etienne Langlois
++ Emeline Flicours
++ Romain Cailly
++ Thomas Seng
++ Tangui Steimetz
++ Benjamin Maignan
++ Matéo Ducastel
